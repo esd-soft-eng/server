@@ -42,4 +42,17 @@ public class User {
     public boolean checkPassword(String password) {
         return this.password.equals(password);
     }
+    
+    public String getUser() {
+        return this.userName;
+    }
+    
+    public String getPassword() {
+        return this.password;
+    }
+   /* 
+    public UserTypes.UserType[] getUserTypes() {
+        return (UserTypes.UserType[]) this.types.toArray();
+    }
+    */
 }

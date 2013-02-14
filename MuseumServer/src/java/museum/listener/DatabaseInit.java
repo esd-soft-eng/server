@@ -29,7 +29,7 @@ public class DatabaseInit implements ServletContextListener {
         DatabaseQueryExecutor db = new DatabaseQueryExecutor(url, user, pass);
         PersistanceRepositoryUser pr = new PersistanceRepositoryUser(db);
         UserManager um = new UserManager(pr);
-        
+        ctx.setAttribute("userManager", um);
         ctx.setAttribute("persistance", pr);
     }
 
