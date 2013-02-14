@@ -19,13 +19,13 @@ public class LoginPage extends HttpServlet{
             throws ServletException, IOException {
         // Get a new HTTP session
         HttpSession session = request.getSession();
-        
-        System.out.println("YARR");
-        
-        UserManager um = (UserManager) request.getServletContext().getAttribute("UserManager");
+                
+        UserManager um = (UserManager) request.getServletContext().getAttribute("userManager");
         
         String username = request.getParameter("username");
         String password = request.getParameter("password");        
+        
+        
         User user = um.validateUser(username, password);
         
         // Adds our order to the session

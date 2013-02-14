@@ -18,10 +18,12 @@ public class MD5Hasher {
         try {
             MessageDigest m = MessageDigest.getInstance("MD5");
             m.update(hash.getBytes(),0,hash.length());
-            returnedHash = new BigInteger(1,m.digest()).toString(16);
+            returnedHash = new BigInteger(0,m.digest()).toString(16);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(MD5Hasher.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        System.out.println(returnedHash);
         
         return returnedHash;
     }

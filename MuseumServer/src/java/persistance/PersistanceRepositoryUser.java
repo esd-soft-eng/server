@@ -46,10 +46,9 @@ public class PersistanceRepositoryUser {
             while(rs.next()){
                 if(rs.getString("userName").equalsIgnoreCase(username)){
                     addUserTypeToUser(rs, newUser);
-                }else{                    
-                    System.out.println("here");
+                }else{
                     username = rs.getString("userName");
-                    password = rs.getString("password");
+                    password = rs.getString("password");                    
                     newUser = new User(username, password);
                     addUserTypeToUser(rs, newUser);
                     userList.add(newUser);
