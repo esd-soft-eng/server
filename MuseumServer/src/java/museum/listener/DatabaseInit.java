@@ -5,6 +5,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import persistance.DatabaseQueryExecutor;
+import persistance.PersistanceRepositoryUser;
 
 /**
  *
@@ -26,9 +27,8 @@ public class DatabaseInit implements ServletContextListener {
         }
 
         DatabaseQueryExecutor db = new DatabaseQueryExecutor(url, user, pass);
-        System.out.println("helll yeeaaaah!");
-        
-        ctx.setAttribute("dataBean", db);
+        PersistanceRepositoryUser pr = new PersistanceRepositoryUser(db);        
+        ctx.setAttribute("persistance", pr);
     }
 
     @Override
