@@ -46,11 +46,13 @@ public class PersistanceRepositoryUser {
             while(rs.next()){
                 if(rs.getString("userName").equalsIgnoreCase(username)){
                     addUserTypeToUser(rs, newUser);
-                }else{
+                }else{                    
+                    System.out.println("here");
                     username = rs.getString("userName");
                     password = rs.getString("password");
                     newUser = new User(username, password);
                     addUserTypeToUser(rs, newUser);
+                    userList.add(newUser);
                 }                
             }         
         } catch (SQLException ex) {
@@ -61,8 +63,9 @@ public class PersistanceRepositoryUser {
     }
 
     private void addUserTypeToUser(ResultSet rs, User newUser) throws SQLException {
-        UserType type;
-        type = UserTypes.UserType.valueOf(rs.getString("typeName"));
+        
+        UserTypes.UserType type;
+        type = UserTypes.UserType.valueOf(rs.getString("typeName"));       
         newUser.addUserType(type);
     }
 }

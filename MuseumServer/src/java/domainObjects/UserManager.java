@@ -16,10 +16,8 @@ public class UserManager {
         this.listOfUsers = this.initUserList();
     }
     
-    public ArrayList<User> initUserList() {
+    private ArrayList<User> initUserList() {
         
-        pr.getAllUsers();
-        
-        return new ArrayList<User>();
+        return pr.getAllUsers();
     }
 }

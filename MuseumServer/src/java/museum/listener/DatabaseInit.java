@@ -1,6 +1,6 @@
 package museum.listener;
 
-import java.sql.SQLException;
+import domainObjects.UserManager;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -27,7 +27,9 @@ public class DatabaseInit implements ServletContextListener {
         }
 
         DatabaseQueryExecutor db = new DatabaseQueryExecutor(url, user, pass);
-        PersistanceRepositoryUser pr = new PersistanceRepositoryUser(db);        
+        PersistanceRepositoryUser pr = new PersistanceRepositoryUser(db);
+        UserManager um = new UserManager(pr);
+        
         ctx.setAttribute("persistance", pr);
     }
 

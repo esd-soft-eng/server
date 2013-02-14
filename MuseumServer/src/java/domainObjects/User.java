@@ -16,10 +16,11 @@ public class User {
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
+        this.types = new HashSet();
     }
     
     public void addUserType(UserTypes.UserType type) {
-        types.add(type); 
+        types.add(type);
     }
     
     public void deleteUserType(UserTypes.UserType type) {

@@ -21,8 +21,7 @@ public class DatabaseQueryExecutor {
         catch (SQLException ex) {
             System.err.println("Can't connect to DB: " + ex);
             System.exit(1);
-        }        
-        System.out.println("great success");
+        }
     }
 
     public synchronized ResultSet executeStatement(String sql) {
