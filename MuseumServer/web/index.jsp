@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <form action="index.jsp" method="post">
+        <form action="displayuser.do" method="post">
             Username: <input type="text" name="username"/>
             Password: <input type="text" name="password"/>
         </form>
