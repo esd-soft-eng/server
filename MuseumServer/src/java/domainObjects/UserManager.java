@@ -2,6 +2,7 @@ package domainObjects;
 
 import java.util.ArrayList;
 import persistance.PersistanceRepositoryUser;
+import utility.MD5Hasher;
 
 /**
  *
@@ -19,5 +20,15 @@ public class UserManager {
     private ArrayList<User> initUserList() {
         
         return pr.getAllUsers();
+    }
+    
+    public boolean validateUser(String userName, String password) {
+        
+        for (User u : listOfUsers){
+            if(u.userName.equals(userName) && u.checkPassword(MD5Hasher.hashMD5(password))){
+                return true;
+            }
+        }
+        return false; 
     }
 }
