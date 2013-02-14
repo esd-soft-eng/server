@@ -5,7 +5,8 @@ import java.util.HashSet;
 /**
  *
  * @author Alex
- * @author Oliver
+ * @author Oliver  
+ * 
  */
 public class User {
     String userName;
