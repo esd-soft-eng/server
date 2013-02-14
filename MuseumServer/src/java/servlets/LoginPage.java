@@ -3,15 +3,12 @@ package servlets;
 import domainObjects.User;
 import domainObjects.UserManager;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import persistance.DatabaseQueryExecutor;
 
 /**
  *
@@ -23,8 +20,10 @@ public class LoginPage extends HttpServlet{
         // Get a new HTTP session
         HttpSession session = request.getSession();
         
+        System.out.println("YARR");
+        
         UserManager um = (UserManager) request.getServletContext().getAttribute("UserManager");
-               
+        
         String username = request.getParameter("username");
         String password = request.getParameter("password");        
         User user = um.validateUser(username, password);
