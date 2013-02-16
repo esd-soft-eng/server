@@ -8,7 +8,7 @@ import java.security.*;
  */
 public class MD5Hasher {
 
-    public static String hashMD5(String hash) throws NoSuchAlgorithmException {
+    public static String hashMD5(String hash) {
 
         byte[] inputBytes = hash.getBytes();
         String output = null;
