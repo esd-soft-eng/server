@@ -8,11 +8,14 @@ import domainObjects.User;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utility.FileUtil;
 import utility.Redirector;
 
 /**
@@ -37,20 +40,19 @@ public class Portal extends HttpServlet {
         User user = (User) session.getAttribute("currentUser");
         if (user == null) {
             Redirector.redirect(request, response, "index.jsp");
+            return;
         }
 
-        PrintWriter out = response.getWriter();
+        ArrayList<String> accessibleFiles = new ArrayList<String>();
+
         for (String dir : user.getAccessibleDirectories()) {
-            //out.println(dir);
-            File directory = new File(dir);
-            for(File file : directory.listFiles())
-            {
-                out.println(file.getAbsolutePath());
+            for (String file : FileUtil.listFilesInDir(getServletContext(), dir)) {
+                accessibleFiles.add(dir + "/" + file);
             }
         }
-        out.flush();
-        out.close();
 
+        request.setAttribute("accessibleFiles", accessibleFiles);
+        Redirector.redirect(request, response, "displayPortal.jsp");
 
     }
 

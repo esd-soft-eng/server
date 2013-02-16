@@ -13,13 +13,13 @@ public class User {
     String userName;
     String password;    
     HashSet<UserTypes.UserType> types;
-    ArrayList<String> accessibleDirectories;
+    HashSet<String> accessibleDirectories;
     
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
         this.types = new HashSet();
-        accessibleDirectories = new ArrayList<String>();
+        accessibleDirectories = new HashSet<String>();
     }
     
     public void addAccessibleDirectory(String directory)
@@ -27,7 +27,7 @@ public class User {
         this.accessibleDirectories.add(directory);
     }
     
-    public ArrayList<String> getAccessibleDirectories()
+    public HashSet<String> getAccessibleDirectories()
     {
         return this.accessibleDirectories;
     }
