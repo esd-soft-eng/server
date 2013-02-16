@@ -4,7 +4,7 @@ import java.security.*;
 
 /**
  *
- * @author Alex, Simon
+ * @author Simon
  */
 public class MD5Hasher {
 
