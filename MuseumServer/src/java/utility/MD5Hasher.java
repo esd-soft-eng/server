@@ -28,6 +28,7 @@ public class MD5Hasher {
             output = hexString.toString();
         } catch (NoSuchAlgorithmException ex) {
         }
+        
         return output;
     }
 }
