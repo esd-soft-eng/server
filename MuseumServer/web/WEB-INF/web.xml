@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	 version="3.0">
-    
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <listener>
         <description>ServletContextListener</description>
         <listener-class>museum.listener.DatabaseInit</listener-class>
@@ -21,17 +16,38 @@
         <param-name>dbPassword</param-name>
         <param-value/>
     </context-param>
-    
     <servlet>
         <servlet-name>LoginPage</servlet-name>
         <servlet-class>servlets.LoginPage</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>ModifyUser</servlet-name>
+        <servlet-class>servlets.ModifyUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ModifyUserAction</servlet-name>
+        <servlet-class>servlets.ModifyUserAction</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddUser</servlet-name>
+        <servlet-class>servlets.AddUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginPage</servlet-name>
         <url-pattern>/displayuser.do</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>ModifyUser</servlet-name>
+        <url-pattern>/ModifyUser.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModifyUserAction</servlet-name>
+        <url-pattern>/ModifyUserAction.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddUser</servlet-name>
+        <url-pattern>/AddUser.do</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
