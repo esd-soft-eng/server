@@ -16,6 +16,10 @@
         <h1>Hello Worldsdad!</h1>            
             <%
                 User user = (User) request.getAttribute("user");
+                if(user == null)
+                                       {
+                    
+                }
                 out.println("Here is our user: " + user.getUser());
             %>
             <br />

@@ -1,8 +1,15 @@
--- MySQL dump 10.13  Distrib 5.5.29, for Linux (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 3.5.2
+-- http://www.phpmyadmin.net
 --
--- Host: localhost    Database: museum_server_database
--- ------------------------------------------------------
--- Server version	5.5.29-log
+-- Host: localhost
+-- Generation Time: Feb 16, 2013 at 02:10 PM
+-- Server version: 5.5.25a
+-- PHP Version: 5.4.4
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -40,6 +47,7 @@ UNLOCK TABLES;
 --
 -- Table structure for table `user`
 --
+USE `museum_server_database`
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -73,7 +81,6 @@ DROP TABLE IF EXISTS `usertype`;
 CREATE TABLE `usertype` (
   `typeID` int(3) NOT NULL AUTO_INCREMENT,
   `typeName` varchar(25) COLLATE utf8_bin NOT NULL,
-  `accessibleFunctions` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`typeID`),
   KEY `typeID` (`typeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -83,11 +90,14 @@ CREATE TABLE `usertype` (
 -- Dumping data for table `usertype`
 --
 
-LOCK TABLES `usertype` WRITE;
-/*!40000 ALTER TABLE `usertype` DISABLE KEYS */;
-INSERT INTO `usertype` VALUES (1,'MAINTAINER','maintainer'),(2,'ADMINISTRATOR','admin, kiosk, maintainer, manager'),(3,'CLIENTHANDSET','handset'),(4,'KIOSK','kiosk'),(5,'MANAGER','manager');
-/*!40000 ALTER TABLE `usertype` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `usertype` (`typeID`, `typeName`) VALUES
+(1, 'MAINTAINER'),
+(2, 'ADMINISTRATOR'),
+(3, 'CLIENTHANDSET'),
+(4, 'KIOSK'),
+(5, 'MANAGER');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `usertypelink`

@@ -1,9 +1,13 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package servlets;
 
 import domainObjects.User;
-import domainObjects.UserManager;
+import java.io.File;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,37 +17,44 @@ import utility.Redirector;
 
 /**
  *
- * @author Alex
+ * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
  */
-public class LoginPage extends HttpServlet {
+public class Portal extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP
+     * <code>GET</code> and
+     * <code>POST</code> methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Get a new HTTP session
         HttpSession session = request.getSession();
-
-        UserManager um = (UserManager) request.getServletContext().getAttribute("userManager");
-
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-
-        User user = um.validateUser(username, password);
-
+        User user = (User) session.getAttribute("currentUser");
         if (user == null) {
-            request.setAttribute("message", "Incorrect login.");
             Redirector.redirect(request, response, "index.jsp");
-            return;
         }
 
-        // Adds our order to the session
-        session.setAttribute("currentUser", user);
-        request.setAttribute("user", user);
+        PrintWriter out = response.getWriter();
+        for (String dir : user.getAccessibleDirectories()) {
+            //out.println(dir);
+            File directory = new File(dir);
+            for(File file : directory.listFiles())
+            {
+                out.println(file.getAbsolutePath());
+            }
+        }
+        out.flush();
+        out.close();
 
-        Redirector.redirect(request, response, "displayPortal.do");
+
     }
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.

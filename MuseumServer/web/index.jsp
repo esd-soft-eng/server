@@ -12,11 +12,15 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1> System Login: </h1>
         <form action="displayuser.do" method="post">
             Username: <input type="text" name="username"/>
             Password: <input type="text" name="password"/>
             <input type="submit" name ="submit" text="submit"/>
         </form>
+
+        <% if (request.getAttribute("message") != null) {
+                out.println("<h2 style='color:red;'>"+request.getAttribute("message")+"</h2>");
+            }%>
     </body>
 </html>
