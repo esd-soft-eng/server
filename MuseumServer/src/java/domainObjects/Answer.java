@@ -12,9 +12,10 @@ public class Answer {
     
     public int value;
     public String answerText;
+    private int id;
     
     public Answer(int value, String answerText){
         this.value = value;
         this.answerText = answerText;
-    }    
+    }
 }

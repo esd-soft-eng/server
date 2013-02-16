@@ -15,9 +15,10 @@ public class Question {
     private ArrayList<Answer> answers;
     private int answer;
     private String questionText;
+    private int id;
 
     public Question(ArrayList answers) {
-        
+
         this.answers = answers;
         this.answer = 0;
     }
@@ -31,21 +32,21 @@ public class Question {
         this.answer = answer;
         return true;
     }
-    
-    public String getQuestionText(){
+
+    public String getQuestionText() {
         return this.questionText;
     }
-    
-    public String[] getAnswerText(){
-        
+
+    public String[] getAnswerText() {
+
         String[] answerTexts = new String[answers.size()];
-        for(int i = 0; i < this.answers.size(); i++){
+        for (int i = 0; i < this.answers.size(); i++) {
             answerTexts[i] = this.answers.get(i).answerText;
         }
         return answerTexts;
     }
 
-    public int getAnswerValue() {
+    public int getScore() {
 
         Answer answerToValue = answers.get(this.answer);
         return answerToValue.value;
