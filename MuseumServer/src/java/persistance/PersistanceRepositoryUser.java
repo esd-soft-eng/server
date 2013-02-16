@@ -52,9 +52,9 @@ public class PersistanceRepositoryUser {
                     password = rs.getString("password");
                     newUser = new User(username, password);
                     addUserTypeToUser(rs, newUser);
-                    addAccessibleDirsToUser(rs, newUser);
                     userList.add(newUser);
                 }
+                addAccessibleDirsToUser(rs, newUser);
             }
         } catch (SQLException ex) {
             Logger.getLogger(PersistanceRepositoryUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,7 +78,7 @@ public class PersistanceRepositoryUser {
             newUser.addAccessibleDirectory(directories.trim());
             return;
         }
-        
+
         //loop over the comma seperated directories and add them to the user
         for (String directory : directories.split(",")) {
             directory = directory.trim();
