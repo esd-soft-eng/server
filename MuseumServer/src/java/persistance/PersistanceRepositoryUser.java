@@ -39,6 +39,7 @@ public class PersistanceRepositoryUser {
         ArrayList<User> userList = new ArrayList();
         String username = "";
         String password = "";
+        int userID = 0;
         UserTypes.UserType type;
         User newUser = null;
         
@@ -47,9 +48,10 @@ public class PersistanceRepositoryUser {
                 if(rs.getString("userName").equalsIgnoreCase(username)){
                     addUserTypeToUser(rs, newUser);
                 }else{
+                    userID = Integer.parseInt(rs.getString("userID"));
                     username = rs.getString("userName");
                     password = rs.getString("password");                    
-                    newUser = new User(username, password);
+                    newUser = new User(username, password, userID);
                     addUserTypeToUser(rs, newUser);
                     userList.add(newUser);
                 }                
