@@ -24,7 +24,7 @@ public class DatabaseInit implements ServletContextListener {
 
         //init managers and set them in the context    
         ctx.setAttribute("userManager", initUserManager(db));
-        ctx.setAttribute("handsetaccessmanager", initHandsetAccessManager(db));
+        ctx.setAttribute("handsetAccessManager", initHandsetAccessManager(db));
     }
 
     @Override
