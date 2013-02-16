@@ -25,6 +25,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `user`
 --
+USE `museum_server_database`
 
 CREATE TABLE IF NOT EXISTS `user` (
   `userID` int(3) NOT NULL AUTO_INCREMENT,
