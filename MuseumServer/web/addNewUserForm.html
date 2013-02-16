@@ -1,0 +1,29 @@
+<!--
+    Document   : addNewUserForm
+    Created on : 16-Feb-2013, 15:26:27
+    Author     : Alex
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h1 align="center">Add New User</h1>
+    <form method="POST" action="AddUser.do">
+        Enter the details of the user you wish to add<p>
+            User name: <input type="text" name="userName"><br>
+            Password:&nbsp;&nbsp; <input type="password" name="password"><br>
+            User type:&nbsp;&nbsp; <select>
+                <option value="MAINTAINER">Maintainer</option>
+                <option value="ADMINISTRATOR">Administrator</option>
+                <option value="CLIENTHANDSET">Handset</option>
+                <option value="KIOSK">Kiosk</option>
+                <option value="MANAGER">Manager</option>
+            </select>
+        <br><br>
+        <input type="SUBMIT" value="Add New User" align="left">
+    </form>
+    </body>
+</html>
