@@ -1,5 +1,6 @@
 package domainObjects;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import persistance.PersistanceRepositoryUser;
 import utility.MD5Hasher;
@@ -23,7 +24,7 @@ public class UserManager {
     }
     
     public User validateUser(String userName, String password) {
-        
+
         for (User u : listOfUsers){
             System.out.println(u.password);
             if(u.userName.equals(userName) && u.checkPassword(MD5Hasher.hashMD5(password))){
@@ -31,5 +32,9 @@ public class UserManager {
             }
         }
         return null;
+    }
+    
+    public ArrayList<User> getAllUsers(){
+        return listOfUsers;
     }
 }
