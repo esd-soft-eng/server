@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package businessDomainObjects;
+package QuestionsAndAnswers;
 
 import java.util.ArrayList;
 
@@ -44,6 +44,10 @@ public class Question {
             answerTexts[i] = this.answers.get(i).answerText;
         }
         return answerTexts;
+    }
+    
+    public int getQuestionId(){
+        return this.id;
     }
 
     public int getScore() {

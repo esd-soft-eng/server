@@ -1,5 +1,4 @@
-// The Ham
-
+// The Ham (Simon Edwins, 21st February 2013)
 package businessDomainObjects;
 
 import java.util.HashSet;
@@ -10,41 +9,40 @@ import persistance.PersistanceRepositoryHandset;
  * @author neil
  */
 public class HandsetAccessManager {
-    
+
     private PersistanceRepositoryHandset persistance;
     private HashSet<String> allowedDevices;
-    
-    public HandsetAccessManager(PersistanceRepositoryHandset persistance){
+
+    public HandsetAccessManager(PersistanceRepositoryHandset persistance) {
         this.persistance = persistance;
         this.initialise();
     }
-    
-    public synchronized boolean addDevice(String macAddress){
-        if (this.allowedDevices.add(macAddress)){
+
+    public synchronized boolean addDevice(String macAddress) {
+        if (this.allowedDevices.add(macAddress)) {
             persistance.addDevice(macAddress);
             return true;
         }
-            return false;
+        return false;
     }
-    
-    public synchronized boolean removeDevice(String macAddress){
-        if (this.allowedDevices.remove(macAddress)){
+
+    public synchronized boolean removeDevice(String macAddress) {
+        if (this.allowedDevices.remove(macAddress)) {
             persistance.removeDevice(macAddress);
             return true;
         }
-            return false;
+        return false;
     }
-    
-    public boolean deviceHasAccess(String macAddress){
+
+    public boolean deviceHasAccess(String macAddress) {
         return allowedDevices.contains(macAddress);
     }
-    
-    public String[] getDeviceList(){
+
+    public String[] getDeviceList() {
         return this.allowedDevices.toArray(new String[0]);
     }
-    
-    private void initialise(){
+
+    private void initialise() {
         this.allowedDevices = this.persistance.getAllowedDevices();
     }
-    
 }
