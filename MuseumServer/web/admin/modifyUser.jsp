@@ -5,8 +5,8 @@
 --%>
 
 <%@page import="java.util.ArrayList"%>
-<%@page import="domainObjects.UserManager"%>
-<%@page import="domainObjects.User"%>
+<%@page import="businessDomainObjects.UserManager"%>
+<%@page import="businessDomainObjects.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

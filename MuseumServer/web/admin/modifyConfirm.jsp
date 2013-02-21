@@ -4,7 +4,7 @@
     Author     : Ske
 --%>
 
-<%@page import="domainObjects.User"%>
+<%@page import="businessDomainObjects.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
