@@ -21,16 +21,20 @@ public class HandsetAccessManager {
         this.initialise();
     }
     
-    public synchronized void addDevice(String macAddress){
+    public synchronized boolean addDevice(String macAddress){
         if (this.allowedDevices.add(macAddress)){
             persistance.addDevice(macAddress);
+            return true;
         }
+        return false;
     }
     
-    public synchronized void removeDevice(String macAddress){
+    public synchronized boolean removeDevice(String macAddress){
         if (this.allowedDevices.remove(macAddress)){
             persistance.removeDevice(macAddress);
+            return true;
         }
+        return false;
     }
     
     public boolean deviceHasAccess(String macAddress){
