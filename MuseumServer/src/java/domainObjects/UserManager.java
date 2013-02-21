@@ -32,4 +32,8 @@ public class UserManager {
         }
         return null;
     }
+    
+    public ArrayList<User> getAllUsers(){
+        return listOfUsers;
+    }
 }

@@ -4,6 +4,7 @@ import domainObjects.User;
 import domainObjects.UserManager;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -12,41 +13,63 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import utility.Redirector;
 
 /**
  *
- * @author Alex, Simon
+ * @author Simon
  */
-public class LoginPage extends HttpServlet {
-
+public class ModifyUserAction extends HttpServlet{
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NoSuchAlgorithmException {
         // Get a new HTTP session
         HttpSession session = request.getSession();
-
+                
         UserManager um = (UserManager) request.getServletContext().getAttribute("userManager");
-
+        
+        // Username check and pass through
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-
+        String password = request.getParameter("password");  
         User user = um.validateUser(username, password);
-
-        if (user == null) {
-            request.setAttribute("message", "Incorrect login.");
-            Redirector.redirect(request, response, "index.jsp");
-            return;
-        }
-
-        // Adds our order to the session
+        
         session.setAttribute("currentUser", user);
         request.setAttribute("user", user);
+        
+        // Get user ID, set to request
+        ArrayList<Integer> userIDList = (ArrayList<Integer>) request.getServletContext().getAttribute("userID");
+        
+        String userName, userPassword;
+        int userID;
+        
+        
+        // Get form parameters
+        //Checkbox, retrieve parameter, update the appropriate SQL field
+        userID = Integer.parseInt(request.getParameter("userToModify"));
+        
+        //userName
+        userName = request.getParameter("userName");
+        
+        //userPassword, remembering to md5 first
+        userPassword = request.getParameter("password");
+        
+        // SQL update statement
+        
+        
+        // If nothing was entered into one of the required form elements
+        if(userName.equals("") || userPassword.equals("")){ //FIXME: Null check needs fixing for all incl userID
+            RequestDispatcher view = request.getRequestDispatcher("modifyUser.jsp");
+            view.forward(request, response);
+        }
+        else{
+            // Instantiate a request dispatcher for the JSP
+            RequestDispatcher view = request.getRequestDispatcher("modifyConfirm.jsp");
+            view.forward(request, response);
+        }
+        
+        // Use the request dispatcher to ask the Container to crank up the JSP,
+        // sending it the request and response
 
-        Redirector.redirect(request, response, "displayPortal.do");
-    }
+}
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-
     /**
      * Handles the HTTP
      * <code>GET</code> method.
@@ -81,8 +104,10 @@ public class LoginPage extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModifyUserAction.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
     }
 
     /**

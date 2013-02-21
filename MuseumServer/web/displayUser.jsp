@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello Worldsdad!</h1>            
+        <h1>Hello World!</h1>            
             <%
                 User user = (User) request.getAttribute("user");
                 if(user == null)

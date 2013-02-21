@@ -1,21 +1,24 @@
 package domainObjects;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
  *
  * @author Alex
  * @author Oliver  
+ * @author Simon
  * 
  */
 public class User {
+    
+    int userID;
     String userName;
-    String password;    
+    String password;
     HashSet<UserTypes.UserType> types;
     HashSet<String> accessibleDirectories;
     
-    public User(String userName, String password) {
+    public User(String userName, String password, int userID) {
+        this.userID = userID;
         this.userName = userName;
         this.password = password;
         this.types = new HashSet();
@@ -50,6 +53,10 @@ public class User {
     
     public void modifyPassword(String newPassword) {
         this.password = newPassword;
+    }
+    
+    public int getUserID(){
+        return userID;
     }
     
     public boolean checkPassword(String password) {

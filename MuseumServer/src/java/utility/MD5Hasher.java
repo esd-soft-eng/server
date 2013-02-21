@@ -10,6 +10,7 @@ public class MD5Hasher {
 
     public static String hashMD5(String hash) {
 
+        
         byte[] inputBytes = hash.getBytes();
         String output = null;
 
@@ -27,6 +28,7 @@ public class MD5Hasher {
             output = hexString.toString();
         } catch (NoSuchAlgorithmException ex) {
         }
+        
         return output;
     }
 }

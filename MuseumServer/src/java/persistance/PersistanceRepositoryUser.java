@@ -2,13 +2,11 @@ package persistance;
 
 import domainObjects.User;
 import domainObjects.UserTypes;
-import domainObjects.UserTypes.UserType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import persistance.DatabaseQueryExecutor;
 
 /**
  *
@@ -39,7 +37,7 @@ public class PersistanceRepositoryUser {
         ArrayList<User> userList = new ArrayList();
         String username = "";
         String password = "";
-
+        int userID = 0;
         UserTypes.UserType type;
         User newUser = null;
 
@@ -47,10 +45,11 @@ public class PersistanceRepositoryUser {
             while (rs.next()) {
                 if (rs.getString("userName").equalsIgnoreCase(username)) {
                     addUserTypeToUser(rs, newUser);
-                } else {
+                }else{
+                    userID = Integer.parseInt(rs.getString("userID"));
                     username = rs.getString("userName");
-                    password = rs.getString("password");
-                    newUser = new User(username, password);
+                    password = rs.getString("password");                    
+                    newUser = new User(username, password, userID);
                     addUserTypeToUser(rs, newUser);
                     userList.add(newUser);
                 }
