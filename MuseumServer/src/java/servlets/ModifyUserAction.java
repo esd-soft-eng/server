@@ -28,11 +28,13 @@ public class ModifyUserAction extends HttpServlet{
         
         // Username check and pass through
         String username = request.getParameter("username");
-        String password = request.getParameter("password");  
+        String password = request.getParameter("password");
         User user = um.validateUser(username, password);
         
         session.setAttribute("currentUser", user);
         request.setAttribute("user", user);
+        
+        
         
         // Get user ID, set to request
         ArrayList<Integer> userIDList = (ArrayList<Integer>) request.getServletContext().getAttribute("userID");
@@ -51,12 +53,14 @@ public class ModifyUserAction extends HttpServlet{
         //userPassword, remembering to md5 first
         userPassword = request.getParameter("password");
         
-        // SQL update statement
-        
         
         // If nothing was entered into one of the required form elements
         if(userName.equals("") || userPassword.equals("")){ //FIXME: Null check needs fixing for all incl userID
-            RequestDispatcher view = request.getRequestDispatcher("modifyUser.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("modifyFail.jsp");
+            view.forward(request, response);
+        }
+        else if(!um.modifyUser(userID, userName, userPassword)){ // SQL update statement via user manager
+            RequestDispatcher view = request.getRequestDispatcher("modifyFail.jsp"); // TODO: implement error page
             view.forward(request, response);
         }
         else{

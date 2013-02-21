@@ -20,10 +20,6 @@
     
     
     <servlet>
-        <servlet-name>LoginPage</servlet-name>
-        <servlet-class>servlets.LoginPage</servlet-class>
-    </servlet>    
-    <servlet>
         <servlet-name>Portal</servlet-name>
         <servlet-class>servlets.Portal</servlet-class>        
     </servlet>    
@@ -46,24 +42,20 @@
     
 
     <servlet-mapping>
-        <servlet-name>LoginPage</servlet-name>
-        <url-pattern>/displayuser.do</url-pattern>
-    </servlet-mapping>    
-    <servlet-mapping>
         <servlet-name>Portal</servlet-name>
         <url-pattern>/displayPortal.do</url-pattern>        
     </servlet-mapping>    
     <servlet-mapping>
         <servlet-name>RemoveUser</servlet-name>
-        <url-pattern>/RemoveUser.do</url-pattern>
+        <url-pattern>/admin/RemoveUser.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ModifyUser</servlet-name>
-        <url-pattern>/ModifyUser.do</url-pattern>
+        <url-pattern>/admin/ModifyUser.do</url-pattern>
     </servlet-mapping>    
     <servlet-mapping>
         <servlet-name>ModifyUserAction</servlet-name>
-        <url-pattern>/ModifyUserAction.do</url-pattern>
+        <url-pattern>/admin/ModifyUserAction.do</url-pattern>
     </servlet-mapping>    
     <servlet-mapping>
         <servlet-name>AddUser</servlet-name>
