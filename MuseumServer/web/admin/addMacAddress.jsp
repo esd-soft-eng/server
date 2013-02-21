@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1> Register new handset in the database </h1>
-        <form method="post" action="../addNewDevice.do">
+        <form method="post" action="/MuseumServer/addNewDevice.do">
             Handset MAC address: <input type="text" name="MAC"/><br />
             <input type="submit" name="submit" value="submit"/>
         </form>

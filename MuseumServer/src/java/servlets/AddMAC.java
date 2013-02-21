@@ -34,21 +34,27 @@ public class AddMAC extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //Get the mac address parameter that the jsp has hopefully passed across
         String MAC = (String) request.getParameter("MAC");
+
+        //If the MAC wasn't passed across then redirect back to the add MAC address page
         if (MAC == null || MAC.isEmpty()) {
             request.setAttribute("message", "<h2 style='color:red'>Please enter a value for the MAC address</h2>");
             Redirector.redirect(request, response, "/admin/addMacAddress.jsp");
             return;
         }
 
+        //get the handsetAccessManager from the servlet context
         HandsetAccessManager ham = (HandsetAccessManager) getServletContext().getAttribute("handsetAccessManager");
+
+        //attempt to add the device and redirect with a success message,
+        //if it fails then redirect back to the 'add' page.
         if (ham.addDevice(MAC)) {
-            request.setAttribute("message", "<h2>Successfully added MAC address <i>\"" + MAC + "\"</i> to the database.</h2>");
+            request.setAttribute("message", "<h2>Successfully added MAC address <i>\"" + MAC + "\"</i> to the database.</h2>"
+                    + "<p> Click <a href=\"/MuseumServer/admin/viewRegisteredHandsets.jsp\">here</a> to view registered devices.");
             Redirector.redirect(request, response, "/admin/addMacAddress.jsp");
             return;
-        }
-        else
-        {
+        } else {
             request.setAttribute("message", "<h2 style='color:red'>Failed to add MAC address <i>\"" + MAC + "\"</i> to the database.</h2><p>Reason: <i>\"" + MAC + "\"</i> likely already exists.");
             Redirector.redirect(request, response, "/admin/addMacAddress.jsp");
             return;
