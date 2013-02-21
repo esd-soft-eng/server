@@ -47,7 +47,7 @@
                 }
             %>
         <br>    
-        <form method="POST" action="RemoveUser.do">
+        <form method="POST" action="../RemoveUser.do">
             Enter the ID of the user to remove<p>
                 User ID: <input type="text" name="userID"><br>                
             <br><br>

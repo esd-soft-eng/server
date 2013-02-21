@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+// The Ham (Simon Edwins, 21st February 2013)
 package businessDomainObjects;
 
 import java.util.HashSet;
@@ -12,11 +9,11 @@ import persistance.PersistanceRepositoryHandset;
  * @author neil
  */
 public class HandsetAccessManager {
-    
+
     private PersistanceRepositoryHandset persistance;
     private HashSet<String> allowedDevices;
-    
-    public HandsetAccessManager(PersistanceRepositoryHandset persistance){
+
+    public HandsetAccessManager(PersistanceRepositoryHandset persistance) {
         this.persistance = persistance;
         this.initialise();
     }
@@ -36,17 +33,16 @@ public class HandsetAccessManager {
         }
         return false;
     }
-    
-    public boolean deviceHasAccess(String macAddress){
+
+    public boolean deviceHasAccess(String macAddress) {
         return allowedDevices.contains(macAddress);
     }
-    
-    public String[] getDeviceList(){
-        return (String[])this.allowedDevices.toArray();
+
+    public String[] getDeviceList() {
+        return this.allowedDevices.toArray(new String[0]);
     }
-    
-    private void initialise(){
+
+    private void initialise() {
         this.allowedDevices = this.persistance.getAllowedDevices();
     }
-    
 }

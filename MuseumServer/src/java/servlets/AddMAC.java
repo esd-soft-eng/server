@@ -4,27 +4,23 @@
  */
 package servlets;
 
-import businessDomainObjects.UserManager;
+import businessDomainObjects.HandsetAccessManager;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import persistance.DatabaseQueryExecutor;
+import sun.reflect.generics.visitor.Reifier;
+import utility.Redirector;
 
 /**
  *
- * @author Alex
+ * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
  */
-public class RemoveUser extends HttpServlet {
+@WebServlet(name = "AddMAC", urlPatterns = {"/addNewDevice.do"})
+public class AddMAC extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -38,32 +34,24 @@ public class RemoveUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            int userID = Integer.parseInt(request.getParameter("userID"));
-            DatabaseQueryExecutor dbQuery = new DatabaseQueryExecutor("jdbc:mysql://localhost:3306/museum_server_database", "root", "");
+        String MAC = (String) request.getParameter("MAC");
+        if (MAC == null || MAC.isEmpty()) {
+            request.setAttribute("message", "<h2 style='color:red'>Please enter a value for the MAC address</h2>");
+            Redirector.redirect(request, response, "/admin/addMacAddress.jsp");
+            return;
+        }
 
-            ServletContext ctx = request.getServletContext();
-            
-            UserManager um = (UserManager) ctx.getAttribute("userManager");
-            
-            if (um.removeUser(userID)){          
-                // Instantiate a request dispatcher for the JSP
-                RequestDispatcher view =
-                        request.getRequestDispatcher("userRemoveSsuccessful.jsp");
-
-                // Use the request dispatcher to ask the Container to crank up the JSP,
-                // sending it the request and response
-                view.forward(request, response);
-            } else {
-                // Instantiate a request dispatcher for the JSP
-                RequestDispatcher view =
-                        request.getRequestDispatcher("userRemoveUnsuccessful.jsp");
-
-                // Use the request dispatcher to ask the Container to crank up the JSP,
-                // sending it the request and response
-                view.forward(request, response);
-            }
-        } finally {
+        HandsetAccessManager ham = (HandsetAccessManager) getServletContext().getAttribute("handsetAccessManager");
+        if (ham.addDevice(MAC)) {
+            request.setAttribute("message", "<h2>Successfully added MAC address <i>\"" + MAC + "\"</i> to the database.</h2>");
+            Redirector.redirect(request, response, "/admin/addMacAddress.jsp");
+            return;
+        }
+        else
+        {
+            request.setAttribute("message", "<h2 style='color:red'>Failed to add MAC address <i>\"" + MAC + "\"</i> to the database.</h2><p>Reason: <i>\"" + MAC + "\"</i> likely already exists.");
+            Redirector.redirect(request, response, "/admin/addMacAddress.jsp");
+            return;
         }
     }
 
