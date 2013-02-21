@@ -17,17 +17,17 @@ public class HandsetAccessManager {
         this.persistance = persistance;
         this.initialise();
     }
-    
-    public synchronized boolean addDevice(String macAddress){
-        if (this.allowedDevices.add(macAddress)){
+
+    public synchronized boolean addDevice(String macAddress) {
+        if (this.allowedDevices.add(macAddress)) {
             persistance.addDevice(macAddress);
             return true;
         }
         return false;
     }
-    
-    public synchronized boolean removeDevice(String macAddress){
-        if (this.allowedDevices.remove(macAddress)){
+
+    public synchronized boolean removeDevice(String macAddress) {
+        if (this.allowedDevices.remove(macAddress)) {
             persistance.removeDevice(macAddress);
             return true;
         }
