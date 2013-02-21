@@ -7,6 +7,7 @@ import utility.MD5Hasher;
 /**
  *
  * @author Alex
+ * @author Simon
  */
 public class UserManager {
 
@@ -24,7 +25,6 @@ public class UserManager {
     }
 
     public User validateUser(String userName, String password) {
-
         for (User u : listOfUsers) {
             if (u.userName.equals(userName) && u.checkPassword(MD5Hasher.hashMD5(password))) {
                 return u;
@@ -35,6 +35,13 @@ public class UserManager {
     
     public ArrayList<User> getAllUsers(){
         return listOfUsers;
+    }
+    
+    public boolean modifyUser(int userID, String user, String pass){
+        if(persistance.modifyUser(userID, user, MD5Hasher.hashMD5(pass))){
+            return true;
+        }
+        return false;
     }
 
     public synchronized boolean removeUser(int userID) {
