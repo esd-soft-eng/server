@@ -13,6 +13,7 @@
         <title>View Registered Handsets</title>
     </head>
     <body>
+        <h1> View Registered Handsets </h1>
         <%
             HandsetAccessManager ham = (HandsetAccessManager) getServletContext().getAttribute("handsetAccessManager");
             if (ham == null) {
