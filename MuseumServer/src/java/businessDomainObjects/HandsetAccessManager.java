@@ -40,7 +40,7 @@ public class HandsetAccessManager {
     }
     
     public String[] getDeviceList(){
-        return (String[])this.allowedDevices.toArray();
+        return this.allowedDevices.toArray(new String[0]);
     }
     
     private void initialise(){
