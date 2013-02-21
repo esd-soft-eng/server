@@ -5,10 +5,7 @@
 package servlets;
 
 import businessDomainObjects.User;
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -47,7 +44,9 @@ public class Portal extends HttpServlet {
 
         for (String dir : user.getAccessibleDirectories()) {
             for (String file : FileUtil.listFilesInDir(getServletContext(), dir)) {
-                accessibleFiles.add(dir + "/" + file);
+                if (file.toLowerCase().endsWith(".jsp") || file.toLowerCase().endsWith(".html")) {
+                    accessibleFiles.add(dir + "/" + file);
+                }
             }
         }
 
