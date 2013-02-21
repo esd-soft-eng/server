@@ -4,7 +4,7 @@
  */
 package servlets;
 
-import domainObjects.User;
+import businessDomainObjects.User;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;

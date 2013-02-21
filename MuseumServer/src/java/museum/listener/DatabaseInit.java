@@ -1,7 +1,7 @@
 package museum.listener;
 
-import domainObjects.HandsetAccessManager;
-import domainObjects.UserManager;
+import businessDomainObjects.HandsetAccessManager;
+import businessDomainObjects.UserManager;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

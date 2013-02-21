@@ -1,7 +1,7 @@
 package persistance;
 
-import domainObjects.User;
-import domainObjects.UserTypes;
+import businessDomainObjects.User;
+import businessDomainObjects.UserTypes;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

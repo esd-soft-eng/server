@@ -1,4 +1,4 @@
-package domainObjects;
+package businessDomainObjects;
 
 import java.util.ArrayList;
 import persistance.PersistanceRepositoryUser;

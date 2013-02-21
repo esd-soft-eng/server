@@ -1,7 +1,7 @@
 package servlets;
 
-import domainObjects.User;
-import domainObjects.UserManager;
+import businessDomainObjects.User;
+import businessDomainObjects.UserManager;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;

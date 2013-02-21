@@ -1,4 +1,4 @@
-package domainObjects;
+package businessDomainObjects;
 
 /**
  *
