@@ -84,7 +84,17 @@ public class PersistanceRepositoryUser {
             newUser.addAccessibleDirectory(directory);
         }
     }
-
+    
+    public boolean modifyUser(int userID, String user, String pass){ // Boolean for error checking
+        String sql = "UPDATE user "
+                + "SET userName='" + user + "'"
+                + ", password='" + pass + "'"
+                + " WHERE user.userID=" + userID;
+    
+               return db.executeUpdate(sql);
+    }
+        
+        
     public boolean removeUser(int userID) { 
         String sql = "DELETE FROM `user` WHERE `userID`='" + userID + "'";
         
