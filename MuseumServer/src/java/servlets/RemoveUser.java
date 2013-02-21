@@ -4,10 +4,16 @@
  */
 package servlets;
 
+import businessDomainObjects.UserManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,38 +41,29 @@ public class RemoveUser extends HttpServlet {
         try {
             int userID = Integer.parseInt(request.getParameter("userID"));
             DatabaseQueryExecutor dbQuery = new DatabaseQueryExecutor("jdbc:mysql://localhost:3306/museum_server_database", "root", "");
+
+            ServletContext ctx = request.getServletContext();
             
-            /*
-             * CHECK THAT USER ID IS VALID
-             * Get a list of all the user ID's
-             * Check against them that the one we have passed is valid
-             * If not direct to error screen with hyperlink to removeUserForm.jsp
-             */
-            /*
-            ResultSet rs = dbQuery.executeStatement("SELECT userID FROM user");
-            int ids;
+            UserManager um = (UserManager) ctx.getAttribute("userManager");
             
-            while(rs.next()) {  
-                ids = rs.getInt(ids);
+            if (um.removeUser(userID)){          
+                // Instantiate a request dispatcher for the JSP
+                RequestDispatcher view =
+                        request.getRequestDispatcher("userRemoveSsuccessful.jsp");
+
+                // Use the request dispatcher to ask the Container to crank up the JSP,
+                // sending it the request and response
+                view.forward(request, response);
+            } else {
+                // Instantiate a request dispatcher for the JSP
+                RequestDispatcher view =
+                        request.getRequestDispatcher("userRemoveUnsuccessful.jsp");
+
+                // Use the request dispatcher to ask the Container to crank up the JSP,
+                // sending it the request and response
+                view.forward(request, response);
             }
-            */
-            dbQuery.executeUpdate("DELETE FROM user WHERE userID='" + userID + "'");
-            
-            // Add an attribute to the request object for the JSP to use. Notice the
-            // JSP is looking for "styles"
-            request.setAttribute("userID", userID);
-
-            // Instantiate a request dispatcher for the JSP
-            RequestDispatcher view = 
-                    request.getRequestDispatcher("userRemoveSuccessful.jsp");
-
-            // Use the request dispatcher to ask the Container to crank up the JSP,
-            // sending it the request and response
-            view.forward(request, response);
-            
-            
-        } finally {            
-
+        } finally {
         }
     }
 

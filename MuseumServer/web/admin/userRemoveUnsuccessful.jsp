@@ -1,6 +1,6 @@
 <%-- 
-    Document   : userRemoveSuccessful
-    Created on : 16-Feb-2013, 17:34:17
+    Document   : userRemoveUnsuccessful
+    Created on : 21-Feb-2013, 17:36:51
     Author     : Alex
 --%>
 
@@ -12,10 +12,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1 align="left">User Removed Successfully</h1>
+        <h1>User Removal Was Unsuccessful</h1>
         <p>
             <%
-                // Say which user ID got removed
+                // Say what user ID they tried to remove
             %>
+            <a href="/MuseumServer/admin/removeUserForm.jsp">Try Removal Again</a>
     </body>
 </html>

@@ -11,16 +11,16 @@ import utility.MD5Hasher;
 public class UserManager {
 
     private ArrayList<User> listOfUsers;
-    private PersistanceRepositoryUser pr;
+    private PersistanceRepositoryUser persistance;
 
     public UserManager(PersistanceRepositoryUser pr) {
-        this.pr = pr;
+        this.persistance = pr;
         this.listOfUsers = this.initUserList();
     }
 
     private ArrayList<User> initUserList() {
 
-        return pr.getAllUsers();
+        return persistance.getAllUsers();
     }
 
     public User validateUser(String userName, String password) {
@@ -35,5 +35,24 @@ public class UserManager {
     
     public ArrayList<User> getAllUsers(){
         return listOfUsers;
+    }
+
+    public synchronized boolean removeUser(int userID) {
+        
+        if (persistance.removeUser(userID)){
+            listOfUsers.remove(this.getUserByID(userID));
+            return true;
+        }
+        return false;
+    }
+
+    private User getUserByID(int userID) {
+        
+        for(User user : listOfUsers){
+            if (user.getUserID() == userID){
+                return user;
+            }
+        }
+        return null;
     }
 }

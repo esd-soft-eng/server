@@ -84,4 +84,10 @@ public class PersistanceRepositoryUser {
             newUser.addAccessibleDirectory(directory);
         }
     }
+
+    public boolean removeUser(int userID) { 
+        String sql = "DELETE FROM `user` WHERE `userID`='" + userID + "'";
+        
+        return db.executeUpdate(sql);
+    }
 }
