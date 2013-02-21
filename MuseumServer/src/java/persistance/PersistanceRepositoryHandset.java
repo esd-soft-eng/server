@@ -26,10 +26,7 @@ public class PersistanceRepositoryHandset {
         
         HashSet<String> allowedDevices = new HashSet<String>();
         
-        String sql = "SELECT * FROM "
-                + "`user` `u` , `usertype` `ut` , `usertypelink` `utl` "
-                + "WHERE `u`.`userID` = `utl`.`userID` "
-                + "AND `ut`.`typeID` = `utl`.`typeID`";
+        String sql = "SELECT * FROM `allowedDevices`";
         
         createAllowedDevicesList(sql, allowedDevices);        
         return allowedDevices;      
