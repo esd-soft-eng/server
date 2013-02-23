@@ -1,12 +1,14 @@
 package museum.listener;
 
 import businessDomainObjects.HandsetAccessManager;
+import businessDomainObjects.TourManager;
 import businessDomainObjects.UserManager;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import persistance.DatabaseQueryExecutor;
 import persistance.PersistanceRepositoryHandset;
+import persistance.PersistanceRepositoryTour;
 import persistance.PersistanceRepositoryUser;
 
 /**
@@ -25,6 +27,7 @@ public class DatabaseInit implements ServletContextListener {
         //init managers and set them in the context    
         ctx.setAttribute("userManager", initUserManager(db));
         ctx.setAttribute("handsetAccessManager", initHandsetAccessManager(db));
+        ctx.setAttribute("tourManager", initTourManager(db));
     }
 
     @Override
@@ -54,5 +57,10 @@ public class DatabaseInit implements ServletContextListener {
         //handset access persistance and manipulation
         PersistanceRepositoryHandset hr = new PersistanceRepositoryHandset(db);
         return new HandsetAccessManager(hr);
+    }
+
+    private TourManager initTourManager(DatabaseQueryExecutor db) {
+        PersistanceRepositoryTour pr = new PersistanceRepositoryTour(db);
+        return new TourManager(pr);
     }
 }
