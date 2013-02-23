@@ -111,6 +111,9 @@ public class PersistanceRepositoryUser {
     public boolean removeUser(int userID) { 
         String sql = "DELETE FROM `user` WHERE `userID`='" + userID + "'";
         
+        // Need to delete any reference to the user ID - DON'T NEED
+        // "DELETE FROM `usertypelink` WHERE `userID`='" + userID + "'";
+        
         return db.executeUpdate(sql);
     }
 }

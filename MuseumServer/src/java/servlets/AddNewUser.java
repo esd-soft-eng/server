@@ -10,6 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utility.InputValidator;
+import utility.Redirector;
 
 /**
  *
@@ -29,10 +31,40 @@ public class AddNewUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         try {
+            // Get userName and validate it
+            String userName = request.getParameter("userName");
+            if (userName != null) {
+                userName = InputValidator.clean(userName);
+            }
+            if (userName == null || userName.isEmpty()) {
+                request.setAttribute("message", "<h2 style='color:red'>Please enter a user name</h2>");
+                Redirector.redirect(request, response, "/admin/addNewUserForm.jsp");
+                return;
+            }
             
-        } finally {            
+            // Get password and validate it
+            String password = request.getParameter("password");
+            if (password != null) {
+                password = InputValidator.clean(password);
+            }
+            if (password == null || userName.isEmpty()) {
+                request.setAttribute("message", "<h2 style='color:red'>Please enter a password</h2>");
+                Redirector.redirect(request, response, "/admin/addNewUserForm.jsp");
+                return;
+            }
+            
+            // Get userType and validate it
+            String userType = request.getParameter("userType");
+            if (userType != null) {
+                userType = InputValidator.clean(userType);
+            }
+            if (userType == null || userName.isEmpty()) {
+                request.setAttribute("message", "<h2 style='color:red'>Please select a user type</h2>");
+                Redirector.redirect(request, response, "/admin/addNewUserForm.jsp");
+                return;
+            }
+        } finally {
         }
     }
 
