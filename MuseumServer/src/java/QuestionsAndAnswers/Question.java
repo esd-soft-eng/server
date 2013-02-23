@@ -57,4 +57,8 @@ public class Question {
         Answer answerToValue = answers.get(this.answer);
         return answerToValue.value;
     }
+    
+    public Answer[] getAnswerListAsArray(){
+        return this.answers.toArray(new Answer[0]);        
+    }
 }

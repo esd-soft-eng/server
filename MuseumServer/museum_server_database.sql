@@ -49,6 +49,7 @@ CREATE TABLE `answer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` varchar(100) NOT NULL,
   `questionId` int(11) NOT NULL,
+  `value` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `questionId` (`questionId`),
   CONSTRAINT `answer_ibfk_1` FOREIGN KEY (`questionId`) REFERENCES `question` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -201,4 +202,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-02-23 14:38:45
+-- Dump completed on 2013-02-23 18:05:28

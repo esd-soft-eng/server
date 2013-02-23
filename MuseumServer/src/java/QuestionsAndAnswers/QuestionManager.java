@@ -23,15 +23,15 @@ public class QuestionManager {
         this.questionSetId = questionSetId;
     }
     
-    public boolean addQuestion(Question question) {
-        if (repository.addQuestionToQuestionSet(question, this.questionSetId)) {
+    public synchronized boolean addQuestion(Question question) {
+        if (repository.addQuestionToExistingQuestionSet(question, this.questionSetId)) {
             this.questions.add(question);
             return true;
         }
         return false;
     }
     
-    public boolean removeQuestion(Question question) {
+    public synchronized boolean removeQuestion(Question question) {
         if (repository.removeQuestion(question, this.questionSetId)) {
             this.removeQuestionFromQuestionSet(question);
             return true;
