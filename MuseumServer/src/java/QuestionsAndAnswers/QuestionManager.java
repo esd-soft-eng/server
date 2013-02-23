@@ -23,7 +23,7 @@ public class QuestionManager {
         this.questionSetId = questionSetId;
     }
     
-    public synchronized boolean addQuestion(Question question) {
+    public boolean addQuestion(Question question) {
         if (repository.addQuestionToExistingQuestionSet(question, this.questionSetId)) {
             this.questions.add(question);
             return true;
@@ -31,7 +31,7 @@ public class QuestionManager {
         return false;
     }
     
-    public synchronized boolean removeQuestion(Question question) {
+    public boolean removeQuestion(Question question) {
         if (repository.removeQuestion(question, this.questionSetId)) {
             this.removeQuestionFromQuestionSet(question);
             return true;
