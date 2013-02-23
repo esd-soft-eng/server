@@ -17,8 +17,10 @@ public class Question {
     private String questionText;
     private int id;
 
-    public Question(ArrayList answers) {
-
+    public Question(int id, String questionText, ArrayList answers) {
+        
+        this.id = id;
+        this.questionText = questionText;
         this.answers = answers;
         this.answer = 0;
     }

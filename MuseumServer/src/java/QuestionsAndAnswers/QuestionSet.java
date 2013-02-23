@@ -5,7 +5,6 @@
 package QuestionsAndAnswers;
 
 import java.util.ArrayList;
-import persistance.PersistanceRepositoryQuestions;
 
 /**
  *
@@ -13,12 +12,15 @@ import persistance.PersistanceRepositoryQuestions;
  */
 public class QuestionSet{
     
+    private int id;
+    private String name;
     private ArrayList<Question> questions;
-    PersistanceRepositoryQuestions persistance;
     
-    public QuestionSet(ArrayList<Question> questions, PersistanceRepositoryQuestions persistance){
+    public QuestionSet(int id, String name, ArrayList<Question> questions){
+        
+        this.id = id;
+        this.name = name;
         this.questions = questions;
-        this.initQuestionSet();
     }
     
     public boolean answerQuestion(int question, int answer){
@@ -50,9 +52,5 @@ public class QuestionSet{
     private DisplayQuestion prepareQuestionForDisplay(Question question) {
         
         return new DisplayQuestion(question.getAnswerText(), question.getQuestionText());
-    }
-
-    private void initQuestionSet() {
-        this.questions = persistance.getQuestionSet();
     }
 }

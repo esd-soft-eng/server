@@ -4,8 +4,8 @@
  */
 package QuestionsAndAnswers;
 
-import persistance.PersistanceRepositoryQuestions;
 import java.util.ArrayList;
+import persistance.PersistanceRepositoryQuestions;
 
 /**
  *
@@ -45,6 +45,6 @@ public class QuestionManager {
             if (q.getQuestionId() == q.getQuestionId()) {
                 questions.remove(q);
             }
-        }        
+        }
     }
 }
