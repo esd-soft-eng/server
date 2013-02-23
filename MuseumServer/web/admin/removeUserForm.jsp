@@ -4,6 +4,7 @@
     Author     : Alex
 --%>
 
+<%@page import="businessDomainObjects.UserManager"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="persistance.PersistanceRepositoryUser"%>
@@ -20,38 +21,29 @@
     <body>
         <h1 align="center">Remove User</h1>
         <p>
-            <%
-                // Need to run query to get list of users
-                DatabaseQueryExecutor dbQuery = new DatabaseQueryExecutor("jdbc:mysql://localhost:3306/museum_server_database", "root", "");
-                
-                ResultSet rs = dbQuery.executeStatement("SELECT userID, userName FROM user");
-                ArrayList<String> allUsers = new ArrayList();
-                String line;
-                int numberOfColumns = rs.getMetaData().getColumnCount();
-                
-                while(rs.next()) {
-                    line = "";
-                    for (int i = 1; i <= numberOfColumns; i++) {
-                        line += rs.getString(i) + ", ";
+            <form method="POST" action="./RemoveUser.do" onsubmit="return confirm('This will delete the selected user. Continue?');">
+            <%            
+                ServletContext ctx = request.getServletContext();
+                UserManager um = (UserManager) ctx.getAttribute("userManager");
+            
+                if (um == null) {
+                    out.println("<h2> No users are currently recorded in the database </h2>");
+                }                    
+                String[] listOfUsers = um.getAllUserStrings();          
+                                
+                if (listOfUsers == null || listOfUsers.length == 0) {
+                    out.println("<h2> No users are currently recorded in the database </h2>");
+                } else {
+                    out.println("Here is a list of users: <br>");
+                    for (String user : listOfUsers) {
+                        String[] userLine = user.split(",");
+                        out.println("<input type='radio' name='userID' value='" + userLine[0] + "'>" + userLine[0] + ", " + userLine[1] + "<br/>");
+
                     }
-                    // remove final ":"
-                    line = line.substring(0, line.length() - 2);
-                    System.out.println("Line: " + line);
-                    allUsers.add(line);
-                }
-                                                       
-                Iterator it = allUsers.iterator();
-                out.print("<br>Here is the list of users: <br>");
-                while(it.hasNext()) {
-                    out.print(it.next() + "<br>");
                 }
             %>
-        <br>    
-        <form method="POST" action="../RemoveUser.do">
-            Enter the ID of the user to remove<p>
-                User ID: <input type="text" name="userID"><br>                
-            <br><br>
+            <br>
             <input type="SUBMIT" value="Remove User" align="left">
-        </form>
+            </form>            
     </body>
 </html>
