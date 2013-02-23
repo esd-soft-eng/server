@@ -9,10 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Register new handset in the database</title>
+        <title>Register a new handset in the database</title>
     </head>
     <body>
-        <h1> Register new handset in the database </h1>
+        <h1> Register a new handset in the database </h1>
         <form method="post" action="/MuseumServer/addNewDevice.do">
             Handset MAC address: <input maxlength="2" size="2" type="text" name="MAC1"/>:<input maxlength="2" size="2" type="text" name="MAC2"/>:<input maxlength="2" size="2" type="text" name="MAC3"/>:<input maxlength="2" size="2" type="text" name="MAC4"/>:<input maxlength="2" size="2" type="text" name="MAC5"/>:<input maxlength="2" size="2" type="text" name="MAC6"/><br />
             <input type="submit" name="submit" value="submit"/>

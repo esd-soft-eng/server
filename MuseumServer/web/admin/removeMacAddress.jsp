@@ -10,11 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Remove handset from the database</title>
+        <title>Remove a handset from the database</title>
     </head>
     <body>
-        <h1> Remove handset from the database </h1>
-        <form action="/MuseumServer/removeDevice" method="post">
+        <h1> Remove a handset from the database </h1>
+        <form action="/MuseumServer/removeDevice" method="post" onsubmit="return confirm('This will delete the selected MAC address. Continue?');">
             <%
                 HandsetAccessManager ham = (HandsetAccessManager) getServletContext().getAttribute("handsetAccessManager");
                 if (ham == null) {
@@ -25,10 +25,18 @@
                     out.println("<h2> No handsets are currently recorded in the database </h2>");
                 } else {
                     for (String device : registeredDevices) {
-                        out.println("<input type='radio' name='mac' value='"+device+"'>" + device + "<br/>");
+                        out.println("<input type='radio' name='mac' value='" + device + "'>" + device + "<br/>");
+
                     }
+                    out.println("<input type='submit' value='submit'/>");
                 }
             %>
         </form>
+
+        <% String messageFromServlet = (String) request.getAttribute("message");
+            if (messageFromServlet != null) {
+                out.println(messageFromServlet);
+            }
+        %>
     </body>
 </html>
