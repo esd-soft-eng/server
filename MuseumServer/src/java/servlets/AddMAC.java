@@ -35,15 +35,21 @@ public class AddMAC extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //Get the mac address parameter that the jsp has hopefully passed across
-        String MAC = (String) request.getParameter("MAC");
+        String MAC1 = (String) request.getParameter("MAC1");
+        String MAC2 = (String) request.getParameter("MAC2");
+        String MAC3 = (String) request.getParameter("MAC3");
+        String MAC4 = (String) request.getParameter("MAC4");
+        String MAC5 = (String) request.getParameter("MAC5");
+        String MAC6 = (String) request.getParameter("MAC6");
+
 
         //If the MAC wasn't passed across then redirect back to the add MAC address page
-        if (MAC == null || MAC.isEmpty()) {
-            request.setAttribute("message", "<h2 style='color:red'>Please enter a value for the MAC address</h2>");
+        if (!validMAC(MAC1, MAC2, MAC3, MAC4, MAC5, MAC6)) {
+            request.setAttribute("message", "<h2 style='color:red'>Please enter a valid value for the MAC address</h2>");
             Redirector.redirect(request, response, "/admin/addMacAddress.jsp");
             return;
         }
-
+        String MAC = MAC1+":"+MAC2+":"+MAC3+":"+MAC4+":"+MAC5+":"+MAC6;
         //get the handsetAccessManager from the servlet context
         HandsetAccessManager ham = (HandsetAccessManager) getServletContext().getAttribute("handsetAccessManager");
 
@@ -59,6 +65,22 @@ public class AddMAC extends HttpServlet {
             Redirector.redirect(request, response, "/admin/addMacAddress.jsp");
             return;
         }
+    }
+
+    private boolean validMAC(String MAC1, String MAC2, String MAC3, String MAC4, String MAC5, String MAC6) {
+        String[] macArray = {MAC1, MAC2, MAC3, MAC4, MAC5, MAC6};
+
+        for (String mac : macArray) {
+            if (mac == null || mac.isEmpty()) {
+                return false;
+            }
+            //regex to see if the mac address is a valid hex value
+            if (!mac.matches("^[\\da-fA-F]+$")) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
