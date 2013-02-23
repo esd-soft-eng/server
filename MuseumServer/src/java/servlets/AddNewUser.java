@@ -4,29 +4,18 @@
  */
 package servlets;
 
-import businessDomainObjects.UserManager;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import persistance.DatabaseQueryExecutor;
-import utility.InputValidator;
-import utility.Redirector;
 
 /**
  *
  * @author Alex
  */
-public class RemoveUser extends HttpServlet {
+public class AddNewUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -40,33 +29,10 @@ public class RemoveUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         try {
-            int userID = 0;
-            String userIDString = request.getParameter("userID");
-
-            if (userIDString != null) {
-                userID = Integer.parseInt(InputValidator.clean(userIDString));
-            }
-
-            if (userIDString == null || userIDString.isEmpty()) {
-                request.setAttribute("message", "<h2 style='color:red'>Please select a user</h2>");
-                Redirector.redirect(request, response, "/admin/removeUserForm.jsp");
-                return;
-            }
-
-            ServletContext ctx = request.getServletContext();
-            UserManager um = (UserManager) ctx.getAttribute("userManager");
-
-            if (um.removeUser(userID)) {
-                request.setAttribute("message", "<h2>Successfully removed user <i>\"" + userID + "\"</i> from the database.</h2>");
-                Redirector.redirect(request, response, "/admin/removeUserForm.jsp");
-                return;
-            } else {
-                request.setAttribute("message", "<h2 style='color:red'>Failed to remove user <i>\"" + userID + "\"</i> from the database.</h2>");
-                Redirector.redirect(request, response, "/admin/removeUserForm.jsp");
-                return;
-            }
-        } finally {
+            
+        } finally {            
         }
     }
 

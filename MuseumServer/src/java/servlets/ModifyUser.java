@@ -27,7 +27,7 @@ public class ModifyUser extends HttpServlet{
         
         // Username check and pass through
         String username = request.getParameter("username");
-        String password = request.getParameter("password");        
+        String password = request.getParameter("password");       
         User user = um.validateUser(username, password);
         
         session.setAttribute("currentUser", user);

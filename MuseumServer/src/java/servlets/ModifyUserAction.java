@@ -53,13 +53,12 @@ public class ModifyUserAction extends HttpServlet{
         //userPassword, remembering to md5 first
         userPassword = request.getParameter("password");
         
-        
         // If nothing was entered into one of the required form elements
         if(userName.equals("") || userPassword.equals("")){ //FIXME: Null check needs fixing for all incl userID
             RequestDispatcher view = request.getRequestDispatcher("modifyFail.jsp");
             view.forward(request, response);
         }
-        else if(!um.modifyUser(userID, userName, userPassword)){ // SQL update statement via user manager
+        else if(!um.modifyUser(userID, userName, userPassword, request.getParameterValues("userType"))){ // SQL update statement via user manager
             RequestDispatcher view = request.getRequestDispatcher("modifyFail.jsp"); // TODO: implement error page
             view.forward(request, response);
         }
