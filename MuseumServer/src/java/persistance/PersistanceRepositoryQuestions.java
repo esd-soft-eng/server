@@ -24,7 +24,7 @@ public class PersistanceRepositoryQuestions {
     public PersistanceRepositoryQuestions(DatabaseQueryExecutor executor) {
         this.executor = executor;
     }
-    
+
     public synchronized ArrayList<QuestionSet> getAllQuestionSets() {
 
         String sql = "SELECT * FROM"
@@ -35,75 +35,178 @@ public class PersistanceRepositoryQuestions {
         return this.generateQuestionSetListFromResults(rs);
     }
 
-    public synchronized ArrayList<Question> getQuestionSet() {
+    // <editor-fold defaultstate="collapsed" desc="Section of methods which get items by id ">
+    public synchronized QuestionSet getQuestionSet(int id) {
 
-        return new ArrayList<Question>();
-    }
+        String sql = "SELECT * FROM"
+                + "`questionset` `qs`"
+                + "WHERE `qs`.`id` =" + id;
 
-    private synchronized ArrayList<QuestionSet> generateQuestionSetListFromResults(ResultSet rs) {
-        
-        ArrayList<QuestionSet> questionSetList = new ArrayList();
-        
-        try {
-            while(rs.next()){
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                ArrayList<Question> questionList = this.getQuestionSetQuestions(id);
-                questionSetList.add(new QuestionSet(id, name, questionList));
-           
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(PersistanceRepositoryQuestions.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return questionSetList;
+        ResultSet rs = executor.executeStatement(sql);
+
+        return this.generateQuestionSetListFromResults(rs).get(0);
+
     }
 
     private synchronized ArrayList<Question> getQuestionSetQuestions(int id) {
-        
+
         String sql = "SELECT * FROM"
                 + "`question`.`q`"
                 + "WHERE `q`.`id` = " + id;
-        
+
         ResultSet rs = executor.executeStatement(sql);
-        
-        return this.generateQuestionsSetQuestionsFromResults(rs);        
+        return this.generateQuestionsSetQuestionsFromResults(rs);
     }
-    
-    private synchronized ArrayList<Question> generateQuestionsSetQuestionsFromResults(ResultSet rs){
-        
-        ArrayList<Question> questionList = new ArrayList();
+
+    private synchronized ArrayList<Answer> getQuestionAnswers(int id) {
+
+        String sql = "SELECT * FROM"
+                + "`answer`.`a`"
+                + "WHERE `a`.`id` =" + id;
+
+        ResultSet rs = executor.executeStatement(sql);
+        return this.generateAnswersForQuestion(rs);
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Section of methods which return a list of items from a result set">
+    private synchronized ArrayList<QuestionSet> generateQuestionSetListFromResults(ResultSet rs) {
+
+        ArrayList<QuestionSet> questionSetList = new ArrayList();
+
         try {
-            while(rs.next()){
-                int id = rs.getInt("id");
-                String questionText = rs.getString("text");
-                ArrayList<Answer> questionAnswers = this.getQuestionAnswers(id);
-                questionList.add(new Question(id, questionText, questionAnswers));
+            while (rs.next()) {
+                questionSetList.add(this.getQuestionSetFromResultSet(rs));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PersistanceRepositoryQuestions.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+        return questionSetList;
+    }
+
+    private synchronized ArrayList<Question> generateQuestionsSetQuestionsFromResults(ResultSet rs) {
+
+        ArrayList<Question> questionList = new ArrayList();
+        try {
+            while (rs.next()) {
+                questionList.add(this.getQuestionFromResultSet(rs));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PersistanceRepositoryQuestions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return questionList;
     }
-    
-    private ArrayList<Answer> getQuestionAnswers(int id) {
-        throw new UnsupportedOperationException("Not yet implemented");
+
+    private synchronized ArrayList<Answer> generateAnswersForQuestion(ResultSet rs) {
+
+        ArrayList<Answer> answerList = new ArrayList();
+        try {
+            while (rs.next()) {
+                answerList.add(this.getAnswerFromResultSet(rs));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PersistanceRepositoryQuestions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return answerList;
     }
-    
-    
-    
-    
-    
-    
-        public synchronized boolean addQuestionToQuestionSet(Question question, int questionSetId) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Section of methods which can pull a single item from a result set. Note, you have to catch an exception">
+    private synchronized QuestionSet getQuestionSetFromResultSet(ResultSet rs) throws SQLException {
+
+        int id = rs.getInt("id");
+        String name = rs.getString("name");
+        ArrayList<Question> questionList = this.getQuestionSetQuestions(id);
+        return new QuestionSet(id, name, questionList);
     }
 
-    public synchronized boolean removeQuestion(Question question, int questionSetId) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    private synchronized Question getQuestionFromResultSet(ResultSet rs) throws SQLException {
+
+        int id = rs.getInt("id");
+        String questionText = rs.getString("text");
+        ArrayList<Answer> questionAnswers = this.getQuestionAnswers(id);
+        return new Question(id, questionText, questionAnswers);
     }
 
-    
+    private synchronized Answer getAnswerFromResultSet(ResultSet rs) throws SQLException {
 
+        int id = rs.getInt("id");
+        String text = rs.getString("text");
+        int value = rs.getInt("value");
+        return new Answer(text, value);
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Methods which save questionsets/questions to the database">
+    public synchronized boolean addNewQuestionSet(QuestionSet questionSet) {
+
+        boolean success = false;
+
+        String sql = "INSERT INTO"
+                + "`questionset` `qs` (`title`)"
+                + "VALUES ('" + questionSet.getName() + "')";
+
+        return executor.executeUpdate(sql);
+    }
+
+    public synchronized boolean updateQuestionSetName(QuestionSet questionSet) {
+
+        String sql = "UPDATE `questionset` `qs`"
+                + "SET `qs`.`title`='" + questionSet.getName() + "'"
+                + "WHERE `qs`.`id` = " + questionSet.getId() + "";
+
+        return executor.executeUpdate(sql);
+    }
+
+    public synchronized boolean addQuestionToExistingQuestionSet(Question question, int questionSetId) {
+
+        String questionText = question.getQuestionText();
+
+        String sql = "INSERT INTO"
+                + "`question` `q` (`text`, `questionSetId`)"
+                + "VALUES ('" + questionText + "'," + questionSetId + ")";
+
+        return addAnswerListToQuestion(question, executor.executeUpdate(sql));
+    }
+
+    private synchronized boolean addAnswerToQuestion(Answer answer) {
+
+        String sql = "Insert INTO"
+                + "`answer` `a` (`text`, `questionId`, `value`)"
+                + "VALUES ('" + answer.answerText + "', (SELECT MAX(`id`) FROM `question`), " + answer.value + " )";
+
+        return executor.executeUpdate(sql);
+    }
+
+    private synchronized boolean addAnswerListToQuestion(Question question, boolean success) {
+
+        if (!success) {
+            return false;
+        }
+
+        for (Answer answer : question.getAnswerListAsArray()) {
+            success = this.addAnswerToQuestion(answer);
+        }
+        return success;
+    }
+    // </editor-fold>
+
+    public boolean removeQuestionSet(QuestionSet questionSet) {
+
+        String sql = "DELETE FROM `questionset`.`qs`"
+                + "WHERE `qs`.`id = " + questionSet.getId();
+
+        return executor.executeUpdate(sql);
+    }
+
+    public boolean removeQuestion(Question question, int questionSetId) {
+
+        String sql = "DELETE FROM `question`.`q`"
+                + "WHERE `q`.`id = " + question.getQuestionId();
+
+        return executor.executeUpdate(sql);
+    }
 }
