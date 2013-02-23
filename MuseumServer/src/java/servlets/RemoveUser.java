@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import persistance.DatabaseQueryExecutor;
+import utility.InputValidator;
+import utility.Redirector;
 
 /**
  *
@@ -39,29 +41,30 @@ public class RemoveUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int userID = Integer.parseInt(request.getParameter("userID"));
-            DatabaseQueryExecutor dbQuery = new DatabaseQueryExecutor("jdbc:mysql://localhost:3306/museum_server_database", "root", "");
+            int userID = 0;
+            String userIDString = request.getParameter("userID");
+
+            if (userIDString != null) {
+                userID = Integer.parseInt(InputValidator.clean(userIDString));
+            }
+
+            if (userIDString == null || userIDString.isEmpty()) {
+                request.setAttribute("message", "<h2 style='color:red'>Please select a user</h2>");
+                Redirector.redirect(request, response, "/admin/removeUserForm.jsp");
+                return;
+            }
 
             ServletContext ctx = request.getServletContext();
-            
             UserManager um = (UserManager) ctx.getAttribute("userManager");
-            
-            if (um.removeUser(userID)){          
-                // Instantiate a request dispatcher for the JSP
-                RequestDispatcher view =
-                        request.getRequestDispatcher("userRemoveSuccessful.jsp");
 
-                // Use the request dispatcher to ask the Container to crank up the JSP,
-                // sending it the request and response
-                view.forward(request, response);
+            if (um.removeUser(userID)) {
+                request.setAttribute("message", "<h2>Successfully removed user <i>\"" + userID + "\"</i> from the database.</h2>");
+                Redirector.redirect(request, response, "/admin/removeUserForm.jsp");
+                return;
             } else {
-                // Instantiate a request dispatcher for the JSP
-                RequestDispatcher view =
-                        request.getRequestDispatcher("userRemoveUnsuccessful.jsp");
-
-                // Use the request dispatcher to ask the Container to crank up the JSP,
-                // sending it the request and response
-                view.forward(request, response);
+                request.setAttribute("message", "<h2 style='color:red'>Failed to remove user <i>\"" + userID + "\"</i> from the database.</h2>");
+                Redirector.redirect(request, response, "/admin/removeUserForm.jsp");
+                return;
             }
         } finally {
         }

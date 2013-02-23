@@ -21,16 +21,17 @@
     <body>
         <h1 align="center">Remove User</h1>
         <p>
-            <form method="POST" action="./RemoveUser.do" onsubmit="return confirm('This will delete the selected user. Continue?');">
-            <%            
+        <form method="POST" action="./RemoveUser.do" onsubmit="return confirm('This will delete the selected user. Continue?');">
+            <%
                 ServletContext ctx = request.getServletContext();
                 UserManager um = (UserManager) ctx.getAttribute("userManager");
-            
+               
                 if (um == null) {
                     out.println("<h2> No users are currently recorded in the database </h2>");
-                }                    
-                String[] listOfUsers = um.getAllUserStrings();          
-                                
+                }
+                 
+                String[] listOfUsers = um.getAllUserStrings();
+
                 if (listOfUsers == null || listOfUsers.length == 0) {
                     out.println("<h2> No users are currently recorded in the database </h2>");
                 } else {
@@ -40,10 +41,16 @@
                         out.println("<input type='radio' name='userID' value='" + userLine[0] + "'>" + userLine[0] + ", " + userLine[1] + "<br/>");
 
                     }
+                    out.println("<br>");
+                    out.println("<input type='submit' value='Remove User' align='left'/>");
                 }
             %>
-            <br>
-            <input type="SUBMIT" value="Remove User" align="left">
-            </form>            
+        </form>
+
+        <% String messageFromServlet = (String) request.getAttribute("message");
+            if (messageFromServlet != null) {
+                out.println(messageFromServlet);
+            }
+        %>
     </body>
 </html>
