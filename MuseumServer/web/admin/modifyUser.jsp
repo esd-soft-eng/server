@@ -30,7 +30,7 @@
                     ArrayList<Integer> userIDList = new ArrayList<Integer>();
                     
                     for(User userString : um.getAllUsers()){
-                        String thisString = userString.getUser();
+                        String thisString = userString.getUserName();
                         int userID = userString.getUserID();
                         
                         userIDList.add(userID);
