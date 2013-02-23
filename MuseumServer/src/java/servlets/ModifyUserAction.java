@@ -4,7 +4,6 @@ import businessDomainObjects.User;
 import businessDomainObjects.UserManager;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -34,18 +33,17 @@ public class ModifyUserAction extends HttpServlet{
         session.setAttribute("currentUser", user);
         request.setAttribute("user", user);
         
-        
-        
-        // Get user ID, set to request
-        ArrayList<Integer> userIDList = (ArrayList<Integer>) request.getServletContext().getAttribute("userID");
-        
         String userName, userPassword;
-        int userID;
+        int userID = 0;
         
-        
+        try{
+            userID = Integer.parseInt(request.getParameter("userToModify"));
+        }
+        catch(NumberFormatException ex){
+            
+        }
         // Get form parameters
         //Checkbox, retrieve parameter, update the appropriate SQL field
-        userID = Integer.parseInt(request.getParameter("userToModify"));
         
         //userName
         userName = request.getParameter("userName");
@@ -54,7 +52,7 @@ public class ModifyUserAction extends HttpServlet{
         userPassword = request.getParameter("password");
         
         // If nothing was entered into one of the required form elements
-        if(userName.equals("") || userPassword.equals("")){ //FIXME: Null check needs fixing for all incl userID
+        if(userName == null || userPassword == null){
             RequestDispatcher view = request.getRequestDispatcher("modifyFail.jsp");
             view.forward(request, response);
         }
