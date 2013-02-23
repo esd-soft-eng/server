@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alex
  */
-public class UserPortal extends HttpServlet {
+public class AddNewUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -29,35 +29,10 @@ public class UserPortal extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         try {
-
-            int requestID = Integer.parseInt(request.getParameter("userRequest"));
-
-            userRequest(requestID);
-
-        } finally {
-        }
-
-
-    }
-
-    public void userRequest(int requestID) {
-        // switch statement depending on what came in on the user
-        // request
-        switch (requestID) {
-            case 1:
-                // Send to add user jsp
-                break;
-            case 2:
-                // Send to remove user jsp
-                break;
-            case 3:
-                // Send to modify user jsp
-                break;
-            default:
-                System.out.println("You messed up!");
-                break;
+            
+        } finally {            
         }
     }
 

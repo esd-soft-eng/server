@@ -41,8 +41,8 @@
         <servlet-class>servlets.AddUser</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UserPortal</servlet-name>
-        <servlet-class>servlets.UserPortal</servlet-class>
+        <servlet-name>AddNewUser</servlet-name>
+        <servlet-class>servlets.AddNewUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginPage</servlet-name>
@@ -59,18 +59,18 @@
     <servlet-mapping>
         <servlet-name>ModifyUser</servlet-name>
         <url-pattern>/admin/ModifyUser.do</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ModifyUserAction</servlet-name>
         <url-pattern>/admin/ModifyUserAction.do</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddUser</servlet-name>
         <url-pattern>/AddUser.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UserPortal</servlet-name>
-        <url-pattern>/UserPortal.do</url-pattern>
+        <servlet-name>AddNewUser</servlet-name>
+        <url-pattern>/AddNewUser.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
