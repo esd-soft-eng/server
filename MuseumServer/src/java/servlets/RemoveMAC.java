@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utility.InputValidator;
 import utility.Redirector;
 
 /**
@@ -36,11 +37,16 @@ public class RemoveMAC extends HttpServlet {
 
         //get the MAC from the paramter, and if it's empty then return an error
         String MAC = request.getParameter("mac");
+        if (!(MAC == null)) {
+            MAC = InputValidator.clean(MAC);
+        }
+
         if (MAC == null || MAC.isEmpty()) {
             request.setAttribute("message", "<h2 style='color:red'>Please select a MAC address</h2>");
             Redirector.redirect(request, response, "/admin/removeMacAddress.jsp");
             return;
         }
+
 
         //get the handsetAccessManager from the servlet context
         HandsetAccessManager ham = (HandsetAccessManager) getServletContext().getAttribute("handsetAccessManager");
