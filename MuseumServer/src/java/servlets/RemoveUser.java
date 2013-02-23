@@ -49,7 +49,7 @@ public class RemoveUser extends HttpServlet {
             if (um.removeUser(userID)){          
                 // Instantiate a request dispatcher for the JSP
                 RequestDispatcher view =
-                        request.getRequestDispatcher("userRemoveSsuccessful.jsp");
+                        request.getRequestDispatcher("userRemoveSuccessful.jsp");
 
                 // Use the request dispatcher to ask the Container to crank up the JSP,
                 // sending it the request and response

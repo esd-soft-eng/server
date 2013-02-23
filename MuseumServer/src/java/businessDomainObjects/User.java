@@ -11,9 +11,9 @@ import java.util.HashSet;
  */
 public class User {
     
-    int userID;
-    String userName;
-    String password;
+    private int userID;
+    private String userName;
+    private String password;
     HashSet<UserTypes.UserType> types;
     HashSet<String> accessibleDirectories;
     
@@ -63,7 +63,7 @@ public class User {
         return this.password.equals(password);
     }
     
-    public String getUser() {
+    public String getUserName() {
         return this.userName;
     }
     

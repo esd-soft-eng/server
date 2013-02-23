@@ -26,7 +26,7 @@ public class UserManager {
 
     public User validateUser(String userName, String password) {
         for (User u : listOfUsers) {
-            if (u.userName.equals(userName) && u.checkPassword(MD5Hasher.hashMD5(password))) {
+            if (u.getUserName().equals(userName) && u.checkPassword(MD5Hasher.hashMD5(password))) {
                 return u;
             }
         }
@@ -37,8 +37,8 @@ public class UserManager {
         return listOfUsers;
     }
     
-    public boolean modifyUser(int userID, String user, String pass){
-        if(persistance.modifyUser(userID, user, MD5Hasher.hashMD5(pass))){
+    public boolean modifyUser(int userID, String user, String pass, String[] userTypeArray){
+        if(persistance.modifyUser(userID, user, MD5Hasher.hashMD5(pass), userTypeArray)){
             return true;
         }
         return false;
@@ -61,5 +61,15 @@ public class UserManager {
             }
         }
         return null;
+    }
+    
+    public String[] getAllUserStrings() {
+        String[] listOfUserStrings = new String[listOfUsers.size()];
+        
+        for (int i = 0; i < listOfUsers.size(); i++) {
+            listOfUserStrings[i] = listOfUsers.get(i).getUserID() + "," + 
+                    listOfUsers.get(i).getUserName();
+        }        
+        return listOfUserStrings;
     }
 }
