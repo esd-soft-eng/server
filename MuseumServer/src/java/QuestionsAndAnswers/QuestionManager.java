@@ -24,7 +24,7 @@ public class QuestionManager {
     }
     
     public boolean addQuestion(Question question) {
-        if (repository.addQuestionToQuestionSet(question, this.questionSetId)) {
+        if (repository.addQuestionToExistingQuestionSet(question, this.questionSetId)) {
             this.questions.add(question);
             return true;
         }

@@ -14,7 +14,7 @@ public class Answer {
     public String answerText;
     private int id;
     
-    public Answer(int value, String answerText){
+    public Answer(String answerText, int value){
         this.value = value;
         this.answerText = answerText;
     }

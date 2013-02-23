@@ -1,4 +1,5 @@
 <%-- 
+    FIXME!!! REFERSH ISSUE (if data is changed, then unless servlet is restarted, won't display changes, may need AJAX!
     Document   : modifyUser
     Created on : 16-Feb-2013, 16:28:00
     Author     : Ske
@@ -26,18 +27,13 @@
             
             <form method="POST" action="ModifyUserAction.do">
                 
-                <%
-                    ArrayList<Integer> userIDList = new ArrayList<Integer>();
-                    
+                <%                    
                     for(User userString : um.getAllUsers()){
-                        String thisString = userString.getUser();
+                        String thisString = userString.getUserName();
                         int userID = userString.getUserID();
-                        
-                        userIDList.add(userID);
                         
                         out.println(userID + ": " + thisString + "   <input type=\"radio\" name=\"userToModify\" value=" + userID + "><br />");
                     }
-                    request.setAttribute("userIDList", userIDList); // Set userID arraylist to req as attrib
                 %>
                 <br /><br />
                 Enter the new details of the user that you wish to modify:<p>

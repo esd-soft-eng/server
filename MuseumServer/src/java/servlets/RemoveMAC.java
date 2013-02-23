@@ -37,7 +37,7 @@ public class RemoveMAC extends HttpServlet {
 
         //get the MAC from the paramter, and if it's empty then return an error
         String MAC = request.getParameter("mac");
-        if (!(MAC == null)) {
+        if (MAC != null) {
             MAC = InputValidator.clean(MAC);
         }
 

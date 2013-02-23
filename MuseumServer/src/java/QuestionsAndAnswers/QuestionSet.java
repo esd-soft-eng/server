@@ -23,6 +23,14 @@ public class QuestionSet{
         this.questions = questions;
     }
     
+    public int getId(){
+        return this.id;
+    }
+    
+    public String getName(){
+        return this.name;
+    }
+    
     public boolean answerQuestion(int question, int answer){
         
         return questions.get(question).answerQuestion(answer);
@@ -36,6 +44,10 @@ public class QuestionSet{
             total += q.getScore();
         }        
         return total;
+    }
+    
+    public ArrayList<Question> getQuestions(){
+        return this.questions;
     }
     
     public DisplayQuestion[] getQuestionsForDisplay(){
