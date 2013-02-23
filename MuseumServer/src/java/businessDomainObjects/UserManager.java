@@ -37,8 +37,8 @@ public class UserManager {
         return listOfUsers;
     }
     
-    public boolean modifyUser(int userID, String user, String pass){
-        if(persistance.modifyUser(userID, user, MD5Hasher.hashMD5(pass))){
+    public boolean modifyUser(int userID, String user, String pass, String[] userTypeArray){
+        if(persistance.modifyUser(userID, user, MD5Hasher.hashMD5(pass), userTypeArray)){
             return true;
         }
         return false;
