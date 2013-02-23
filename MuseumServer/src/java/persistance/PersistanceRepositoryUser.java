@@ -85,13 +85,26 @@ public class PersistanceRepositoryUser {
         }
     }
     
-    public boolean modifyUser(int userID, String user, String pass){ // Boolean for error checking
+    public boolean modifyUser(int userID, String user, String pass, String[] userTypeArray){ // Boolean for error checking
         String sql = "UPDATE user "
                 + "SET userName='" + user + "'"
                 + ", password='" + pass + "'"
                 + " WHERE user.userID=" + userID;
     
-               return db.executeUpdate(sql);
+        String sql2 = "DELETE FROM usertypelink WHERE usertypelink.userID=" + userID;
+
+        
+        if(db.executeUpdate(sql) && db.executeUpdate(sql2)){
+            // Obtain all strings from array
+            for(String userType : userTypeArray){
+                String sql3 = "INSERT INTO usertypelink SET userID='" + userID + "'"
+                    + ", typeID='" + userType + "'";
+                if(!db.executeUpdate(sql3)) return false;
+            }
+            return true;
+        }
+        
+        return false;
     }
         
         

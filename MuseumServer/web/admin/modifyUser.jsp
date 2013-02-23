@@ -30,7 +30,7 @@
                     ArrayList<Integer> userIDList = new ArrayList<Integer>();
                     
                     for(User userString : um.getAllUsers()){
-                        String thisString = userString.getUser();
+                        String thisString = userString.getUserName();
                         int userID = userString.getUserID();
                         
                         userIDList.add(userID);
@@ -41,15 +41,14 @@
                 %>
                 <br /><br />
                 Enter the new details of the user that you wish to modify:<p>
-                    New User name: <input type="text" name="userName"><br>
-                    New Password:&nbsp;&nbsp; <input type="password" name="password"><br>
-                    New User type:&nbsp;&nbsp; <select>
-                        <option value="MAINTAINER">Maintainer</option>
-                        <option value="ADMINISTRATOR">Administrator</option>
-                        <option value="CLIENTHANDSET">Handset</option>
-                        <option value="KIOSK">Kiosk</option>
-                        <option value="MANAGER">Manager</option>
-                    </select>
+                    <b>New User Name:</b> <input type="text" name="userName"><br />
+                    <b>New Password:</b>&nbsp;&nbsp; <input type="password" name="password"><br /><br />
+                    <b><u>New User type</u></b>&nbsp;&nbsp;<br />
+                    Maintainer<input type="checkbox" name="userType" value="1"></input><br />
+                    Administrator<input type="checkbox" name="userType" value="2"></input><br />
+                    Client Handset<input type="checkbox" name="userType" value="3"></input><br />
+                    Kiosk<input type="checkbox" name="userType" value="4"></input><br />
+                    Manager<input type="checkbox" name="userType" value="5"></input><br />
                 <br><br>
                 <input type="SUBMIT" value="Modify User" align="left">
             </form>
