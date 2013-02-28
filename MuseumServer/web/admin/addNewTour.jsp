@@ -12,6 +12,9 @@
         <title>Add a new tour to the database</title>
     </head>
     <body>
-        <h1> Add a new tour to the database </h1>        
+        <h1> Add a new tour to the database </h1> 
+        <%
+            TourManager tm = getServletContext().getAttribute("tourManager");
+        %>
     </body>
 </html>
