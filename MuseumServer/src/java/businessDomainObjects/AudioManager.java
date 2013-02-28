@@ -22,7 +22,6 @@ public class AudioManager {
     public synchronized boolean addAudio(String name, String location)
     {
         name = InputValidator.clean(name);
-        location = InputValidator.clean(location);
         
         try {
             boolean ret = persistance.addAudio(name, location);

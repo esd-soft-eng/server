@@ -14,7 +14,7 @@
     <body>
         <h1>Add a new audio item to the database</h1>
         <form action="/MuseumServer/addAudio.do" method="post" enctype="multipart/form-data">
-            Name of audio file (please indicate level of knowledge required to understand): <input type="text" name="name"/><br/>
+            Name of audio file (please indicate level of knowledge required to understand): <input type="text" name="audioName"/><br/>
             Upload: <input type="file" name="file"/><br/>
             <input type="submit"/>
         </form>

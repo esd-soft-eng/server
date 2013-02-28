@@ -48,7 +48,6 @@ public class PersistanceRepositoryAudio {
 
     public synchronized boolean addAudio(String name, String location) throws SQLException {
         name = InputValidator.clean(name);
-        location = InputValidator.clean(location);
 
         String insertionSQL = "INSERT INTO audio (AudioName, AudioLocation) VALUES ('" + name + "','" + location + "');";
         return db.executeUpdate(insertionSQL);

@@ -4,7 +4,9 @@
  */
 package servlets;
 
+import businessDomainObjects.AudioManager;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,6 +23,7 @@ import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import utility.FileUtil;
+import utility.Redirector;
 
 /**
  *
@@ -41,40 +44,77 @@ public class AddAudio extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String audioName = request.getParameter("name");
-        String audioLocation;
+
+        AudioManager manager = (AudioManager) getServletContext().getAttribute("audioManager");
+        if (manager == null) {
+            request.setAttribute("message", "<h2 style='color:red;'>Failed to upload file.</h2>");
+            Redirector.redirect(request, response, "/admin/addAudio.jsp");
+            return;
+        }
+
+        String audioLocation = "";
+        InputStream content = null;
+        String audioName = "";
         try {
             List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 
             for (FileItem item : items) {
                 if (!item.isFormField()) {
                     String filename = item.getName();
-                    if(!filename.toUpperCase().endsWith(""))
-                    {
-                        
-                    }
+
                     audioLocation = FileUtil.getFileSystemPath(getServletContext(), "audio") + "/" + filename;
-                    System.out.println(audioLocation);
-                    InputStream content = item.getInputStream();
+                    content = item.getInputStream();
+                } else {
 
-                    // write the inputStream to a FileOutputStream
-                    OutputStream out = new FileOutputStream(new File(audioLocation));
-
-                    int read = 0;
-                    byte[] bytes = new byte[1024];
-
-                    while ((read = content.read(bytes)) != -1) {
-                        out.write(bytes, 0, read);
+                    if (item.getFieldName().contains("audioName")) {
+                        audioName = item.getString();
                     }
-
-                    content.close();
-                    out.flush();
-                    out.close();
                 }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
+        if (!audioLocation.toUpperCase().endsWith(".MP3")) {
+            request.setAttribute("message", "<h2 style='color:red;'>Only MP3s may be uploaded through this form.</h2>");
+            Redirector.redirect(request, response, "/admin/addAudio.jsp");
+            return;
+        } else if (audioName == null || audioName == "") {
+            request.setAttribute("message", "<h2 style='color:red;'>No name specified.</h2>");
+            Redirector.redirect(request, response, "/admin/addAudio.jsp");
+            return;
+        } else if (content == null) {
+            request.setAttribute("message", "<h2 style='color:red;'>Error uploading file.</h2>");
+            Redirector.redirect(request, response, "/admin/addAudio.jsp");
+            return;
+        } else if (!manager.addAudio(audioName, audioLocation)) {
+            request.setAttribute("message", "<h2 style='color:red;'>Error uploading file.</h2>");
+            Redirector.redirect(request, response, "/admin/addAudio.jsp");
+            return;
+        }
+        
+        uploadAudio(content, audioLocation);
+
+
+        request.setAttribute("message", "<h2>Successfully uploaded file with name <i>\"" + audioName + "\"</i></h2>");
+        Redirector.redirect(request, response, "/admin/addAudio.jsp");
+        return;
+    }
+
+    public void uploadAudio(InputStream content, String audioLocation) throws FileNotFoundException, IOException {
+        // write the inputStream to a FileOutputStream
+        OutputStream out = new FileOutputStream(new File(audioLocation));
+
+        int read = 0;
+        byte[] bytes = new byte[1024];
+
+        while ((read = content.read(bytes)) != -1) {
+            out.write(bytes, 0, read);
+        }
+
+        content.close();
+        out.flush();
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
