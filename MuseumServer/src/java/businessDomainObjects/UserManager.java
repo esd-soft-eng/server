@@ -19,8 +19,7 @@ public class UserManager {
         this.listOfUsers = this.initUserList();
     }
 
-    private ArrayList<User> initUserList() {
-
+    private synchronized ArrayList<User> initUserList() {
         return persistance.getAllUsers();
     }
 
@@ -50,6 +49,15 @@ public class UserManager {
             listOfUsers.remove(this.getUserByID(userID));
             return true;
         }
+        return false;
+    }
+    
+    public synchronized boolean addUser(String userName, String password) {        
+        if (persistance.addUser(userName, password)) {
+            int userId = persistance.getLastEnteredUser();
+            this.listOfUsers.add(new User(userName, password, userId));
+            return true;
+        }        
         return false;
     }
 
