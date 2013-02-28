@@ -44,6 +44,8 @@
         <servlet-name>AddNewUser</servlet-name>
         <servlet-class>servlets.AddNewUser</servlet-class>
     </servlet>
+
+    
     <servlet-mapping>
         <servlet-name>LoginPage</servlet-name>
         <url-pattern>/displayuser.do</url-pattern>
