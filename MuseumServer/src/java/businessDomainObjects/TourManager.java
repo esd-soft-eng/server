@@ -49,4 +49,10 @@ public class TourManager {
     public synchronized boolean modifyTour(int tourID, String name, String description, ArrayList<String> exhibitIDs) {
         throw new NotImplementedException();
     }
+
+    public ArrayList<Tour> getListOfTours() {
+        return listOfTours;
+    }
+    
+    
 }
