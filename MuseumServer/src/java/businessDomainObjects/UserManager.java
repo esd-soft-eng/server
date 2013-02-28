@@ -60,6 +60,15 @@ public class UserManager {
         }        
         return false;
     }
+    
+    public synchronized boolean addUserType(int typeID) {
+        int userId = persistance.getLastEnteredUser();
+        if (persistance.addUserType(userId, typeID)) {
+            // add type to list of users?
+            return true;
+        }
+        return false;
+    }
 
     private User getUserByID(int userID) {
         
