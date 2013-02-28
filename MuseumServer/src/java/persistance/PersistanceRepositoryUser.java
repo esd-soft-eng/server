@@ -105,8 +105,7 @@ public class PersistanceRepositoryUser {
         }
         
         return false;
-    }
-        
+    }        
         
     public boolean removeUser(int userID) { 
         String sql = "DELETE FROM `user` WHERE `userID`='" + userID + "'";
@@ -115,5 +114,30 @@ public class PersistanceRepositoryUser {
         // "DELETE FROM `usertypelink` WHERE `userID`='" + userID + "'";
         
         return db.executeUpdate(sql);
+    }
+    
+    public boolean addUser(String userName, String password) {
+        String sql = "INSERT INTO `user` (userName, password) "
+              + "VALUES ('" + userName + "', '" + password + "')";
+        
+        // need to add user type to type link table
+        
+        return db.executeUpdate(sql);
+    }
+    
+    public int getLastEnteredUser() {
+        String sql = "SELECT userID FROM `user`";
+        ResultSet rs = db.executeStatement(sql);
+        int userID = 0;
+        
+        try {
+            while (rs.next()) {                
+                    userID = Integer.parseInt(rs.getString("userID"));                     
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PersistanceRepositoryUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return userID;
     }
 }

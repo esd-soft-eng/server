@@ -4,13 +4,17 @@
  */
 package servlets;
 
+import businessDomainObjects.UserManager;
+import businessDomainObjects.UserTypes;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utility.InputValidator;
+import utility.MD5Hasher;
 import utility.Redirector;
 
 /**
@@ -45,8 +49,10 @@ public class AddNewUser extends HttpServlet {
             
             // Get password and validate it
             String password = request.getParameter("password");
+            String hashedPassword = null;
             if (password != null) {
                 password = InputValidator.clean(password);
+                hashedPassword = MD5Hasher.hashMD5(password);
             }
             if (password == null || userName.isEmpty()) {
                 request.setAttribute("message", "<h2 style='color:red'>Please enter a password</h2>");
@@ -55,15 +61,33 @@ public class AddNewUser extends HttpServlet {
             }
             
             // Get userType and validate it
+            UserTypes.UserType type = null;            
+            
             String userType = request.getParameter("userType");
             if (userType != null) {
                 userType = InputValidator.clean(userType);
+                type = UserTypes.UserType.valueOf(userType);
             }
             if (userType == null || userName.isEmpty()) {
                 request.setAttribute("message", "<h2 style='color:red'>Please select a user type</h2>");
                 Redirector.redirect(request, response, "/admin/addNewUserForm.jsp");
                 return;
             }
+            
+            // Add stuff to the database
+            ServletContext ctx = request.getServletContext();
+            UserManager um = (UserManager) ctx.getAttribute("userManager");
+            
+            if (um.addUser(userName, hashedPassword)) {
+                request.setAttribute("message", "<h2>Successfully added user <i>\"" + userName + "\"</i> to the database.</h2>");
+                Redirector.redirect(request, response, "/admin/addNewUserForm.jsp");
+                return;
+            } else {
+                request.setAttribute("message", "<h2 style='color:red'>Failed to add user <i>\"" + userName + "\"</i> to the database.</h2>");
+                Redirector.redirect(request, response, "/admin/addNewUserForm.jsp");
+                return;
+            }
+            
         } finally {
         }
     }
