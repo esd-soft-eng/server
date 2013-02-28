@@ -13,8 +13,12 @@
     </head>
     <body>
         <h1> Add a new tour to the database </h1> 
+<<<<<<< HEAD
+
+=======
         <%
             TourManager tm = getServletContext().getAttribute("tourManager");
         %>
+>>>>>>> 9641c3a537ea7a2732a6a8932d89ac4d65f9a94e
     </body>
 </html>
