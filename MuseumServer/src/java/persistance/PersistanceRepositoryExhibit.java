@@ -21,8 +21,8 @@ public class PersistanceRepositoryExhibit {
     }
 
     public ArrayList<Exhibit> getAllExhibits() {
-        String sql = "SELECT * FROM exhibits";
 
+        String sql = "SELECT * FROM exhibits;";
         ResultSet rs = db.executeStatement(sql);
         return mapResultSetToArrayList(rs);
     }
@@ -30,7 +30,7 @@ public class PersistanceRepositoryExhibit {
     private ArrayList<Exhibit> mapResultSetToArrayList(ResultSet rs) {
         ArrayList<Exhibit> listOfExhibits = new ArrayList<Exhibit>();
 
-        try {
+        try { 
             while (rs.next()) {
                 String exhibitName = rs.getString("Name");
                 String exhibitDescription = rs.getString("Description");

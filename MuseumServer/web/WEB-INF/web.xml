@@ -44,8 +44,14 @@
         <servlet-name>AddNewUser</servlet-name>
         <servlet-class>servlets.AddNewUser</servlet-class>
     </servlet>
-
-    
+    <servlet>
+        <servlet-name>RemoveTour</servlet-name>
+        <servlet-class>servlets.RemoveTour</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveTourAction</servlet-name>
+        <servlet-class>servlets.RemoveTourAction</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginPage</servlet-name>
         <url-pattern>/displayuser.do</url-pattern>
@@ -73,6 +79,14 @@
     <servlet-mapping>
         <servlet-name>AddNewUser</servlet-name>
         <url-pattern>/AddNewUser.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveTour</servlet-name>
+        <url-pattern>/RemoveTour.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveTourAction</servlet-name>
+        <url-pattern>/RemoveTourAction.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

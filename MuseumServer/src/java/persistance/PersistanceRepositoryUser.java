@@ -118,9 +118,14 @@ public class PersistanceRepositoryUser {
     
     public boolean addUser(String userName, String password) {
         String sql = "INSERT INTO `user` (userName, password) "
-              + "VALUES ('" + userName + "', '" + password + "')";
-        
+              + "VALUES ('" + userName + "', '" + password + "')";      
+        return db.executeUpdate(sql);
+    }
+    
+    public boolean addUserType(int userID, int typeID) {
         // need to add user type to type link table
+        String sql = "INSERT INTO `usertypelink` (userID, typeID) "
+                + "VALUES ('" + userID + "', '" + typeID + "')";
         
         return db.executeUpdate(sql);
     }
