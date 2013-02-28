@@ -4,21 +4,30 @@
  */
 package servlets;
 
-import businessDomainObjects.UserManager;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import javax.servlet.ServletContext;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utility.InputValidator;
-import utility.Redirector;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import utility.FileUtil;
 
 /**
  *
- * @author Alex
+ * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
  */
-public class RemoveUser extends HttpServlet {
+@WebServlet(name = "AddAudio", urlPatterns = {"/addAudio.do"})
+public class AddAudio extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -32,33 +41,39 @@ public class RemoveUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String audioName = request.getParameter("name");
+        String audioLocation;
         try {
-            int userID = 0;
-            String userIDString = request.getParameter("userID");
+            List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 
-            if (userIDString != null) {
-                userID = Integer.parseInt(InputValidator.clean(userIDString));
+            for (FileItem item : items) {
+                if (!item.isFormField()) {
+                    String filename = item.getName();
+                    if(!filename.toUpperCase().endsWith(""))
+                    {
+                        
+                    }
+                    audioLocation = FileUtil.getFileSystemPath(getServletContext(), "audio") + "/" + filename;
+                    System.out.println(audioLocation);
+                    InputStream content = item.getInputStream();
+
+                    // write the inputStream to a FileOutputStream
+                    OutputStream out = new FileOutputStream(new File(audioLocation));
+
+                    int read = 0;
+                    byte[] bytes = new byte[1024];
+
+                    while ((read = content.read(bytes)) != -1) {
+                        out.write(bytes, 0, read);
+                    }
+
+                    content.close();
+                    out.flush();
+                    out.close();
+                }
             }
-
-            if (userIDString == null || userIDString.isEmpty()) {
-                request.setAttribute("message", "<h2 style='color:red'>Please select a user</h2>");
-                Redirector.redirect(request, response, "/admin/removeUserForm.jsp");
-                return;
-            }
-
-            ServletContext ctx = request.getServletContext();
-            UserManager um = (UserManager) ctx.getAttribute("userManager");
-
-            if (um.removeUser(userID)) {
-                request.setAttribute("message", "<h2>Successfully removed user <i>\"" + userID + "\"</i> from the database.</h2>");
-                Redirector.redirect(request, response, "/admin/removeUserForm.jsp");
-                return;
-            } else {
-                request.setAttribute("message", "<h2 style='color:red'>Failed to remove user <i>\"" + userID + "\"</i> from the database.</h2>");
-                Redirector.redirect(request, response, "/admin/removeUserForm.jsp");
-                return;
-            }
-        } finally {
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
