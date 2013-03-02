@@ -19,6 +19,8 @@
 -- Table structure for table `allowedDevices`
 --
 
+USE museum_server_database;
+
 DROP TABLE IF EXISTS `allowedDevices`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;

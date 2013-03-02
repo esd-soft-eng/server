@@ -65,6 +65,22 @@ public class UserManager {
         int userId = persistance.getLastEnteredUser();
         if (persistance.addUserType(userId, typeID)) {
             // add type to list of users?
+            User user = getUserByID(userId);
+            switch (typeID) {
+                case 1: user.addUserType(UserTypes.UserType.MAINTAINER);
+                        break;
+                case 2: user.addUserType(UserTypes.UserType.ADMINISTRATOR);
+                        break;
+                case 3: user.addUserType(UserTypes.UserType.CLIENTHANDSET);
+                        break;
+                case 4: user.addUserType(UserTypes.UserType.KIOSK);
+                        break;
+                case 5: user.addUserType(UserTypes.UserType.MANAGER);
+                        break;
+                default: 
+                        break;
+            }
+            
             return true;
         }
         return false;
