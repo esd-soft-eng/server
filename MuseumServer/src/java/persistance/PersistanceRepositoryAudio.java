@@ -1,7 +1,6 @@
 package persistance;
 
 import businessDomainObjects.Audio;
-import businessDomainObjects.Exhibit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
