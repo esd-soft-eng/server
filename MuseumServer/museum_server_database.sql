@@ -79,7 +79,7 @@ CREATE TABLE `audio` (
   `AudioName` varchar(50) NOT NULL,
   `AudioLocation` varchar(200) NOT NULL,
   PRIMARY KEY (`AudioID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,6 +88,7 @@ CREATE TABLE `audio` (
 
 LOCK TABLES `audio` WRITE;
 /*!40000 ALTER TABLE `audio` DISABLE KEYS */;
+INSERT INTO `audio` VALUES (5,'Test','/home/lolliver/NetBeansProjects/server/MuseumServer/build/web/audio/test.mp3'),(6,'Test53','/home/lolliver/NetBeansProjects/server/MuseumServer/build/web/audio/test.mp3'),(7,'Test99','/home/lolliver/NetBeansProjects/server/MuseumServer/build/web/audio/test.mp3'),(8,'Level 53 nicey good time','/home/lolliver/NetBeansProjects/server/MuseumServer/build/web/audio/test.mp3');
 /*!40000 ALTER TABLE `audio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,14 +101,14 @@ DROP TABLE IF EXISTS `exhibits`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `exhibits` (
   `ExhibitID` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(50) NOT NULL,
+  `Name` varchar(200) DEFAULT NULL,
   `Description` varchar(200) NOT NULL,
   `AudioLevel1ID` int(11) NOT NULL,
   `AudioLevel2ID` int(11) NOT NULL,
   `AudioLevel3ID` int(11) NOT NULL,
   `AudioLevel4ID` int(11) NOT NULL,
   PRIMARY KEY (`ExhibitID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +117,7 @@ CREATE TABLE `exhibits` (
 
 LOCK TABLES `exhibits` WRITE;
 /*!40000 ALTER TABLE `exhibits` DISABLE KEYS */;
-INSERT INTO `exhibits` VALUES (1,'Test','Test',123,123,123,123),(2,'Test53','test',123,123,123,123);
+INSERT INTO `exhibits` VALUES (1,'Test','Test!',5,6,7,6),(2,'Test','Test!',5,6,7,6),(3,'Test','Test!',5,6,7,6),(4,'Test','Test!',5,6,7,6),(5,'Test','Test!',5,6,7,6),(6,'test','55',5,5,5,5),(7,'This exhibit is an introduction to ','This exhibit is an introduction to the bippidy slip slappa whappa bip bop, happa bappa whippa whappa',5,5,5,5);
 /*!40000 ALTER TABLE `exhibits` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,7 +182,7 @@ CREATE TABLE `tours` (
   `TourName` varchar(50) NOT NULL,
   `TourDescription` varchar(200) NOT NULL,
   PRIMARY KEY (`TourID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,7 +191,6 @@ CREATE TABLE `tours` (
 
 LOCK TABLES `tours` WRITE;
 /*!40000 ALTER TABLE `tours` DISABLE KEYS */;
-INSERT INTO `tours` VALUES (1,'Test','Test');
 /*!40000 ALTER TABLE `tours` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,7 +213,6 @@ CREATE TABLE `toursExhibitsLink` (
 
 LOCK TABLES `toursExhibitsLink` WRITE;
 /*!40000 ALTER TABLE `toursExhibitsLink` DISABLE KEYS */;
-INSERT INTO `toursExhibitsLink` VALUES (1,1);
 /*!40000 ALTER TABLE `toursExhibitsLink` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -305,4 +304,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-03-02 13:30:50
+-- Dump completed on 2013-03-02 15:38:46

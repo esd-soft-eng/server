@@ -1,9 +1,8 @@
 package servlets;
 
-import businessDomainObjects.Audio;
-import businessDomainObjects.AudioManager;
-import java.io.File;
+import businessDomainObjects.ExhibitManager;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,8 +14,8 @@ import utility.Redirector;
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
  */
-@WebServlet(name = "RemoveAudio", urlPatterns = {"/removeAudio.do"})
-public class RemoveAudio extends HttpServlet {
+@WebServlet(name = "RemoveExhibit", urlPatterns = {"/removeExhibit.do"})
+public class RemoveExhibit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -30,41 +29,30 @@ public class RemoveAudio extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ID = request.getParameter("audioID");
+        String exhibitID = request.getParameter("exhibitID");
+        if (exhibitID == null || exhibitID == "") {
+            request.setAttribute("message", "<h2 style='color:red;'>No exhibit was selected</h2>");
+            Redirector.redirect(request, response, "/admin/removeExhibit.jsp");
+            return;
+        }
+        int exhibitIDInt = -1;
+        try {
+            exhibitIDInt = Integer.parseInt(exhibitID);
+        } catch (NumberFormatException ex) {
+            request.setAttribute("message", "<h2 style='color:red;'>Exhibit ID was invalid</h2>");
+            Redirector.redirect(request, response, "/admin/removeExhibit.jsp");
+            return;
+        }
+        ExhibitManager manager = (ExhibitManager) getServletContext().getAttribute("exhibitManager");
 
-        if (ID == null || ID == "") {
-            request.setAttribute("message", "<h2 style='color:red;'>No audio was selected</h2>");
-            Redirector.redirect(request, response, "/admin/removeAudio.jsp");
+        if (!manager.removeExhibit(exhibitIDInt)) {
+            request.setAttribute("message", "<h2 style='color:red;'>Failed to remove exhibit.</h2>");
+            Redirector.redirect(request, response, "/admin/removeExhibit.jsp");
             return;
         }
 
-        AudioManager manager = (AudioManager) getServletContext().getAttribute("audioManager");
-        Audio audioToDelete = null;
-        for (Audio a : manager.getListOfAudio()) {
-            if (a.getAudioID() == Integer.parseInt(ID)) {
-                audioToDelete = a;
-                break;
-            }
-        }
-
-        if (audioToDelete == null) {
-            request.setAttribute("message", "<h2 style='color:red;'>Invalid audio ID was selected</h2>");
-            Redirector.redirect(request, response, "/admin/removeAudio.jsp");
-            return;
-        }
-
-        File audioFile = new File(audioToDelete.getAudioLocation());
-        audioFile.delete();
-
-        if (!manager.removeAudio(Integer.parseInt(ID))) {
-            request.setAttribute("message", "<h2 style='color:red;'>Failed to delete audio file.</h2>");
-            Redirector.redirect(request, response, "/admin/removeAudio.jsp");
-            return;
-        }
-
-        request.setAttribute("message", "<h2>Successfully deleted audio file.</h2>");
-        Redirector.redirect(request, response, "/admin/removeAudio.jsp");
-        return;
+        request.setAttribute("message", "<h2>Successfully removed exhibit.</h2>");
+        Redirector.redirect(request, response, "/admin/removeExhibit.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
