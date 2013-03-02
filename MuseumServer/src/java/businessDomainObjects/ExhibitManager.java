@@ -38,6 +38,15 @@ public class ExhibitManager {
         return listOfExhibits;
     }
 
+    public Exhibit getExhibitByID(int ID) {
+        for (Exhibit e : listOfExhibits) {
+            if (e.getExhibitID() == ID) {
+                return e;
+            }
+        }
+        return null;
+    }
+
     public synchronized boolean removeExhibit(int ID) {
         try {
             boolean ret = persistance.removeExhibit(ID);
