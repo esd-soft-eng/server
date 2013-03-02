@@ -31,5 +31,11 @@
             %>
             <input type="submit">
         </form>
+        <%
+            String messageFromServlet = (String) request.getAttribute("message");
+            if (messageFromServlet != null) {
+                out.println(messageFromServlet);
+            }
+        %>
     </body>
 </html>
