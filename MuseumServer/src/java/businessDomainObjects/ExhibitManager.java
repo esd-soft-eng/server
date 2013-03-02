@@ -20,8 +20,6 @@ public class ExhibitManager {
     }
 
     public synchronized boolean addExhibit(String name, String description, int audioLevel1ID, int audioLevel2ID, int audioLevel3ID, int audioLevel4ID) {
-        name = InputValidator.clean(name);
-        description = InputValidator.clean(description);
 
         try {
             boolean ret = persistance.addExhibit(name, description, audioLevel1ID, audioLevel2ID, audioLevel3ID, audioLevel4ID);
@@ -34,6 +32,10 @@ public class ExhibitManager {
         } catch (SQLException se) {
             return false;
         }
+    }
+
+    public ArrayList<Exhibit> getListOfExhibits() {
+        return listOfExhibits;
     }
 
     public synchronized boolean removeExhibit(int ID) {

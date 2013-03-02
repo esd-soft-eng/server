@@ -54,11 +54,7 @@ public class RemoveAudio extends HttpServlet {
         }
 
         File audioFile = new File(audioToDelete.getAudioLocation());
-        if (!audioFile.delete()) {
-            request.setAttribute("message", "<h2 style='color:red;'>Failed to delete audio file.</h2>");
-            Redirector.redirect(request, response, "/admin/removeAudio.jsp");
-            return;
-        }
+        audioFile.delete();
 
         if (!manager.removeAudio(Integer.parseInt(ID))) {
             request.setAttribute("message", "<h2 style='color:red;'>Failed to delete audio file.</h2>");
