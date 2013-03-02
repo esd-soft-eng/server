@@ -18,7 +18,7 @@ public class Question {
     private int id;
 
     public Question(int id, String questionText, ArrayList answers) {
-        
+
         this.id = id;
         this.questionText = questionText;
         this.answers = answers;
@@ -47,8 +47,8 @@ public class Question {
         }
         return answerTexts;
     }
-    
-    public int getQuestionId(){
+
+    public int getQuestionId() {
         return this.id;
     }
 
@@ -57,8 +57,8 @@ public class Question {
         Answer answerToValue = answers.get(this.answer);
         return answerToValue.value;
     }
-    
-    public Answer[] getAnswerListAsArray(){
-        return this.answers.toArray(new Answer[0]);        
+
+    public Answer[] getAnswerListAsArray() {
+        return this.answers.toArray(new Answer[0]);
     }
 }

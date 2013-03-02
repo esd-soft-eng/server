@@ -21,8 +21,8 @@ public class PersistanceRepositoryExhibit {
     }
 
     public ArrayList<Exhibit> getAllExhibits() {
-        String sql = "SELECT * FROM exhibits;";
 
+        String sql = "SELECT * FROM exhibits;";
         ResultSet rs = db.executeStatement(sql);
         return mapResultSetToArrayList(rs);
     }

@@ -141,13 +141,11 @@ public class PersistanceRepositoryQuestions {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Methods which save questionsets/questions to the database">
-    public synchronized boolean addNewQuestionSet(QuestionSet questionSet) {
-
-        boolean success = false;
+    public synchronized boolean addNewQuestionSet(String name) {
 
         String sql = "INSERT INTO"
                 + "`questionset` `qs` (`title`)"
-                + "VALUES ('" + questionSet.getName() + "')";
+                + "VALUES ('" + name + "')";
 
         return executor.executeUpdate(sql);
     }
@@ -168,7 +166,7 @@ public class PersistanceRepositoryQuestions {
         String sql = "INSERT INTO"
                 + "`question` `q` (`text`, `questionSetId`)"
                 + "VALUES ('" + questionText + "'," + questionSetId + ")";
-
+        
         return addAnswerListToQuestion(question, executor.executeUpdate(sql));
     }
 
