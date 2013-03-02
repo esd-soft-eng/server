@@ -21,6 +21,10 @@ public class PersistanceRepositoryExhibit {
     }
 
     public ArrayList<Exhibit> getAllExhibits() {
+<<<<<<< HEAD
+=======
+        String sql = "SELECT * FROM exhibits;";
+>>>>>>> branch 'master' of https://github.com/esd-soft-eng/server.git
 
         String sql = "SELECT * FROM exhibits;";
         ResultSet rs = db.executeStatement(sql);
