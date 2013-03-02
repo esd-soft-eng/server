@@ -19,8 +19,6 @@
 -- Table structure for table `allowedDevices`
 --
 
-USE museum_server_database;
-
 DROP TABLE IF EXISTS `allowedDevices`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -65,6 +63,30 @@ CREATE TABLE `answer` (
 LOCK TABLES `answer` WRITE;
 /*!40000 ALTER TABLE `answer` DISABLE KEYS */;
 /*!40000 ALTER TABLE `answer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `audio`
+--
+
+DROP TABLE IF EXISTS `audio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `audio` (
+  `AudioID` int(11) NOT NULL AUTO_INCREMENT,
+  `AudioName` varchar(50) NOT NULL,
+  `AudioLocation` varchar(200) NOT NULL,
+  PRIMARY KEY (`AudioID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `audio`
+--
+
+LOCK TABLES `audio` WRITE;
+/*!40000 ALTER TABLE `audio` DISABLE KEYS */;
+/*!40000 ALTER TABLE `audio` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -281,4 +303,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-02-28 14:29:12
+-- Dump completed on 2013-03-02 13:30:50
