@@ -48,6 +48,10 @@
         <servlet-name>RemoveTourAction</servlet-name>
         <servlet-class>servlets.RemoveTourAction</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ModifyAudio</servlet-name>
+        <servlet-class>servlets.ModifyAudio</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginPage</servlet-name>
         <url-pattern>/displayuser.do</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>RemoveTourAction</servlet-name>
         <url-pattern>/RemoveTourAction.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModifyAudio</servlet-name>
+        <url-pattern>/ModifyAudio.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
