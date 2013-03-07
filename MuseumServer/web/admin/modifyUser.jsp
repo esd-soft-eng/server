@@ -13,6 +13,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%
+                String message = (String) request.getAttribute("message");
+                if(message == null){
+                    message = "";
+                }
+                out.println(message);
+        %>
         <title>Modify User</title>
     </head>
     <body>
@@ -25,7 +32,7 @@
             Please select a user to modify from the list below.
             <br /><br />
             
-            <form method="POST" action="ModifyUserAction.do">
+            <form method="POST" action="ModifyUser.do">
                 
                 <%                    
                     for(User userString : um.getAllUsers()){

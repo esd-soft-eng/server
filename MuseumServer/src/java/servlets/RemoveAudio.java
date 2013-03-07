@@ -32,7 +32,7 @@ public class RemoveAudio extends HttpServlet {
             throws ServletException, IOException {
         String ID = request.getParameter("audioID");
 
-        if (ID == null || ID == "") {
+        if (ID == null || ID.equals("")) {
             request.setAttribute("message", "<h2 style='color:red;'>No audio was selected</h2>");
             Redirector.redirect(request, response, "/admin/removeAudio.jsp");
             return;
