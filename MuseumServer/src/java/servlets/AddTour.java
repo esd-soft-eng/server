@@ -28,11 +28,11 @@ public class AddTour extends HttpServlet {
         String tourDescription = request.getParameter("tourDescription");
         String[] exhibitIDs = request.getParameterValues("exhibitID");
 
-        if (tourName == null || tourName == "") {
+        if (tourName == null || tourName.equals("")) {
             request.setAttribute("message", "<h2 style='color:red;'> Name cannot be empty. </h2>");
             Redirector.redirect(request, response, "/admin/addNewTour.jsp");
             return;
-        } else if (tourDescription == null || tourDescription == "") {
+        } else if (tourDescription == null || tourDescription.equals("")) {
             request.setAttribute("message", "<h2 style='color:red;'> Description cannot be empty. </h2>");
             Redirector.redirect(request, response, "/admin/addNewTour.jsp");
             return;
