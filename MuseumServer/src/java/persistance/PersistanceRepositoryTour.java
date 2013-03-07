@@ -30,9 +30,10 @@ public class PersistanceRepositoryTour {
             return false;
         }
 
-        String tourIDSQL = "SELECT MAX(TourID) FROM `tours`;";
+        String tourIDSQL = "SELECT MAX(TourID) as TourID FROM `tours`;";
         ResultSet rs = db.executeStatement(tourIDSQL);
-        int latestTourID = Integer.parseInt(rs.getString("TourID"));
+        rs.next();
+        String latestTourID = rs.getString("TourID");
         for (String exhibitID : exhibitIDs) {
             String exhibitInsertSQL = "INSERT INTO `toursExhibitsLink` (TourID, ExhibitID) VALUES ('" + latestTourID + "','" + exhibitID + "');";
             ret = db.executeUpdate(exhibitInsertSQL);
