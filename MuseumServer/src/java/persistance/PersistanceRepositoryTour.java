@@ -61,8 +61,28 @@ public class PersistanceRepositoryTour {
         return true;
     }
 
-    public synchronized boolean modifyTour(String name, String description, ArrayList<String> exhibitIDs) {
-        throw new NotImplementedException();
+    public synchronized boolean modifyTour(int ID, String name, String description, ArrayList<String> exhibitIDs) throws SQLException {
+        String modificationSQL = "UPDATE tours SET TourName='" + name + "', TourDescription='" + description + "' WHERE TourID=" + ID + ";";
+        boolean ret = db.executeUpdate(modificationSQL);
+        if (!ret) {
+            return false;
+        }
+
+        String linkRemovalSQL = "DELETE FROM toursExhibitsLink WHERE TourID = " + ID + ";";
+        ret = db.executeUpdate(linkRemovalSQL);
+        if (!ret) {
+            return false;
+        }
+
+        for (String exhibitID : exhibitIDs) {
+            String exhibitInsertSQL = "INSERT INTO `toursExhibitsLink` (TourID, ExhibitID) VALUES ('" + ID + "','" + exhibitID + "');";
+            ret = db.executeUpdate(exhibitInsertSQL);
+            if (ret == false) {
+                return false;
+            }
+        }
+        return true;
+
     }
 
     public ArrayList<Tour> getAllTours() {
@@ -82,7 +102,7 @@ public class PersistanceRepositoryTour {
         try {
             while (rs.next()) {
                 if (rs.getString("TourID").equals(tourID)) {
-                    tempTour.addExhibit(Integer.parseInt(exhibitID));
+                    tempTour.addExhibit(rs.getInt("ExhibitID"));
                 } else {
                     tourName = rs.getString("TourName");
                     tourDescription = rs.getString("TourDescription");
