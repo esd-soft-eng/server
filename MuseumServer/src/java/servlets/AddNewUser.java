@@ -46,7 +46,7 @@ public class AddNewUser extends HttpServlet {
                 Redirector.redirect(request, response, "/admin/addNewUserForm.jsp");
                 return;
             }
-            
+
             // Get password and validate it
             String password = request.getParameter("password");
             String hashedPassword = null;
@@ -54,31 +54,41 @@ public class AddNewUser extends HttpServlet {
                 password = InputValidator.clean(password);
                 hashedPassword = MD5Hasher.hashMD5(password);
             }
-            if (password == null || userName.isEmpty()) {
+            if (password == null || password.equals("") || userName.isEmpty()) {
                 request.setAttribute("message", "<h2 style='color:red'>Please enter a password</h2>");
                 Redirector.redirect(request, response, "/admin/addNewUserForm.jsp");
                 return;
             }
-            
+
             // Get userType and validate it
-            UserTypes.UserType type = null;            
-            
-            String userType = request.getParameter("userType");
+            int[] type = new int[5];
+
+            String[] userType = request.getParameterValues("userType");
             if (userType != null) {
-                userType = InputValidator.clean(userType);
-                type = UserTypes.UserType.valueOf(userType);
+                for (int i = 0; i < userType.length; i++) {
+                    userType[i] = InputValidator.clean(userType[i]);
+                    type[i] = Integer.parseInt(userType[i]);
+                }
             }
             if (userType == null || userName.isEmpty()) {
                 request.setAttribute("message", "<h2 style='color:red'>Please select a user type</h2>");
                 Redirector.redirect(request, response, "/admin/addNewUserForm.jsp");
                 return;
             }
-            
-            // Add stuff to the database
+
+            // Add user to the database
             ServletContext ctx = request.getServletContext();
             UserManager um = (UserManager) ctx.getAttribute("userManager");
-            
+
             if (um.addUser(userName, hashedPassword)) {
+                // TODO implement array for many types to one user
+                for (int i = 0; i < userType.length; i++) {
+                    if (um.addUserType(type[i]) == false) {
+                        request.setAttribute("message", "<h2 style='color:red'>Failed to add user <i>\"" + userName + "\"</i> to the database.</h2>");
+                        Redirector.redirect(request, response, "/admin/addNewUserForm.jsp");
+                        return;
+                    }
+                }
                 request.setAttribute("message", "<h2>Successfully added user <i>\"" + userName + "\"</i> to the database.</h2>");
                 Redirector.redirect(request, response, "/admin/addNewUserForm.jsp");
                 return;
@@ -87,7 +97,6 @@ public class AddNewUser extends HttpServlet {
                 Redirector.redirect(request, response, "/admin/addNewUserForm.jsp");
                 return;
             }
-            
         } finally {
         }
     }

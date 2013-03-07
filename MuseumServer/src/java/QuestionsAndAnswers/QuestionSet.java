@@ -32,7 +32,6 @@ public class QuestionSet{
     }
     
     public boolean answerQuestion(int question, int answer){
-        
         return questions.get(question).answerQuestion(answer);
     }
     
@@ -42,7 +41,7 @@ public class QuestionSet{
         
         for(Question q : questions){
             total += q.getScore();
-        }        
+        }
         return total;
     }
     
@@ -58,7 +57,6 @@ public class QuestionSet{
             displayQuestions[i] = this.prepareQuestionForDisplay(this.questions.get(i));           
         }
         return displayQuestions;
-        
     }
 
     private DisplayQuestion prepareQuestionForDisplay(Question question) {

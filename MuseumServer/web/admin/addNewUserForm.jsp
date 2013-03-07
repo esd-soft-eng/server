@@ -11,16 +11,16 @@
     </head>
     <body>
         <h1 align="center">Add New User</h1>
-        <form method="POST" action="../AddNewUser.do">
+        <form method="POST" action="/MuseumServer/AddNewUser.do">
             Enter the details of the user you wish to add<p>
                 <b>User name:</b> <input type="text" name="userName"><br>
                 <b>Password:&nbsp;&nbsp;</b> <input type="password" name="password"><br><br>
                 <b>User type:&nbsp;&nbsp;<br></b>
-                Maintainer<input type="checkbox" name="userType" value="MAINTAINER"></input><br />
-                Administrator<input type="checkbox" name="userType" value="ADMINISTRATOR"></input><br />
-                Handset<input type="checkbox" name="userType" value="HANDSET"></input><br />
-                Kiosk<input type="checkbox" name="userType" value="KIOSK"></input><br />
-                Manager<input type="checkbox" name="userType" value="MANAGER"></input><br />
+                Maintainer<input type="checkbox" name="userType" value="1"></input><br />
+                Administrator<input type="checkbox" name="userType" value="2"></input><br />
+                Handset<input type="checkbox" name="userType" value="3"></input><br />
+                Kiosk<input type="checkbox" name="userType" value="4"></input><br />
+                Manager<input type="checkbox" name="userType" value="5"></input><br />
                 <br><br>
                 <input type="SUBMIT" value="Add New User" align="left">
         </form>

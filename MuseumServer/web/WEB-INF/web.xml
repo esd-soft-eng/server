@@ -37,10 +37,6 @@
         <servlet-class>servlets.ModifyUserAction</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddUser</servlet-name>
-        <servlet-class>servlets.AddUser</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AddNewUser</servlet-name>
         <servlet-class>servlets.AddNewUser</servlet-class>
     </servlet>
@@ -71,10 +67,6 @@
     <servlet-mapping>
         <servlet-name>ModifyUserAction</servlet-name>
         <url-pattern>/admin/ModifyUserAction.do</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddUser</servlet-name>
-        <url-pattern>/AddUser.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddNewUser</servlet-name>

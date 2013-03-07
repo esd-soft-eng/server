@@ -21,8 +21,8 @@ public class PersistanceRepositoryExhibit {
     }
 
     public ArrayList<Exhibit> getAllExhibits() {
-        String sql = "SELECT * FROM exhibits;";
 
+        String sql = "SELECT * FROM exhibits;";
         ResultSet rs = db.executeStatement(sql);
         return mapResultSetToArrayList(rs);
     }
@@ -50,9 +50,7 @@ public class PersistanceRepositoryExhibit {
     }
 
     public synchronized boolean addExhibit(String name, String description, int audioLevel1ID, int audioLevel2ID, int audioLevel3ID, int audioLevel4ID) throws SQLException {
-        name = InputValidator.clean(name);
-        description = InputValidator.clean(description);
-        String insertionSQL = "INSERT INTO exhibits (Name, Description, AudioLevel1ID, AudioLevel2ID, AudioLevel3ID, AudioLevel4ID) VALUES ('" + name + "','" + description + "'," + audioLevel1ID + "," + audioLevel2ID + "," + "'," + audioLevel3ID + "," + audioLevel4ID + ");";
+        String insertionSQL = "INSERT INTO exhibits (Name, Description, AudioLevel1ID, AudioLevel2ID, AudioLevel3ID, AudioLevel4ID) VALUES ('" + name + "','" + description + "'," + audioLevel1ID + "," + audioLevel2ID + "," + audioLevel3ID + "," + audioLevel4ID + ");";
         return db.executeUpdate(insertionSQL);
     }
 

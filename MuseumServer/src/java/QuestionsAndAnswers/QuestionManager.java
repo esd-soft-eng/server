@@ -14,17 +14,17 @@ import persistance.PersistanceRepositoryQuestions;
 public class QuestionManager {
     
     private ArrayList<Question> questions;
-    private PersistanceRepositoryQuestions repository;
+    private PersistanceRepositoryQuestions persistance;
     private int questionSetId;
     
-    public QuestionManager(ArrayList<Question> questions, PersistanceRepositoryQuestions repository, int questionSetId) {
+    public QuestionManager(ArrayList<Question> questions, PersistanceRepositoryQuestions persistance, int questionSetId) {
         this.questions = questions;
-        this.repository = repository;
+        this.persistance = persistance;
         this.questionSetId = questionSetId;
     }
     
     public boolean addQuestion(Question question) {
-        if (repository.addQuestionToExistingQuestionSet(question, this.questionSetId)) {
+        if (persistance.addQuestionToExistingQuestionSet(question, this.questionSetId)) {
             this.questions.add(question);
             return true;
         }
@@ -32,7 +32,7 @@ public class QuestionManager {
     }
     
     public boolean removeQuestion(Question question) {
-        if (repository.removeQuestion(question, this.questionSetId)) {
+        if (persistance.removeQuestion(question, this.questionSetId)) {
             this.removeQuestionFromQuestionSet(question);
             return true;
         }

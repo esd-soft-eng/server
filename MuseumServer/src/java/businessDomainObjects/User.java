@@ -1,5 +1,6 @@
 package businessDomainObjects;
 
+import businessDomainObjects.UserTypes.UserType;
 import java.util.HashSet;
 
 /**
@@ -70,9 +71,8 @@ public class User {
     public String getPassword() {
         return this.password;
     }
-   /* 
-    public UserTypes.UserType[] getUserTypes() {
-        return (UserTypes.UserType[]) this.types.toArray();
-    }
-    */
+
+    public HashSet<UserType> getTypes() {
+        return types;
+    } 
 }
