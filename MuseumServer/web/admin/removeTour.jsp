@@ -24,7 +24,7 @@
             TourManager tm = (TourManager) request.getServletContext().getAttribute("tourManager");
         %>
         <b>Select a Tour to Remove:</b><br />
-        <form method="POST" action="RemoveTourAction.do">
+        <form method="POST" action="../RemoveTour.do">
         <select name="selectedTour">
             <%
                 ArrayList<Tour> tourList = tm.getListOfTours();

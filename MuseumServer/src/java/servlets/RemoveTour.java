@@ -1,5 +1,6 @@
 package servlets;
 
+import businessDomainObjects.TourManager;
 import businessDomainObjects.User;
 import businessDomainObjects.UserManager;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utility.Redirector;
 
 /**
  *
@@ -39,14 +41,24 @@ public class RemoveTour extends HttpServlet {
         session.setAttribute("currentUser", user);
         request.setAttribute("user", user);
         
+        int tourID = 0;
         
-        // Instantiate a request dispatcher for the JSP
-        RequestDispatcher view =
-                request.getRequestDispatcher("/admin/removeTour.jsp");
-
-        // Use the request dispatcher to ask the Container to crank up the JSP,
-        // sending it the request and response
-        view.forward(request, response);
+        if(request.getParameter("selectedTour") == null){
+            request.setAttribute("message", "<h2 style='color:red;'>Request to remove a tour failed!</h2>");
+            Redirector.redirect(request, response, "/admin/removeTour.jsp");
+            return;
+        }
+        else{
+            tourID = Integer.parseInt(request.getParameter("selectedTour"));
+        }
+        
+        TourManager tm = (TourManager) getServletContext().getAttribute("tourManager");
+        
+        tm.removeTour(tourID);
+        
+        request.setAttribute("message", "<h2 style='color:green;'>Tour was removed!  Success!</h2>");
+        Redirector.redirect(request, response, "/admin/removeTour.jsp");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

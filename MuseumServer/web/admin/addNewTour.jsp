@@ -27,6 +27,7 @@
                 } else {
                     out.println("Name of tour: <input type='text' name='tourName' size='50' maxlength='50'/><br/>");
                     out.println("Description of tour: <input type='text' name='tourDescription' size='150' maxlength='200'/><br/>");
+                    out.println("<br />Select exhibits for this tour:<br />");
                     for (Exhibit e : exhibits) {
                         String description = e.getDescription().length() > 100 ? e.getDescription().substring(0, 100) + "....." : e.getDescription();
                         String name = e.getName();
