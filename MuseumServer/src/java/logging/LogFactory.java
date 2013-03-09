@@ -46,5 +46,6 @@ public class LogFactory {
             case USERREM:
                 break;
         }
+        return null;
     }
 }

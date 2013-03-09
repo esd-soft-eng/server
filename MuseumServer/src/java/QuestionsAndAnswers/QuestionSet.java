@@ -49,7 +49,31 @@ public class QuestionSet{
         return this.questions;
     }
     
-    public DisplayQuestion[] getQuestionsForDisplay(){
+    public synchronized void removeQuestion(int questionId) {
+ 
+        Question q = this.getQuestionById(questionId);
+        if(q != null){
+            this.questions.remove(q);
+        }
+    }
+    
+    public synchronized boolean questionIdExistsInQs(int questionId){
+        
+        Question q = this.getQuestionById(questionId);
+        return (q != null) ? true : false;
+    }
+    
+    private synchronized Question getQuestionById(int questionId){
+        
+        for (Question q : questions) {
+            if (questionId == q.getQuestionId()) {
+                return q;
+            }
+        }
+        return null;
+    }
+    
+    public synchronized DisplayQuestion[] getQuestionsForDisplay(){
         
         DisplayQuestion[] displayQuestions = new DisplayQuestion[this.questions.size()];
         
@@ -59,7 +83,7 @@ public class QuestionSet{
         return displayQuestions;
     }
 
-    private DisplayQuestion prepareQuestionForDisplay(Question question) {
+    private synchronized DisplayQuestion prepareQuestionForDisplay(Question question) {
         
         return new DisplayQuestion(question.getAnswerText(), question.getQuestionText());
     }

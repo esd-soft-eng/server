@@ -1,5 +1,3 @@
-// FIXME: Validation (string validation, using utility -> add).
-
 package servlets;
 
 import businessDomainObjects.User;
@@ -14,18 +12,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import utility.Redirector;
 
 /**
  *
  * @author Simon
  */
-public class ModifyUser extends HttpServlet{
+public class ModifyUserAction extends HttpServlet{
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NoSuchAlgorithmException {
         // Get a new HTTP session
         HttpSession session = request.getSession();
-        
+                
         UserManager um = (UserManager) request.getServletContext().getAttribute("userManager");
         
         // Username check and pass through
@@ -43,7 +40,7 @@ public class ModifyUser extends HttpServlet{
             userID = Integer.parseInt(request.getParameter("userToModify"));
         }
         catch(NumberFormatException ex){
-           
+            
         }
         // Get form parameters
         //Checkbox, retrieve parameter, update the appropriate SQL field
@@ -55,18 +52,23 @@ public class ModifyUser extends HttpServlet{
         userPassword = request.getParameter("password");
         
         // If nothing was entered into one of the required form elements
-        if(userName == null || userName.equals("") || userPassword == null || userPassword.equals("")){
-            request.setAttribute("message", "<h2 style='color:red;'>Fail - Username or Password was not entered!  All fields must be filled in to modify a user.</h2>");
-            Redirector.redirect(request, response, "/admin/modifyUser.jsp");
+        if(userName == null || userPassword == null){
+            RequestDispatcher view = request.getRequestDispatcher("modifyFail.jsp");
+            view.forward(request, response);
         }
         else if(!um.modifyUser(userID, userName, userPassword, request.getParameterValues("userType"))){ // SQL update statement via user manager
-            request.setAttribute("message", "<h2 style='color:red;'>Fail - Could not perform modify user/interact with database!</h2>");
-            Redirector.redirect(request, response, "/admin/modifyUser.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("modifyFail.jsp"); // TODO: implement error page
+            view.forward(request, response);
         }
         else{
-            request.setAttribute("message", "<h2 style='color:green;'>Success!  The user has been modified!</h2>");
-            Redirector.redirect(request, response, "/admin/modifyUser.jsp");
+            // Instantiate a request dispatcher for the JSP
+            RequestDispatcher view = request.getRequestDispatcher("modifyConfirm.jsp");
+            view.forward(request, response);
         }
+        
+        // Use the request dispatcher to ask the Container to crank up the JSP,
+        // sending it the request and response
+
 }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -103,8 +105,10 @@ public class ModifyUser extends HttpServlet{
         try {
             processRequest(request, response);
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModifyUserAction.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
     }
 
     /**

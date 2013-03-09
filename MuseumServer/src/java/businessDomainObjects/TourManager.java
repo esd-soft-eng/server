@@ -3,12 +3,12 @@ package businessDomainObjects;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import persistance.PersistanceRepositoryTour;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
- * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * @author Oliver Brooks
  */
+
 public class TourManager {
 
     private ArrayList<Tour> listOfTours;

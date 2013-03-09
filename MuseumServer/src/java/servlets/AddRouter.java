@@ -1,18 +1,23 @@
 package servlets;
 
+import businessDomainObjects.Router;
+import businessDomainObjects.RouterManager;
+import businessDomainObjects.User;
+import businessDomainObjects.UserManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import utility.Redirector;
 
 /**
  *
  * @author Darkstar
  */
-public class ManageRouter extends HttpServlet {
+public class AddRouter extends HttpServlet {
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -24,10 +29,48 @@ public class ManageRouter extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        // Get a new HTTP session
+        HttpSession session = request.getSession();
+                
+        UserManager um = (UserManager) request.getServletContext().getAttribute("userManager");
+        
+        // Username check and pass through
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        User user = um.validateUser(username, password);
+        
+        session.setAttribute("currentUser", user);
+        request.setAttribute("user", user);
+        
+        RouterManager rm = (RouterManager) request.getServletContext().getAttribute("routerManager");
+        
+        Router newRouter = new Router();
+        
+        String audioLocation = request.getParameter("audioLocation");
+        String description = request.getParameter("description");
+        String macAddress = request.getParameter("macAddress");
+        
+        if(audioLocation == null || audioLocation.equals("")
+                || description == null || description.equals("")
+                || macAddress == null || macAddress.equals("")){
+            request.setAttribute("message", "<h2 style='color:red;'>Fail - Input error!  All fields must be filled in to modify a user.</h2>");
+            Redirector.redirect(request, response, "/admin/addRouter.jsp");
+            return;
+        }
+        
+        // Update existing router object
+        newRouter.setAudioLocation(audioLocation);
+        newRouter.setDescription(description);
+        newRouter.setMACAddress(macAddress);
+        
+        // Execute sql for update
+        rm.addRouter(newRouter);
+        
+        request.setAttribute("message", "<h2 style='color:green;'>Success!</h2>");
+        Redirector.redirect(request, response, "/admin/addRouter.jsp");
         
         
-        request.setAttribute("message", "<h2 style='color:green;'></h2>");
-        Redirector.redirect(request, response, "/admin/removeTour.jsp");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

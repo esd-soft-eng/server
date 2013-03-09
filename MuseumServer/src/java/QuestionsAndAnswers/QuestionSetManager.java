@@ -12,38 +12,71 @@ import persistance.PersistanceRepositoryQuestions;
  * @author neil
  */
 public class QuestionSetManager {
-    
-    PersistanceRepositoryQuestions persistance;    
+
+    PersistanceRepositoryQuestions persistance;
     ArrayList<QuestionSet> questionSets;
-    
-    public QuestionSetManager(PersistanceRepositoryQuestions persistance){
+
+    public QuestionSetManager(PersistanceRepositoryQuestions persistance) {
         this.persistance = persistance;
         this.init();
     }
-    
-    public QuestionSet[] getAllQuestionSets(){
-        return this.questionSets.toArray(new QuestionSet[0]);        
+
+    public QuestionSet[] getAllQuestionSets() {
+        return this.questionSets.toArray(new QuestionSet[0]);
     }
-    
-    public boolean addQuestionSet(String name){
-        
-        if (persistance.addNewQuestionSet(name)){
+
+    public synchronized boolean addQuestionSet(String name) {
+
+        if (persistance.addNewQuestionSet(name)) {
             this.init();
             return true;
         }
         return false;
     }
-    
-    public boolean deleteQuestionSet(int index){
-        
-        if (persistance.removeQuestionSet(this.questionSets.get(index))){
-            this.questionSets.remove(this.questionSets.get(index));
+
+    public synchronized boolean deleteQuestionSet(int questionSetId) {
+
+        QuestionSet qs = this.getQuestionSetById(questionSetId);
+        if (persistance.removeQuestionSet(qs)) {
+            this.questionSets.remove(qs);
             return true;
         }
         return false;
     }
 
-    private void init() {
+    public synchronized boolean addQuestion(Question question, int questionSetId) {
+
+        if (persistance.addQuestionToExistingQuestionSet(question, questionSetId)) {
+            this.init();
+            return true;
+        }
+        return false;
+    }
+
+    public synchronized boolean removeQuestionFromQuestionSet(int questionId, int questionSetId) {
+
+        QuestionSet qs = this.getQuestionSetById(questionSetId);
+        
+        if (qs != null 
+                && qs.questionIdExistsInQs(questionId) 
+                && persistance.removeQuestion(questionId)) {
+            qs.removeQuestion(questionId);
+            return true;
+        }
+        return false;
+    }
+
+    private QuestionSet getQuestionSetById(int id) {
+
+        for (QuestionSet qs : this.questionSets) {
+            if (id == qs.getId()) {                
+                return qs;
+            }
+        }
+        return null;
+    }
+
+    private synchronized void init() {
         this.questionSets = persistance.getAllQuestionSets();
     }
 }
