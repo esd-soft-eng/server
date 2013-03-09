@@ -269,6 +269,24 @@ INSERT INTO `usertype` VALUES (1,'MAINTAINER','maintainer'),(2,'ADMINISTRATOR','
 UNLOCK TABLES;
 
 --
+-- Table structure for table `router`
+--
+
+CREATE TABLE IF NOT EXISTS `router` (
+  `MacID` varchar(12) NOT NULL,
+  `AudioLocation` varchar(70) NOT NULL,
+  `Description` varchar(150) NOT NULL,
+  PRIMARY KEY (`MacID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `router`
+--
+
+INSERT INTO `router` (`MacID`, `AudioLocation`, `Description`) VALUES
+('001122334455', 'test', 'tester');
+
+--
 -- Table structure for table `usertypelink`
 --
 
