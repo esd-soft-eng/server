@@ -48,6 +48,10 @@
         <servlet-name>ModifyRouter</servlet-name>
         <servlet-class>servlets.ModifyRouter</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddRouter</servlet-name>
+        <servlet-class>servlets.AddRouter</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginPage</servlet-name>
         <url-pattern>/displayuser.do</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>ModifyRouter</servlet-name>
         <url-pattern>/ModifyRouter.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddRouter</servlet-name>
+        <url-pattern>/AddRouter.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

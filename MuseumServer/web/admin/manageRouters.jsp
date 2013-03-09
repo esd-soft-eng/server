@@ -46,7 +46,7 @@
                     <b>New Audio Location:</b>&nbsp;&nbsp; <input type="text" name="audioLocation"><br />
                     <b>New Description:</b>&nbsp;&nbsp; <input type="text" name="description"><br />
                 <br><br>
-                <input type="SUBMIT" value="Modify Mac Address" align="left">
+                <input type="SUBMIT" value="Modify Router" align="left">
             </form>
     </body>
 </html>

@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * @author Simon Edwins <Darkstar>
  */
 public class PersistanceRepositoryRouter {
 
@@ -17,6 +18,17 @@ public class PersistanceRepositoryRouter {
 
     public PersistanceRepositoryRouter(DatabaseQueryExecutor executor) {
         this.executor = executor;
+    }
+    
+    public synchronized boolean addRouter(String mac, String audioLocation, String description){
+        String sql = "INSERT INTO `router` (MacID, AudioLocation, Description) "
+                + "VALUES ('" + mac + "', '" + audioLocation + "', '" + description + "')";
+        
+        if(!executor.executeUpdate(sql)){
+            return false;
+        }
+        
+        return true;
     }
 
     public synchronized boolean modifyRouter(String mac, String audioLocation, String description){

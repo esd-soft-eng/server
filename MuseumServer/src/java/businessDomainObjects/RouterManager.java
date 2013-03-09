@@ -17,6 +17,24 @@ public class RouterManager {
         listOfRouters = persistance.getAllRouters();
     }
     
+    public synchronized boolean addRouter(Router r){
+        String audioLocation = r.getAudioLocation();
+        String description = r.getDescription();
+        String macAddress = r.getMACAddress();
+        
+        if(macAddress == null || macAddress.equals("") || audioLocation.equals("") || audioLocation == null
+                || description == null || description.equals("")){
+            return false;
+        }
+        
+        if(!persistance.addRouter(macAddress, audioLocation, description)){
+            return false;
+        }
+        
+        return true;
+    }
+    
+    
     public synchronized boolean modifyRouter(Router r){
         String audioLocation = r.getAudioLocation();
         String description = r.getDescription();
