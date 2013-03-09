@@ -188,6 +188,27 @@ CREATE TABLE `tours` (
 
 --
 -- Dumping data for table `tours`
+----
+-- Table structure for table `tours`
+--
+
+CREATE TABLE IF NOT EXISTS `tours` (
+  `TourID` int(11) NOT NULL AUTO_INCREMENT,
+  `TourName` varchar(50) NOT NULL,
+  `TourDescription` varchar(200) NOT NULL,
+  `QuestionSetID` int(11) NOT NULL,
+  PRIMARY KEY (`TourID`),
+  UNIQUE KEY `QuestionSetID` (`QuestionSetID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Constraints for table `tours`
+--
+ALTER TABLE `tours`
+  ADD CONSTRAINT `tours_ibfk_1` FOREIGN KEY (`QuestionSetID`) REFERENCES `question` (`questionSetId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for dumped tables
 --
 
 LOCK TABLES `tours` WRITE;
@@ -286,6 +307,7 @@ CREATE TABLE IF NOT EXISTS `router` (
 
 INSERT INTO `router` (`MacID`, `AudioLocation`, `Description`) VALUES
 ('001122334455', 'test', 'tester');
+
 
 --
 -- Table structure for table `usertypelink`
