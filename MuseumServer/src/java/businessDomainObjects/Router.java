@@ -10,6 +10,12 @@ public class Router {
     String audioLocation;
     String description;
 
+    public Router() {
+        MAC = "";
+        audioLocation = "";
+        description = "";
+    }
+
     public String getAudioLocation() {
         return audioLocation;
     }

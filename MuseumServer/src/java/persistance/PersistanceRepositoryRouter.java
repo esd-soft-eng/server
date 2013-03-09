@@ -21,6 +21,6 @@ public class PersistanceRepositoryRouter {
     }
 
     public synchronized ArrayList<Router> getAllRouters() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new ArrayList<Router>();
     }
 }

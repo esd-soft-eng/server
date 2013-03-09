@@ -33,12 +33,16 @@ public class RouterManager {
         }
     }
 
-    private Router getRouterByMAC(String MAC) {
+    public Router getRouterByMAC(String MAC) {
         for (Router r : listOfRouters) {
             if (r.getMACAddress() == MAC) {
                 return r;
             }
         }
         return null;
+    }
+
+    public ArrayList<Router> getRouters() {
+        return listOfRouters;
     }
 }
