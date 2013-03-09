@@ -7,9 +7,10 @@ package servlets;
 import QuestionsAndAnswers.Answer;
 import QuestionsAndAnswers.Question;
 import QuestionsAndAnswers.QuestionSet;
+import QuestionsAndAnswers.QuestionSetManager;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,32 +37,40 @@ public class ModifyQuestionSet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String questionSet = (String) request.getParameter("questionSet");
-        QuestionSet[] questionSets = getFakeData();
+        String questionSetAction = (String) request.getParameter("questionSetAction");
+        String questionSetId = (String) request.getParameter("questionSetId");
+        QuestionSetManager qsm = (QuestionSetManager) getServletContext().getAttribute("questionSetManager");
+        
+        if (!(questionSetAction.equals(""))) {
+            switch (Integer.parseInt(questionSetAction)) {
+                case 1:
+                    this.addQuestionSet(request, qsm);
+                    break;
+                case 2:
+                    this.displayQuestions(request);
+                    break;
+                case 3:
+                    this.removeQuestionSet(questionSetId, qsm);
+                    break;
+                case 4:
+                    this.addQuestionToQuestionSet(request, qsm);
+                    break;
+                case 5:
+                    String questionId = (String) request.getParameter("questionId");
+                    this.removeQuestionFromQuestionSet(request, qsm);
+                    break;
+                default:
+                    break;
+            }
+        }
 
-        //set variables
+        QuestionSet[] questionSets = qsm.getAllQuestionSets();
         request.setAttribute("questionSets", questionSets);
-        
-        
-        if (questionSet == null) {
-        }
+        request.setAttribute("questionSetId", questionSetId);
 
+        RequestDispatcher view = request.getRequestDispatcher("admin/modifyQuestionSet.jsp");
+        view.forward(request, response);
 
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ModifyQuestionSet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ModifyQuestionSet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -105,29 +114,45 @@ public class ModifyQuestionSet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private QuestionSet[] getFakeData() {
-        
-        QuestionSet[] questionSet = new QuestionSet[2];
-        // get first questionset
-        ArrayList<Answer> a1 = new ArrayList();
-        a1.add(new Answer("Answer 1", 5));
-        a1.add(new Answer("Answer 2", 1));
-        a1.add(new Answer("Answer 3", 3));
-        Question question1 = new Question(1, "Question 1", a1);
-        ArrayList<Question> q1 = new ArrayList();
-        q1.add(question1);
-        
-        ArrayList<Answer> a2 = new ArrayList();
-        a2.add(new Answer("Answer 1", 3));
-        a2.add(new Answer("Answer 2", 2));
-        a2.add(new Answer("Answer 3", 8));
-        Question question2 = new Question(1, "Question 2", a2);
-        ArrayList<Question> q2 = new ArrayList();
-        q2.add(question2);
-        
-        questionSet[1] = new QuestionSet(1, "Testtype22!", q1);
-        
-        
-        return questionSet;
+    private void addQuestionSet(HttpServletRequest request, QuestionSetManager qsm) {
+        String setName = (String) request.getParameter("setName");
+        qsm.addQuestionSet(setName);
+    }
+
+    private void displayQuestions(HttpServletRequest request) {
+        request.setAttribute("displayQuestions", true);
+    }
+
+    private void removeQuestionSet(String questionSetId, QuestionSetManager qsm) {
+        qsm.deleteQuestionSet(Integer.parseInt(questionSetId));
+    }
+
+    private void addQuestionToQuestionSet(HttpServletRequest request, QuestionSetManager qsm) {
+
+        int questionSetId = Integer.parseInt(request.getParameter("questionSetId"));
+        String question = (String) request.getParameter("questionText");
+        ArrayList<Answer> answers = new ArrayList();
+
+        for (int i = 0; i < 6; i++) {
+            String answer = (String) request.getParameter("answer" + (i + 1));
+            if (!(answer.equals(""))) {
+                System.out.println("in here");
+                int value = Integer.parseInt(request.getParameter("value" + (i + 1)));
+                answers.add(new Answer(answer, value));
+            }
+        }
+
+        Question q = new Question(0, question, answers);
+
+        qsm.addQuestion(q, questionSetId);
+        this.displayQuestions(request);
+    }
+
+    private void removeQuestionFromQuestionSet(HttpServletRequest request, QuestionSetManager qsm) {
+
+        int questionId = Integer.parseInt(request.getParameter("questionId"));
+        int questionSetId = Integer.parseInt(request.getParameter("questionSetId"));
+        qsm.removeQuestionFromQuestionSet(questionId, questionSetId);
+        this.displayQuestions(request);
     }
 }

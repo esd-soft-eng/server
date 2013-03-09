@@ -18,6 +18,7 @@
 --
 -- Table structure for table `allowedDevices`
 --
+use museum_server_database;
 
 DROP TABLE IF EXISTS `allowedDevices`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
