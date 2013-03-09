@@ -25,7 +25,7 @@ public class ModifyUser extends HttpServlet{
             throws ServletException, IOException, NoSuchAlgorithmException {
         // Get a new HTTP session
         HttpSession session = request.getSession();
-                
+        
         UserManager um = (UserManager) request.getServletContext().getAttribute("userManager");
         
         // Username check and pass through
