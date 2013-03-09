@@ -26,7 +26,9 @@
     <body>
         <h1>Manage Routers</h1>
         <form method="POST" action="ModifyRouter.do">
+                Select Router 
                 <select name="selectedRouter">
+                    
                 <%
                     RouterManager rm = (RouterManager) request.getServletContext().getAttribute("routerManager");
                     ArrayList<Router> routerArrayList = rm.getRouterList();
@@ -41,8 +43,8 @@
                 <br /><br />
                 Enter the new details for router modification:<p>
                     <b>New Mac Address:</b> <input type="text" name="macAddress"><br />
-                    <b>New Audio Location:</b>&nbsp;&nbsp; <input type="text" name="audioLocation"><br /><br />
-                    <b>New Description:</b>&nbsp;&nbsp; <input type="text" name="description"><br /><br />
+                    <b>New Audio Location:</b>&nbsp;&nbsp; <input type="text" name="audioLocation"><br />
+                    <b>New Description:</b>&nbsp;&nbsp; <input type="text" name="description"><br />
                 <br><br>
                 <input type="SUBMIT" value="Modify Mac Address" align="left">
             </form>
