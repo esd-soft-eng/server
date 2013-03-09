@@ -16,9 +16,26 @@ public class RouterManager {
         this.persistance = pr;
         listOfRouters = persistance.getAllRouters();
     }
+    
+    public synchronized boolean modifyRouter(Router r){
+        String audioLocation = r.getAudioLocation();
+        String description = r.getDescription();
+        String macAddress = r.getMACAddress();
+        
+        if(macAddress == null || macAddress.equals("") || audioLocation.equals("") || audioLocation == null
+                || description == null || description.equals("")){
+            return false;
+        }
+        
+        if(!persistance.modifyRouter(macAddress, audioLocation, description)){
+            return false;
+        }
+        
+        return true;
+    }
 
     public synchronized boolean removeRouter(String MAC) {
-        if (MAC == null || MAC == "") {
+        if (MAC == null || MAC.equals("")) {
             return false;
         }
 
@@ -33,12 +50,16 @@ public class RouterManager {
         }
     }
 
-    private Router getRouterByMAC(String MAC) {
+    public Router getRouterByMAC(String MAC) {
         for (Router r : listOfRouters) {
-            if (r.getMACAddress() == MAC) {
+            if (r.getMACAddress().equals(MAC)) {
                 return r;
             }
         }
         return null;
+    }
+    
+    public ArrayList<Router> getRouterList(){
+        return listOfRouters;
     }
 }

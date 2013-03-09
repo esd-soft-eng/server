@@ -4,6 +4,8 @@
     Author     : Darkstar
 --%>
 
+<%@page import="businessDomainObjects.Router"%>
+<%@page import="businessDomainObjects.RouterManager"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="businessDomainObjects.UserManager"%>
 <%@page import="businessDomainObjects.User"%>
@@ -23,29 +25,26 @@
     </head>
     <body>
         <h1>Manage Routers</h1>
-        <form method="POST" action="ModifyUser.do">
-                
+        <form method="POST" action="ModifyRouter.do">
+                <select name="selectedRouter">
                 <%
-                    UserManager um = (UserManager) request.getServletContext().getAttribute("userManager");
-                    for(User userString : um.getAllUsers()){
-                        String thisString = userString.getUserName();
-                        int userID = userString.getUserID();
-                        
-                        out.println(userID + ": " + thisString + "   <input type=\"radio\" name=\"userToModify\" value=" + userID + "><br />");
+                    RouterManager rm = (RouterManager) request.getServletContext().getAttribute("routerManager");
+                    ArrayList<Router> routerArrayList = rm.getRouterList();
+
+                    for(Router thisRouter : routerArrayList){
+                        String mac = thisRouter.getMACAddress();
+                        out.println("<option value=\"" + mac + "\">" + mac + "</option>");
                     }
+
                 %>
+                </select>
                 <br /><br />
-                Enter the new details of the user that you wish to modify:<p>
-                    <b>New User Name:</b> <input type="text" name="userName"><br />
-                    <b>New Password:</b>&nbsp;&nbsp; <input type="password" name="password"><br /><br />
-                    <b><u>New User type</u></b>&nbsp;&nbsp;<br />
-                    Maintainer<input type="checkbox" name="userType" value="1"></input><br />
-                    Administrator<input type="checkbox" name="userType" value="2"></input><br />
-                    Client Handset<input type="checkbox" name="userType" value="3"></input><br />
-                    Kiosk<input type="checkbox" name="userType" value="4"></input><br />
-                    Manager<input type="checkbox" name="userType" value="5"></input><br />
+                Enter the new details for router modification:<p>
+                    <b>New Mac Address:</b> <input type="text" name="macAddress"><br />
+                    <b>New Audio Location:</b>&nbsp;&nbsp; <input type="text" name="audioLocation"><br /><br />
+                    <b>New Description:</b>&nbsp;&nbsp; <input type="text" name="description"><br /><br />
                 <br><br>
-                <input type="SUBMIT" value="Modify User" align="left">
+                <input type="SUBMIT" value="Modify Mac Address" align="left">
             </form>
     </body>
 </html>

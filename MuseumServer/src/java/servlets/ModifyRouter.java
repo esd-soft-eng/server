@@ -1,5 +1,7 @@
 package servlets;
 
+import businessDomainObjects.Router;
+import businessDomainObjects.RouterManager;
 import businessDomainObjects.User;
 import businessDomainObjects.UserManager;
 import java.io.IOException;
@@ -15,7 +17,7 @@ import utility.Redirector;
  *
  * @author Darkstar
  */
-public class ManageRouter extends HttpServlet {
+public class ModifyRouter extends HttpServlet {
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,25 +41,44 @@ public class ManageRouter extends HttpServlet {
         session.setAttribute("currentUser", user);
         request.setAttribute("user", user);
         
-        //userName
-        userName = request.getParameter("userName");
+        RouterManager rm = (RouterManager) request.getServletContext().getAttribute("routerManager");
         
-        //userPassword, remembering to md5 first
-        userPassword = request.getParameter("password");
+        // Get existing router object
+        Router thisRouter = rm.getRouterByMAC(request.getParameter("selectedRouter"));
+        
+        String audioLocation = request.getParameter("audioLocation");
+        String description = request.getParameter("description");
+        String macAddress = request.getParameter("macAddress");
+        
+        if(!(audioLocation == null || audioLocation.equals("")
+                || description == null || description.equals("")
+                || macAddress == null || macAddress.equals(""))){
+            request.setAttribute("message", "<h2 style='color:red;'>Fail - Input error!  All fields must be filled in to modify a user.</h2>");
+            Redirector.redirect(request, response, "/admin/manageRouters.jsp");
+        }
+                
+        // Update existing router object
+        thisRouter.setAudioLocation(audioLocation);
+        thisRouter.setDescription(description);
+        thisRouter.setMACAddress(macAddress);
+        
+        // Execute sql for update
+        rm.modifyRouter(thisRouter);
+        
         
         // If nothing was entered into one of the required form elements
-        if(userName == null || userName.equals("") || userPassword == null || userPassword.equals("")){
-            request.setAttribute("message", "<h2 style='color:red;'>Fail - Username or Password was not entered!  All fields must be filled in to modify a user.</h2>");
-            Redirector.redirect(request, response, "/admin/modifyUser.jsp");
-        }
-        else if(!um.modifyUser(userID, userName, userPassword, request.getParameterValues("userType"))){ // SQL update statement via user manager
-            request.setAttribute("message", "<h2 style='color:red;'>Fail - Could not perform modify user/interact with database!</h2>");
-            Redirector.redirect(request, response, "/admin/modifyUser.jsp");
-        }
-        else{
-            request.setAttribute("message", "<h2 style='color:green;'>Success!  The user has been modified!</h2>");
-            Redirector.redirect(request, response, "/admin/modifyUser.jsp");
-        }
+//        if(userName == null || userName.equals("") || userPassword == null || userPassword.equals("")){
+//            request.setAttribute("message", "<h2 style='color:red;'>Fail - Username or Password was not entered!  All fields must be filled in to modify a user.</h2>");
+//            Redirector.redirect(request, response, "/admin/modifyUser.jsp");
+//        }
+//        else if(!um.modifyUser(userID, userName, userPassword, request.getParameterValues("userType"))){ // SQL update statement via user manager
+//            request.setAttribute("message", "<h2 style='color:red;'>Fail - Could not perform modify user/interact with database!</h2>");
+//            Redirector.redirect(request, response, "/admin/modifyUser.jsp");
+//        }
+//        else{
+//            request.setAttribute("message", "<h2 style='color:green;'>Success!  The user has been modified!</h2>");
+//            Redirector.redirect(request, response, "/admin/modifyUser.jsp");
+//        }
         
         request.setAttribute("message", "<h2 style='color:green;'></h2>");
         Redirector.redirect(request, response, "/admin/removeTour.jsp");
