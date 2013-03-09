@@ -3,6 +3,7 @@ package museum.listener;
 import businessDomainObjects.AudioManager;
 import businessDomainObjects.ExhibitManager;
 import businessDomainObjects.HandsetAccessManager;
+import businessDomainObjects.RouterManager;
 import businessDomainObjects.TourManager;
 import businessDomainObjects.UserManager;
 import javax.servlet.ServletContext;
@@ -12,6 +13,7 @@ import persistance.DatabaseQueryExecutor;
 import persistance.PersistanceRepositoryAudio;
 import persistance.PersistanceRepositoryExhibit;
 import persistance.PersistanceRepositoryHandset;
+import persistance.PersistanceRepositoryRouter;
 import persistance.PersistanceRepositoryTour;
 import persistance.PersistanceRepositoryUser;
 
@@ -34,6 +36,7 @@ public class DatabaseInit implements ServletContextListener {
         ctx.setAttribute("tourManager", initTourManager(db));
         ctx.setAttribute("exhibitManager", initExhibitManager(db));
         ctx.setAttribute("audioManager", initAudioManager(db));
+        ctx.setAttribute("routerManager", initRouterManager(db));
     }
 
     @Override
@@ -78,5 +81,10 @@ public class DatabaseInit implements ServletContextListener {
     private AudioManager initAudioManager(DatabaseQueryExecutor db) {
         PersistanceRepositoryAudio pr = new PersistanceRepositoryAudio(db);
         return new AudioManager(pr);
+    }
+
+    private RouterManager initRouterManager(DatabaseQueryExecutor db) {
+        PersistanceRepositoryRouter pr = new PersistanceRepositoryRouter(db);
+        return new RouterManager(pr);
     }
 }
