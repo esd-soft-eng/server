@@ -51,8 +51,8 @@ public class PersistanceRepositoryQuestions {
     private synchronized ArrayList<Question> getQuestionSetQuestions(int id) {
 
         String sql = "SELECT * FROM"
-                + "`question`.`q`"
-                + "WHERE `q`.`id` = " + id;
+                + "`question` `q`"
+                + "WHERE `q`.`questionSetId` = " + id;
 
         ResultSet rs = executor.executeStatement(sql);
         return this.generateQuestionsSetQuestionsFromResults(rs);
@@ -61,8 +61,8 @@ public class PersistanceRepositoryQuestions {
     private synchronized ArrayList<Answer> getQuestionAnswers(int id) {
 
         String sql = "SELECT * FROM"
-                + "`answer`.`a`"
-                + "WHERE `a`.`id` =" + id;
+                + "`answer` `a`"
+                + "WHERE `a`.`questionId` =" + id;
 
         ResultSet rs = executor.executeStatement(sql);
         return this.generateAnswersForQuestion(rs);
@@ -110,6 +110,9 @@ public class PersistanceRepositoryQuestions {
             Logger.getLogger(PersistanceRepositoryQuestions.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        
+        System.out.println("yarrr!!!");
+        
         return answerList;
     }
     // </editor-fold>
@@ -118,7 +121,7 @@ public class PersistanceRepositoryQuestions {
     private synchronized QuestionSet getQuestionSetFromResultSet(ResultSet rs) throws SQLException {
 
         int id = rs.getInt("id");
-        String name = rs.getString("name");
+        String name = rs.getString("title");
         ArrayList<Question> questionList = this.getQuestionSetQuestions(id);
         return new QuestionSet(id, name, questionList);
     }
@@ -144,7 +147,7 @@ public class PersistanceRepositoryQuestions {
     public synchronized boolean addNewQuestionSet(String name) {
 
         String sql = "INSERT INTO"
-                + "`questionset` `qs` (`title`)"
+                + "`questionset` (`title`)"
                 + "VALUES ('" + name + "')";
 
         return executor.executeUpdate(sql);
@@ -164,7 +167,7 @@ public class PersistanceRepositoryQuestions {
         String questionText = question.getQuestionText();
 
         String sql = "INSERT INTO"
-                + "`question` `q` (`text`, `questionSetId`)"
+                + "`question` (`text`, `questionSetId`)"
                 + "VALUES ('" + questionText + "'," + questionSetId + ")";
         
         return addAnswerListToQuestion(question, executor.executeUpdate(sql));
@@ -173,7 +176,7 @@ public class PersistanceRepositoryQuestions {
     private synchronized boolean addAnswerToQuestion(Answer answer) {
 
         String sql = "Insert INTO"
-                + "`answer` `a` (`text`, `questionId`, `value`)"
+                + "`answer` (`text`, `questionId`, `value`)"
                 + "VALUES ('" + answer.answerText + "', (SELECT MAX(`id`) FROM `question`), " + answer.value + " )";
 
         return executor.executeUpdate(sql);
@@ -194,16 +197,22 @@ public class PersistanceRepositoryQuestions {
 
     public boolean removeQuestionSet(QuestionSet questionSet) {
 
-        String sql = "DELETE FROM `questionset`.`qs`"
-                + "WHERE `qs`.`id = " + questionSet.getId();
+                
+        System.out.println("==============================");
+                System.out.println(questionSet.getId());
+                System.out.println("==============================");
+        
+        
+        String sql = "DELETE FROM `questionset` "
+                + "WHERE `id` = " + questionSet.getId();
 
         return executor.executeUpdate(sql);
     }
 
-    public boolean removeQuestion(Question question, int questionSetId) {
+    public boolean removeQuestion(int questionId) {
 
-        String sql = "DELETE FROM `question`.`q`"
-                + "WHERE `q`.`id = " + question.getQuestionId();
+        String sql = "DELETE FROM `question` "
+                + "WHERE `id` = " + questionId;
 
         return executor.executeUpdate(sql);
     }

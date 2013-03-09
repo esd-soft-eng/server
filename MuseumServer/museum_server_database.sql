@@ -18,6 +18,7 @@
 --
 -- Table structure for table `allowedDevices`
 --
+use museum_server_database;
 
 USE museum_server_database;
 
