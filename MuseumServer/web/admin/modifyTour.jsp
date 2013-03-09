@@ -2,6 +2,7 @@
     Document   : modifyTour
     Created on : 07-Mar-2013, 16:43:54
     Author     : Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+               : Simon Edwins <Darkstar>
 --%>
 
 <%@page import="businessDomainObjects.Tour"%>

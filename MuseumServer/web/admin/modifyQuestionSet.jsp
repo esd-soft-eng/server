@@ -1,7 +1,7 @@
 <%-- 
     Document   : modifyQuestionSet
     Created on : 28-Feb-2013, 17:59:36
-    Author     : neil
+    Author     : neil + darkstar
 --%>
 
 <%@page import="QuestionsAndAnswers.Answer"%>
@@ -40,13 +40,15 @@
                         + "<td><a href=\"/MuseumServer/modifyQuestionSet.do?questionSetId=" + questionSet.getId() + "&questionSetAction=3\">Delete</a></td></tr>");
 
             }
-            %><table><%
-
+            %>
+            <table>
+                    <%
                     if (request.getAttribute("displayQuestions") != null) {
                     
                             String questionSetId = (String) request.getAttribute("questionSetId");
                         //Display Add question
-                        %><h2>Add question to question set</h2>
+                    %>
+                    <h2>Add question to question set</h2>
                         <p>Minimum of one answer required:</p>
                         <form>
                             <input type="hidden" name="questionSetAction" value="4"/>

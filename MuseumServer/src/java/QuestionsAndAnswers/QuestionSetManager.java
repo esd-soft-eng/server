@@ -9,7 +9,7 @@ import persistance.PersistanceRepositoryQuestions;
 
 /**
  *
- * @author neil
+ * @author neil + darkstar
  */
 public class QuestionSetManager {
 

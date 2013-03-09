@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author neil
+ * @author neil + darkstar
  */
 public class QuestionSet{
     
