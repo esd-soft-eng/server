@@ -3,12 +3,12 @@ package businessDomainObjects;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import persistance.PersistanceRepositoryTour;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
- * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * @author Oliver Brooks
  */
+
 public class TourManager {
 
     private ArrayList<Tour> listOfTours;
@@ -47,12 +47,29 @@ public class TourManager {
     }
 
     public synchronized boolean modifyTour(int tourID, String name, String description, ArrayList<String> exhibitIDs) {
-        throw new NotImplementedException();
+        try {
+            boolean ret = persistance.modifyTour(tourID, name, description, exhibitIDs);
+            if (ret == false) {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+
+        this.listOfTours = persistance.getAllTours();
+        return true;
     }
 
     public ArrayList<Tour> getListOfTours() {
         return listOfTours;
     }
-    
-    
+
+    public Tour getTourByID(int ID) {
+        for (Tour t : listOfTours) {
+            if (t.getTourID() == ID) {
+                return t;
+            }
+        }
+        return null;
+    }
 }

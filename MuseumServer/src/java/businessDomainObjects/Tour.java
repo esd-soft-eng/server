@@ -48,4 +48,10 @@ public class Tour {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public HashSet<String> getExhibitIDs() {
+        return exhibitIDs;
+    }
+    
+    
 }

@@ -11,7 +11,7 @@
     </head>
     <body>
         <h1 align="center">Add New User</h1>
-        <form method="POST" action="../AddNewUser.do">
+        <form method="POST" action="/MuseumServer/AddNewUser.do">
             Enter the details of the user you wish to add<p>
                 <b>User name:</b> <input type="text" name="userName"><br>
                 <b>Password:&nbsp;&nbsp;</b> <input type="password" name="password"><br><br>

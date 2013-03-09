@@ -1,25 +1,27 @@
 package servlets;
 
-import businessDomainObjects.TourManager;
-import businessDomainObjects.User;
-import businessDomainObjects.UserManager;
+import businessDomainObjects.ExhibitManager;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import utility.Redirector;
 
 /**
  *
- * @author Darkstar
+ * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
  */
-public class RemoveTour extends HttpServlet {
+@WebServlet(name = "RemoveExhibit", urlPatterns = {"/removeExhibit.do"})
+public class RemoveExhibit extends HttpServlet {
 
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+    /**
+     * Processes requests for both HTTP
+     * <code>GET</code> and
+     * <code>POST</code> methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -27,43 +29,37 @@ public class RemoveTour extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            
-        // Get a new HTTP session
-        HttpSession session = request.getSession();
-                
-        UserManager um = (UserManager) request.getServletContext().getAttribute("userManager");
-        
-        // Username check and pass through
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        User user = um.validateUser(username, password);
-        
-        session.setAttribute("currentUser", user);
-        request.setAttribute("user", user);
-        
-        int tourID = 0;
-        
-        if(request.getParameter("selectedTour") == null){
-            request.setAttribute("message", "<h2 style='color:red;'>Request to remove a tour failed!</h2>");
-            Redirector.redirect(request, response, "/admin/removeTour.jsp");
+        String exhibitID = request.getParameter("exhibitID");
+        if (exhibitID == null || exhibitID == "") {
+            request.setAttribute("message", "<h2 style='color:red;'>No exhibit was selected</h2>");
+            Redirector.redirect(request, response, "/admin/removeExhibit.jsp");
             return;
         }
-        else{
-            tourID = Integer.parseInt(request.getParameter("selectedTour"));
+        int exhibitIDInt = -1;
+        try {
+            exhibitIDInt = Integer.parseInt(exhibitID);
+        } catch (NumberFormatException ex) {
+            request.setAttribute("message", "<h2 style='color:red;'>Exhibit ID was invalid</h2>");
+            Redirector.redirect(request, response, "/admin/removeExhibit.jsp");
+            return;
         }
-        
-        TourManager tm = (TourManager) getServletContext().getAttribute("tourManager");
-        
-        tm.removeTour(tourID);
-        
-        request.setAttribute("message", "<h2 style='color:green;'>Tour was removed!  Success!</h2>");
-        Redirector.redirect(request, response, "/admin/removeTour.jsp");
-        
+        ExhibitManager manager = (ExhibitManager) getServletContext().getAttribute("exhibitManager");
+
+        if (!manager.removeExhibit(exhibitIDInt)) {
+            request.setAttribute("message", "<h2 style='color:red;'>Failed to remove exhibit.</h2>");
+            Redirector.redirect(request, response, "/admin/removeExhibit.jsp");
+            return;
+        }
+
+        request.setAttribute("message", "<h2>Successfully removed exhibit.</h2>");
+        Redirector.redirect(request, response, "/admin/removeExhibit.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
+    /**
+     * Handles the HTTP
+     * <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -75,8 +71,10 @@ public class RemoveTour extends HttpServlet {
         processRequest(request, response);
     }
 
-    /** 
-     * Handles the HTTP <code>POST</code> method.
+    /**
+     * Handles the HTTP
+     * <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -88,8 +86,9 @@ public class RemoveTour extends HttpServlet {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

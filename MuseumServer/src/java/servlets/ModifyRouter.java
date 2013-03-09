@@ -1,10 +1,11 @@
 package servlets;
 
-import businessDomainObjects.TourManager;
+import businessDomainObjects.Router;
+import businessDomainObjects.RouterManager;
 import businessDomainObjects.User;
 import businessDomainObjects.UserManager;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ import utility.Redirector;
  *
  * @author Darkstar
  */
-public class RemoveTour extends HttpServlet {
+public class ModifyRouter extends HttpServlet {
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -27,7 +28,6 @@ public class RemoveTour extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            
         // Get a new HTTP session
         HttpSession session = request.getSession();
                 
@@ -41,24 +41,47 @@ public class RemoveTour extends HttpServlet {
         session.setAttribute("currentUser", user);
         request.setAttribute("user", user);
         
-        int tourID = 0;
+        RouterManager rm = (RouterManager) request.getServletContext().getAttribute("routerManager");
         
-        if(request.getParameter("selectedTour") == null){
-            request.setAttribute("message", "<h2 style='color:red;'>Request to remove a tour failed!</h2>");
-            Redirector.redirect(request, response, "/admin/removeTour.jsp");
-            return;
+        // Get existing router object
+        Router thisRouter = rm.getRouterByMAC(request.getParameter("selectedRouter"));
+        
+        String audioLocation = request.getParameter("audioLocation");
+        String description = request.getParameter("description");
+        String macAddress = request.getParameter("macAddress");
+        
+        if(!(audioLocation == null || audioLocation.equals("")
+                || description == null || description.equals("")
+                || macAddress == null || macAddress.equals(""))){
+            request.setAttribute("message", "<h2 style='color:red;'>Fail - Input error!  All fields must be filled in to modify a user.</h2>");
+            Redirector.redirect(request, response, "/admin/manageRouters.jsp");
         }
-        else{
-            tourID = Integer.parseInt(request.getParameter("selectedTour"));
-        }
+                
+        // Update existing router object
+        thisRouter.setAudioLocation(audioLocation);
+        thisRouter.setDescription(description);
+        thisRouter.setMACAddress(macAddress);
         
-        TourManager tm = (TourManager) getServletContext().getAttribute("tourManager");
+        // Execute sql for update
+        rm.modifyRouter(thisRouter);
         
-        tm.removeTour(tourID);
         
-        request.setAttribute("message", "<h2 style='color:green;'>Tour was removed!  Success!</h2>");
+        // If nothing was entered into one of the required form elements
+//        if(userName == null || userName.equals("") || userPassword == null || userPassword.equals("")){
+//            request.setAttribute("message", "<h2 style='color:red;'>Fail - Username or Password was not entered!  All fields must be filled in to modify a user.</h2>");
+//            Redirector.redirect(request, response, "/admin/modifyUser.jsp");
+//        }
+//        else if(!um.modifyUser(userID, userName, userPassword, request.getParameterValues("userType"))){ // SQL update statement via user manager
+//            request.setAttribute("message", "<h2 style='color:red;'>Fail - Could not perform modify user/interact with database!</h2>");
+//            Redirector.redirect(request, response, "/admin/modifyUser.jsp");
+//        }
+//        else{
+//            request.setAttribute("message", "<h2 style='color:green;'>Success!  The user has been modified!</h2>");
+//            Redirector.redirect(request, response, "/admin/modifyUser.jsp");
+//        }
+        
+        request.setAttribute("message", "<h2 style='color:green;'></h2>");
         Redirector.redirect(request, response, "/admin/removeTour.jsp");
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
