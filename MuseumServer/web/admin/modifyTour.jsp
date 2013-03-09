@@ -5,6 +5,8 @@
                : Simon Edwins <Darkstar>
 --%>
 
+<%@page import="QuestionsAndAnswers.QuestionSet"%>
+<%@page import="QuestionsAndAnswers.QuestionSetManager"%>
 <%@page import="businessDomainObjects.Tour"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="businessDomainObjects.TourManager"%>
@@ -20,6 +22,12 @@
         <form action="/MuseumServer/modifyTour.do">
             <input type="hidden" name="stage" value="1"/>
             <%
+                QuestionSet[] qs = (QuestionSet[]) request.getAttribute("questionSets");
+                
+                for (QuestionSet questionSet : qs) {
+                    out.println("<option value=\"" + questionSet.getId() + "\">" + questionSet.getName() + "</option>");
+                }
+                
                 TourManager tm = (TourManager) getServletContext().getAttribute("tourManager");
                 ArrayList<Tour> tours = tm.getListOfTours();
                 if (tours.isEmpty()) {
