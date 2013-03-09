@@ -25,8 +25,8 @@
     </head>
     <body>
         <h1>Manage Routers</h1>
-        <form method="POST" action="ModifyRouter.do">
-                Select Router 
+        <form method="POST" action="/MuseumServer/ModifyRouter.do">
+            <b>Select Router Mac Address to Modify </b>
                 <select name="selectedRouter">
                     
                 <%

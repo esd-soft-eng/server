@@ -50,11 +50,12 @@ public class ModifyRouter extends HttpServlet {
         String description = request.getParameter("description");
         String macAddress = request.getParameter("macAddress");
         
-        if(!(audioLocation == null || audioLocation.equals("")
+        if(audioLocation == null || audioLocation.equals("")
                 || description == null || description.equals("")
-                || macAddress == null || macAddress.equals(""))){
+                || macAddress == null || macAddress.equals("")){
             request.setAttribute("message", "<h2 style='color:red;'>Fail - Input error!  All fields must be filled in to modify a user.</h2>");
             Redirector.redirect(request, response, "/admin/manageRouters.jsp");
+            return;
         }
                 
         // Update existing router object
@@ -65,23 +66,8 @@ public class ModifyRouter extends HttpServlet {
         // Execute sql for update
         rm.modifyRouter(thisRouter);
         
-        
-        // If nothing was entered into one of the required form elements
-//        if(userName == null || userName.equals("") || userPassword == null || userPassword.equals("")){
-//            request.setAttribute("message", "<h2 style='color:red;'>Fail - Username or Password was not entered!  All fields must be filled in to modify a user.</h2>");
-//            Redirector.redirect(request, response, "/admin/modifyUser.jsp");
-//        }
-//        else if(!um.modifyUser(userID, userName, userPassword, request.getParameterValues("userType"))){ // SQL update statement via user manager
-//            request.setAttribute("message", "<h2 style='color:red;'>Fail - Could not perform modify user/interact with database!</h2>");
-//            Redirector.redirect(request, response, "/admin/modifyUser.jsp");
-//        }
-//        else{
-//            request.setAttribute("message", "<h2 style='color:green;'>Success!  The user has been modified!</h2>");
-//            Redirector.redirect(request, response, "/admin/modifyUser.jsp");
-//        }
-        
-        request.setAttribute("message", "<h2 style='color:green;'></h2>");
-        Redirector.redirect(request, response, "/admin/removeTour.jsp");
+        request.setAttribute("message", "<h2 style='color:green;'>Success!</h2>");
+        Redirector.redirect(request, response, "/admin/manageRouters.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
