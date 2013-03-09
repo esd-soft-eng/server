@@ -1,17 +1,14 @@
-Preliminary list of loggable items, and what should be logged
----------------------------------------------------------------
-
-Registration - username, level, four digit code
-Login from handset - 4 digit code
-Audio request - 4 digit code and exhibit ID
-Router directional info request - 4 digit code, MAC of router
-Exhibit added - exhibit ID, exhibit name, username
-Exhibit removed - exhibit ID, exhibit name, username
-Handset added - MAC, username of adder
-Handset removed - MAC, username of remover
-Router added - MAC, username of adder
-Router removed - MAC, username of remover
-Tour added - TourID, tour name, username of adder
-Tour removed - TourID, tour name, username of remover
-User added - username of added user, username of adder
-User removed - username of removed user, username of remover
+-- Potential tables
+_____________________________________________________________________________________________________
+                |   ID      |    Action   |   Parameters...                         |   DateTime    |
+----------------|-----------|-------------|-----------------------------------------|---------------|
+AudioLog        |   Y       |       N     |4 digit code, audio ID                   |       Y       |
+RouterLog       |   Y       |       Y     |4 digit code, MAC of router              |       Y       |
+UserLog         |   Y       |       Y     |Username of user, username of maintainer |       Y       |
+ExhibitLog      |   Y       |       Y     |ExhibitID, Exhibit Name, username        |       Y       |
+HandsetLog      |   Y       |       Y     |MAC address, username of maintainer      |       Y       |
+LoginLog        |   Y       |       N     |4 digit code                             |       Y       |
+RegisterLog     |   Y       |       N     |username, level, 4 digit code            |       Y       |
+WifiLog         |   Y       |       N     |4 digit code, MAC of router              |       Y       |
+TourLog         |   Y       |       Y     |TourID, tour name, username of maintainer|       Y       |
+________________|___________|_____________|_________________________________________|_______________|
