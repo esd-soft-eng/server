@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utility.InputValidator;
 
 /**
  *
@@ -116,6 +117,7 @@ public class ModifyQuestionSet extends HttpServlet {
 
     private void addQuestionSet(HttpServletRequest request, QuestionSetManager qsm) {
         String setName = (String) request.getParameter("setName");
+        setName = InputValidator.escape(setName);
         qsm.addQuestionSet(setName);
     }
 
@@ -131,11 +133,13 @@ public class ModifyQuestionSet extends HttpServlet {
 
         int questionSetId = Integer.parseInt(request.getParameter("questionSetId"));
         String question = (String) request.getParameter("questionText");
+        question = InputValidator.escape(question);
         ArrayList<Answer> answers = new ArrayList();
 
         for (int i = 0; i < 6; i++) {
             String answer = (String) request.getParameter("answer" + (i + 1));
             if (!(answer.equals(""))) {
+                answer = InputValidator.escape(answer);
                 System.out.println("in here");
                 int value = Integer.parseInt(request.getParameter("value" + (i + 1)));
                 answers.add(new Answer(answer, value));

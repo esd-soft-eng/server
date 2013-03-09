@@ -31,16 +31,13 @@ public class QuestionSet{
         return this.name;
     }
     
-    public boolean answerQuestion(int question, int answer){
-        return questions.get(question).answerQuestion(answer);
-    }
-    
-    public int getTotalScore(){
+    public int getScoreForAnswers(int[] answers){
         
         int total = 0;
-        
+        int counter = 0;        
         for(Question q : questions){
-            total += q.getScore();
+            total += q.getScore(answers[counter]);
+            counter++;
         }
         return total;
     }
