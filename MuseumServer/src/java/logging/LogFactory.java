@@ -1,8 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package logging;
+
+import persistance.DatabaseQueryExecutor;
 
 /**
  *
@@ -10,41 +8,59 @@ package logging;
  */
 public class LogFactory {
 
-    public static final int REG = 0, LOGIN = 1, AUDIO = 2, WIFI = 3, EXHIBITADD = 4, EXHIBITREM = 5,
-            HANDSETADD = 6, HANDSETREM = 7, ROUTERADD = 8, ROUTERREM = 9, TOURADD = 10, TOURREM = 11,
-            USERADD = 12, USERREM = 13;
+    public enum LogType {
 
-    Log getFactory(int logType) {
-        switch(logType)
-        {
+        REG, LOGIN, AUDIO, WIFI, EXHIBITADD, EXHIBITREM, EXHIBITMODIFY,
+        HANDSETADD, HANDSETREM, ROUTERADD, ROUTERREM, TOURADD, TOURREM, TOURMOD,
+        USERADD, USERREM, USERMOD;
+    };
+
+    public enum LogAction {
+
+        ADD, REMOVE, MODIFY
+    };
+    private DatabaseQueryExecutor db;
+
+    public LogFactory(DatabaseQueryExecutor db) {
+        this.db = db;
+    }
+
+    Log getFactory(LogType logType) {
+        switch (logType) {
             case REG:
-                break;
+                return new RegisterLog(db);
             case LOGIN:
-                break;
+                return new LoginLog(db);
             case AUDIO:
-                break;
+                return new AudioLog(db);
             case WIFI:
-                break;
+                return new WifiAudioLog(db);
             case EXHIBITADD:
-                break;
+                return new ExhibitLog(db, LogAction.ADD);
             case EXHIBITREM:
-                break;
+                return new ExhibitLog(db, LogAction.REMOVE);
+            case EXHIBITMODIFY:
+                return new ExhibitLog(db, LogAction.MODIFY);
             case HANDSETADD:
-                break;
+                return new HandsetLog(db, LogAction.ADD);
             case HANDSETREM:
-                break;
+                return new HandsetLog(db, LogAction.REMOVE);
             case ROUTERADD:
-                break;
+                return new RouterLog(db, LogAction.ADD);
             case ROUTERREM:
-                break;
+                return new RouterLog(db, LogAction.REMOVE);
             case TOURADD:
-                break;
+                return new TourLog(db, LogAction.ADD);
             case TOURREM:
-                break;
+                return new TourLog(db, LogAction.REMOVE);
+            case TOURMOD:
+                return new TourLog(db, LogAction.MODIFY);
             case USERADD:
-                break;
+                return new UserLog(db, LogAction.ADD);
             case USERREM:
-                break;
+                return new UserLog(db, LogAction.REMOVE);
+            case USERMOD:
+                return new UserLog(db, LogAction.MODIFY);
         }
         return null;
     }

@@ -12,7 +12,8 @@ public class Logger {
         this.logFactory = logFact;
     }
 
-    public void Log(int logType, String[] params) {
-        Log l = logFactory.getFactory(logType);
+    public void Log(LogFactory.LogType logType, String[] params) {
+        Log logger = logFactory.getFactory(logType);
+        logger.log(params);
     }
 }
