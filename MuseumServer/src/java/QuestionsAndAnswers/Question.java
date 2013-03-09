@@ -25,16 +25,6 @@ public class Question {
         this.answer = 0;
     }
 
-    public boolean answerQuestion(int answer) {
-
-        if (answer > answers.size() - 1) {
-            return false;
-        }
-
-        this.answer = answer;
-        return true;
-    }
-
     public String getQuestionText() {
         return this.questionText;
     }
@@ -52,10 +42,12 @@ public class Question {
         return this.id;
     }
 
-    public int getScore() {
+    public int getScore(int answer) {
 
-        Answer answerToValue = answers.get(this.answer);
-        return answerToValue.value;
+        if (answer > answers.size() - 1) {
+            return 0;
+        }
+        return answers.get(answer).value;
     }
 
     public Answer[] getAnswerListAsArray() {

@@ -65,6 +65,15 @@ public class QuestionSetManager {
         }
         return false;
     }
+    
+    public synchronized int answerQuestionSet(int questionSetId, int[] answers){
+        
+        QuestionSet qs = this.getQuestionSetById(questionSetId);
+        if (qs != null){
+            return qs.getScoreForAnswers(answers);
+        }
+        return 0;
+    }
 
     private QuestionSet getQuestionSetById(int id) {
 

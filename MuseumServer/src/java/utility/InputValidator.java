@@ -19,4 +19,17 @@ public class InputValidator {
         inputString = inputString.replace("--", "");
         return inputString;
     }
+    
+    
+    public static String escape(String inputString){
+        
+        String escapeChars = "`<>!'\"&*^%$!()~#@£?][}{|+=_"; 
+        for(char c : escapeChars.toCharArray())
+        {
+            inputString = inputString.replace(String.valueOf(c), "\\" + c);
+        }
+                
+        inputString = inputString.replace("--", "");
+        return inputString;
+    }
 }
