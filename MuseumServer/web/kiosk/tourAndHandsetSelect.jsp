@@ -30,7 +30,7 @@
                     ArrayList<Tour> tours = tm.getListOfTours();
 
                     for (Tour tour : tours) {
-                        out.println("<option value=\"" + tour.getName() + "\">"
+                        out.println("<option value=\"tour\">"
                                 + tour.getName() + "</option>");
                     }
                 %>                  
@@ -41,7 +41,7 @@
             <select>
                 <%
                     for (int i = 1; i <= 10; i++) {
-                        out.println("<option value=\"" + i + "\">" + i + "</option>");
+                        out.println("<option value=\"handset\">" + i + "</option>");
                     }
                 %>
             </select>
