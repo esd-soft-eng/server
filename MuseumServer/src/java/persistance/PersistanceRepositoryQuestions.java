@@ -84,7 +84,7 @@ public class PersistanceRepositoryQuestions {
 
         return questionSetList;
     }
-
+    
     private synchronized ArrayList<Question> generateQuestionsSetQuestionsFromResults(ResultSet rs) {
 
         ArrayList<Question> questionList = new ArrayList();
@@ -215,6 +215,15 @@ public class PersistanceRepositoryQuestions {
                 + "WHERE `id` = " + questionId;
 
         return executor.executeUpdate(sql);
+    }
+    
+    public synchronized ArrayList<Question> getAllQuestions() {
+        String sql = "SELECT * FROM"
+                + "`question`";
+
+        ResultSet rs = executor.executeStatement(sql);
+
+        return this.generateQuestionsSetQuestionsFromResults(rs);
     }
     
     

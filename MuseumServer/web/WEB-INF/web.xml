@@ -52,6 +52,10 @@
         <servlet-name>AddRouter</servlet-name>
         <servlet-class>servlets.AddRouter</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SelectTourAndHandsetNumber</servlet-name>
+        <servlet-class>servlets.SelectTourAndHandsetNumber</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginPage</servlet-name>
         <url-pattern>/displayuser.do</url-pattern>
@@ -88,7 +92,13 @@
         <servlet-name>AddRouter</servlet-name>
         <url-pattern>/AddRouter.do</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SelectTourAndHandsetNumber</servlet-name>
+        <url-pattern>/SelectTourAndHandsetNumber.do</url-pattern>
+    </servlet-mapping>
     <session-config>
-        <session-timeout>30</session-timeout>
+        <session-timeout>
+            30
+        </session-timeout>
     </session-config>
 </web-app>
