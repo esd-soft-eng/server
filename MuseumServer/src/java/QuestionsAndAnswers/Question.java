@@ -16,7 +16,6 @@ public class Question {
     private int answer;
     private String questionText;
     private int id;
-    private int questionSetId;
 
     public Question(int id, String questionText, ArrayList answers) {
 
@@ -26,10 +25,6 @@ public class Question {
         this.answer = 0;
     }
 
-    public void setQuestionSetId(int questionSetId){
-        this.questionSetId = questionSetId;
-    }
-    
     public String getQuestionText() {
         return this.questionText;
     }

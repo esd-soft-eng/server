@@ -4,9 +4,6 @@
     Author     : Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
 --%>
 
-<%@page import="QuestionsAndAnswers.Question"%>
-<%@page import="QuestionsAndAnswers.QuestionSet"%>
-<%@page import="QuestionsAndAnswers.QuestionSetManager"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="businessDomainObjects.Exhibit"%>
 <%@page import="businessDomainObjects.ExhibitManager"%>
@@ -37,52 +34,8 @@
                         int ID = e.getExhibitID();
                         out.println("<input type=\"checkbox\" name=\"exhibitID\" value=\"" + ID + "\">" + name + "(<i>" + description + "</i>)<br>");
                     }
-            %>
-            
-            
-            Select a Question Set:<br />
-            <select name="questionSetSelection">
-                <%
-                    QuestionSetManager qsm = (QuestionSetManager) request.getServletContext().getAttribute("questionSetManager");
-
-                    QuestionSet[] qs = qsm.getAllQuestionSets();
-
-                    out.println("<option value=\"new\">Add New Question Set</option>");
-                    for(QuestionSet currentQuestionSet : qs){
-                        out.println("<option value=\"" + currentQuestionSet.getId() + "\">"
-                                + currentQuestionSet.getName() + "</option>");
-                    }
-
-                %>
-            </select><br /><br />
-            
-            New Question Set Title: <input type="text" name="questionSetTitle" size="50" maxlength="50"/><br/>
-            
-            
-            
-            <br />
-            <%      
-                Question[] allQuestions = qsm.getAllQuestions();
-                
-                if(allQuestions.length == 0){ // If no questions exist
-                    out.println("<b>No questions currently exist!  Please make sure at least one question exists, before"
-                            + " you try and create a new QuestionSet.</b>");
+                    out.println("<input type=\"submit\" value=\"submit\"/>");
                 }
-                else{
-                    out.println("Select Questions to be added to new QuestionSet:<br />");
-                }
-                
-                for(Question currentQuestion : allQuestions){
-                    int currentQuestionID = currentQuestion.getQuestionId();
-                    String currentQuestionName = currentQuestion.getQuestionText();
-                    
-                    // TODO: text and checkboxes output
-                    out.println(currentQuestionName + "<input type=\"checkbox\" name=\"check\"" + currentQuestionID + " value=\""
-                            + currentQuestionID + "\"><br />");
-                }
-            
-                    out.println("<br /><input type=\"submit\" value=\"submit\"/>");
-                } // end else
             %>
         </form>
         <%

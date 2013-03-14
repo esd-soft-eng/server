@@ -19,9 +19,9 @@ public class TourManager {
         this.listOfTours = persistance.getAllTours();
     }
 
-    public synchronized boolean addTour(String name, String description, ArrayList<String> exhibitIDs, int questionSetId) {
+    public synchronized boolean addTour(String name, String description, ArrayList<String> exhibitIDs) {
         try {
-            boolean ret = persistance.addTour(name, description, exhibitIDs, questionSetId);
+            boolean ret = persistance.addTour(name, description, exhibitIDs);
             if (ret == false) {
                 return false;
             }
