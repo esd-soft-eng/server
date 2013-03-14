@@ -111,8 +111,6 @@ public class PersistanceRepositoryQuestions {
         }
 
         
-        System.out.println("yarrr!!!");
-        
         return answerList;
     }
     // </editor-fold>

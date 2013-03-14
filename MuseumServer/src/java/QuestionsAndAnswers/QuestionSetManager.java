@@ -15,7 +15,7 @@ public class QuestionSetManager {
 
     PersistanceRepositoryQuestions persistance;
     ArrayList<QuestionSet> questionSets;
-    ArrayList<Question> questions;
+    ArrayList<Question> questions = new ArrayList<Question>();
 
     public QuestionSetManager(PersistanceRepositoryQuestions persistance) {
         this.persistance = persistance;

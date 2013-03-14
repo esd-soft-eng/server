@@ -41,7 +41,7 @@
             
             
             Select a Question Set:<br />
-            <select name="questionSet">
+            <select name="questionSetSelection">
                 <%
                     QuestionSetManager qsm = (QuestionSetManager) request.getServletContext().getAttribute("questionSetManager");
 
@@ -56,27 +56,32 @@
                 %>
             </select><br /><br />
             
-            Name of tour: <input type="text" name="tourName" size="50" maxlength="50"/><br/>"
+            New Question Set Title: <input type="text" name="questionSetTitle" size="50" maxlength="50"/><br/>
             
-            <br /><br />
+            
+            
+            <br />
             <%      
                 Question[] allQuestions = qsm.getAllQuestions();
-                for(Question currentQuestion : allQuestions){
-                    // TODO: text and checkboxs output
-                    
+                
+                if(allQuestions.length == 0){ // If no questions exist
+                    out.println("<b>No questions currently exist!  Please make sure at least one question exists, before"
+                            + " you try and create a new QuestionSet.</b>");
+                }
+                else{
+                    out.println("Select Questions to be added to new QuestionSet:<br />");
                 }
                 
-                out.println("Name of tour: <input type='text' name='tourName' size='50' maxlength='50'/><br/>");
-                out.println("Description of tour: <input type='text' name='tourDescription' size='150' maxlength='200'/><br/>");
-                out.println("<br />Select exhibits for this tour:<br />");
-                for (Exhibit e : exhibits) {
-                    String description = e.getDescription().length() > 100 ? e.getDescription().substring(0, 100) + "....." : e.getDescription();
-                    String name = e.getName();
-                    int ID = e.getExhibitID();
-                    out.println("<input type=\"checkbox\" name=\"exhibitID\" value=\"" + ID + "\">" + name + "(<i>" + description + "</i>)<br>");
+                for(Question currentQuestion : allQuestions){
+                    int currentQuestionID = currentQuestion.getQuestionId();
+                    String currentQuestionName = currentQuestion.getQuestionText();
+                    
+                    // TODO: text and checkboxes output
+                    out.println(currentQuestionName + "<input type=\"checkbox\" name=\"check\"" + currentQuestionID + " value=\""
+                            + currentQuestionID + "\"><br />");
                 }
             
-                    out.println("<input type=\"submit\" value=\"submit\"/>");
+                    out.println("<br /><input type=\"submit\" value=\"submit\"/>");
                 } // end else
             %>
         </form>
