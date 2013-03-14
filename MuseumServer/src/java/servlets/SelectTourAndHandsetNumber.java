@@ -1,11 +1,14 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import utility.InputValidator;
+import utility.Redirector;
 
 /**
  *
@@ -25,7 +28,42 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String tour = request.getParameter("userID");
+        HttpSession session = request.getSession();
+        
+        // Get tour selected and validate it
+        String tour = request.getParameter("tour");
+        if (tour != null) {
+            tour = InputValidator.clean(tour);
+        }
+        if (tour == null || tour.isEmpty()) {
+            request.setAttribute("message", "<h2 style='color:red'>Please select a tour</h2>");
+            Redirector.redirect(request, response, "/kiosk/tourAndHandsetSelect.jsp");
+            return;
+        }
+
+        // Get number of handsets required and validate
+        String handsetString = request.getParameter("handset");
+        int handsetNumber = 0;
+        if (handsetString != null) {
+            handsetNumber = Integer.parseInt(InputValidator.clean(handsetString));
+        }
+        if (handsetString == null || handsetString.isEmpty()) {
+            request.setAttribute("message", "<h2 style='color:red'>Please select the number of handsets you require</h2>");
+            Redirector.redirect(request, response, "/kiosk/tourAndHandsetSelect.jsp");
+            return;
+        }
+
+        session.setAttribute("tour", tour);
+        session.setAttribute("handsetNo", handsetNumber);
+        
+        // Redirect to next JSP
+        // Instantiate a request dispatcher for the JSP
+        RequestDispatcher view =
+                request.getRequestDispatcher("addUserDetails.jsp");
+
+        // Use the request dispatcher to ask the Container to crank up the JSP,
+        // sending it the request and response
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
