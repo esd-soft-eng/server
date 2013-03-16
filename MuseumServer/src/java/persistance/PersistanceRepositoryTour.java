@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import utility.InputValidator;
 
 /**
@@ -32,8 +31,8 @@ public class PersistanceRepositoryTour {
                 + description + "', '-1'";
         }
         else{
-            insertSQL += ") VALUES ('" + name + "','" 
-                + description + "'";
+            insertSQL += ", QuestionSetID) VALUES ('" + name + "','" 
+                + description + "', '" + questionSetID + "'";
         }
 
             insertSQL += ");";
