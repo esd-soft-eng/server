@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,9 +37,10 @@ public class LoginPage extends HttpServlet {
             Redirector.redirect(request, response, "index.jsp");
             return;
         }
-
+        
         // Adds our order to the session
         session.setAttribute("currentUser", user);
+        session.setAttribute("username",username);
         request.setAttribute("user", user);
 
         Redirector.redirect(request, response, "displayPortal.do");
