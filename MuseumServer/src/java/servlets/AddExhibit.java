@@ -89,7 +89,7 @@ public class AddExhibit extends HttpServlet {
         }
 
         Exhibit exhibitJustAdded = manager.getListOfExhibits().get(manager.getListOfExhibits().size()-1);
-        Logger.Log(Logger.LogType.EXHIBITADD, new String[]{exhibitJustAdded.getExhibitID(),exhibitJustAdded.getName(), (String)request.getSession().getAttribute("username")});
+        Logger.Log(Logger.LogType.EXHIBITADD, new String[]{String.valueOf(exhibitJustAdded.getExhibitID()),exhibitJustAdded.getName(), (String)request.getSession().getAttribute("username")});
         request.setAttribute("message", "<h2>Successfully added a new exhibit.</h2>");
         Redirector.redirect(request, response, "/admin/addNewExhibit.jsp");
     }
