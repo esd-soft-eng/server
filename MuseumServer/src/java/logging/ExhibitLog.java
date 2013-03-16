@@ -13,9 +13,9 @@ import persistance.DatabaseQueryExecutor;
 public class ExhibitLog implements Log {
 
     DatabaseQueryExecutor db;
-    LogFactory.LogAction action;
+    Logger.LogAction action;
 
-    public ExhibitLog(DatabaseQueryExecutor db, LogFactory.LogAction action) {
+    public ExhibitLog(DatabaseQueryExecutor db, Logger.LogAction action) {
         this.db = db;
         this.action = action;
     }

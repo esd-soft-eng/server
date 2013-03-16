@@ -13,9 +13,9 @@ import persistance.DatabaseQueryExecutor;
 public class TourLog implements Log {
 
     DatabaseQueryExecutor db;
-    LogFactory.LogAction action;
+    Logger.LogAction action;
 
-    public TourLog(DatabaseQueryExecutor db, LogFactory.LogAction action) {
+    public TourLog(DatabaseQueryExecutor db, Logger.LogAction action) {
         this.db = db;
         this.action = action;
     }

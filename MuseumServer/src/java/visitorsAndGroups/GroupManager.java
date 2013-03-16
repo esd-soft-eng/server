@@ -34,7 +34,7 @@ public class GroupManager {
 
     public synchronized boolean addNewVisitorToGroup(int groupId, Visitor visitor) {
 
-        if (persistance.addNewVisitorToDatabase(visitor)) {
+        if (persistance.addNewVisitorToDatabase(visitor, groupId)) {
             return this.addVisitorToGroup(groupId, visitor);
         }
         return false;

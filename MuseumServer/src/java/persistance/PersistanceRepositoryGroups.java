@@ -21,14 +21,20 @@ public class PersistanceRepositoryGroups {
     }
 
     public boolean addNewGroupToDatabase(int tourId) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        
+        String sql = "INSERT INTO `tourGroup` "
+                   + "(tourId, startDate, expiryDate, active) "
+                   + "VALUES (" + tourId + ", NOW(), )";
+        
+        return true;
+                
     }
 
     public Group getLastCreatedGroup() {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public boolean addNewVisitorToDatabase(Visitor visitor) {
+    public boolean addNewVisitorToDatabase(Visitor visitor, int groupId) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 

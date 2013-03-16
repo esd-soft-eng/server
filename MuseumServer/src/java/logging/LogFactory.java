@@ -7,27 +7,16 @@ import persistance.DatabaseQueryExecutor;
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
  */
 public class LogFactory {
-
-    public enum LogType {
-
-        REG, LOGIN, AUDIO, WIFI, EXHIBITADD, EXHIBITREM, EXHIBITMODIFY,
-        HANDSETADD, HANDSETREM, ROUTERADD, ROUTERREM, TOURADD, TOURREM, TOURMOD,
-        USERADD, USERREM, USERMOD;
-    };
-
-    public enum LogAction {
-
-        ADD, REMOVE, MODIFY
-    };
+    
     private DatabaseQueryExecutor db;
 
     public LogFactory(DatabaseQueryExecutor db) {
         this.db = db;
     }
 
-    Log getFactory(LogType logType) {
+    Log getFactory(Logger.LogType logType) {
         switch (logType) {
-            case REG:
+            case REGISTER:
                 return new RegisterLog(db);
             case LOGIN:
                 return new LoginLog(db);
@@ -36,31 +25,31 @@ public class LogFactory {
             case WIFI:
                 return new WifiAudioLog(db);
             case EXHIBITADD:
-                return new ExhibitLog(db, LogAction.ADD);
+                return new ExhibitLog(db, Logger.LogAction.ADD);
             case EXHIBITREM:
-                return new ExhibitLog(db, LogAction.REMOVE);
+                return new ExhibitLog(db, Logger.LogAction.REMOVE);
             case EXHIBITMODIFY:
-                return new ExhibitLog(db, LogAction.MODIFY);
+                return new ExhibitLog(db, Logger.LogAction.MODIFY);
             case HANDSETADD:
-                return new HandsetLog(db, LogAction.ADD);
+                return new HandsetLog(db, Logger.LogAction.ADD);
             case HANDSETREM:
-                return new HandsetLog(db, LogAction.REMOVE);
+                return new HandsetLog(db, Logger.LogAction.REMOVE);
             case ROUTERADD:
-                return new RouterLog(db, LogAction.ADD);
+                return new RouterLog(db, Logger.LogAction.ADD);
             case ROUTERREM:
-                return new RouterLog(db, LogAction.REMOVE);
+                return new RouterLog(db, Logger.LogAction.REMOVE);
             case TOURADD:
-                return new TourLog(db, LogAction.ADD);
+                return new TourLog(db, Logger.LogAction.ADD);
             case TOURREM:
-                return new TourLog(db, LogAction.REMOVE);
+                return new TourLog(db, Logger.LogAction.REMOVE);
             case TOURMOD:
-                return new TourLog(db, LogAction.MODIFY);
+                return new TourLog(db, Logger.LogAction.MODIFY);
             case USERADD:
-                return new UserLog(db, LogAction.ADD);
+                return new UserLog(db, Logger.LogAction.ADD);
             case USERREM:
-                return new UserLog(db, LogAction.REMOVE);
+                return new UserLog(db, Logger.LogAction.REMOVE);
             case USERMOD:
-                return new UserLog(db, LogAction.MODIFY);
+                return new UserLog(db, Logger.LogAction.MODIFY);
         }
         return null;
     }
