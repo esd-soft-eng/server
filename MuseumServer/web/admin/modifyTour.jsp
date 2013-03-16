@@ -22,12 +22,13 @@
         <form action="/MuseumServer/modifyTour.do">
             <input type="hidden" name="stage" value="1"/>
             <%
-                QuestionSet[] qs = (QuestionSet[]) request.getAttribute("questionSets");
-                
+                QuestionSetManager manager = (QuestionSetManager) getServletContext().getAttribute("questionSetManager");
+                QuestionSet[] qs = (QuestionSet[]) manager.getAllQuestionSets();
+
                 for (QuestionSet questionSet : qs) {
                     out.println("<option value=\"" + questionSet.getId() + "\">" + questionSet.getName() + "</option>");
                 }
-                
+
                 TourManager tm = (TourManager) getServletContext().getAttribute("tourManager");
                 ArrayList<Tour> tours = tm.getListOfTours();
                 if (tours.isEmpty()) {
