@@ -111,6 +111,7 @@ public class PersistanceRepositoryTour {
     private ArrayList<Tour> mapResultSetToArrayList(ResultSet rs) {
         ArrayList<Tour> listOfTours = new ArrayList<Tour>();
         String tourName = "", tourDescription = "", tourID = "", exhibitID = "";
+        int questionSetID;
         Tour tempTour = null;
         try {
             while (rs.next()) {
@@ -121,7 +122,8 @@ public class PersistanceRepositoryTour {
                     tourDescription = rs.getString("TourDescription");
                     tourID = rs.getString("TourID");
                     exhibitID = rs.getString("ExhibitID");
-                    tempTour = new Tour(Integer.parseInt(tourID), tourName, tourDescription);
+                    questionSetID = Integer.parseInt(rs.getString("QuestionSetID"));
+                    tempTour = new Tour(Integer.parseInt(tourID), tourName, tourDescription, questionSetID);
                     tempTour.addExhibit(Integer.parseInt(exhibitID));
                     listOfTours.add(tempTour);
                 }

@@ -12,12 +12,14 @@ public class Tour {
     private String name;
     private String description;
     private HashSet<String> exhibitIDs;
+    private int questionSetID;
 
-    public Tour(int ID, String name, String description) {
+    public Tour(int ID, String name, String description, int questionSetID) {
         this.tourID = ID;
         this.name = name;
         this.description = description;
         exhibitIDs = new HashSet<String>();
+        this.questionSetID = questionSetID;
     }
 
     public void addExhibit(int exhibitID) {
@@ -51,6 +53,10 @@ public class Tour {
 
     public HashSet<String> getExhibitIDs() {
         return exhibitIDs;
+    }
+    
+    public int getQuestionSetID(){
+        return questionSetID;
     }
     
     
