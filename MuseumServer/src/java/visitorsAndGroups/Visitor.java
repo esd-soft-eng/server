@@ -12,13 +12,13 @@ import QuestionsAndAnswers.Levels;
  */
 public class Visitor {
 
-    private String title;
-    private String forename;
-    private String surname;
-    private int age;
+    public String title;
+    public String forename;
+    public String surname;
+    public int age;
     private String hostname;
-    private int pin;
-    private Levels level;
+    public int pin;
+    public Levels level;
     
     public Visitor(String title, String forename, String surname, int age, Levels level){
         

@@ -3,6 +3,7 @@ package servlets;
 import QuestionsAndAnswers.DisplayQuestion;
 import QuestionsAndAnswers.QuestionSet;
 import QuestionsAndAnswers.QuestionSetManager;
+import businessDomainObjects.Tour;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -84,6 +85,7 @@ public class ValidateUserDetails extends HttpServlet {
         // TODO work out the id using Simon's stuff to find corresponding question
         // set id to the tour we're passed in
         QuestionSet qs = qsm.getQuestionSetById(1);
+//        Tour tour = new Tour(); // ADD FOR NICE
         
         DisplayQuestion[] questions = qs.getQuestionsForDisplay();
         

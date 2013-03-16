@@ -4,8 +4,8 @@
  */
 package visitorsAndGroups;
 
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  *
@@ -17,11 +17,11 @@ public class Group {
     private ArrayList<Visitor> groupMembers;
     private Visitor groupLeader;
     private int tourId;
-    private Calendar start;
-    private Calendar expires;
+    private Date start;
+    private Date expires;
     private boolean active;
     
-    public Group(int id, int tourId, Calendar start, Calendar expires, boolean active, ArrayList<Visitor> groupMembers){
+    public Group(int id, int tourId, Date start, Date expires, boolean active, ArrayList<Visitor> groupMembers){
         
         this.id = id;
         this.tourId = tourId;

@@ -2,8 +2,6 @@ package businessDomainObjects;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import logging.Logger;
-import logging.Logger;
 import persistance.PersistanceRepositoryTour;
 
 /**
@@ -74,4 +72,5 @@ public class TourManager {
         }
         return null;
     }
+
 }
