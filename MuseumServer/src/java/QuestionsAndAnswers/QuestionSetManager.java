@@ -15,7 +15,6 @@ public class QuestionSetManager {
 
     PersistanceRepositoryQuestions persistance;
     ArrayList<QuestionSet> questionSets;
-    ArrayList<Question> questions = new ArrayList<Question>();
 
     public QuestionSetManager(PersistanceRepositoryQuestions persistance) {
         this.persistance = persistance;
@@ -24,10 +23,6 @@ public class QuestionSetManager {
 
     public QuestionSet[] getAllQuestionSets() {
         return this.questionSets.toArray(new QuestionSet[0]);
-    }
-    
-    public Question[] getAllQuestions(){
-        return this.questions.toArray(new Question[0]);
     }
 
     public synchronized boolean addQuestionSet(String name) {
@@ -92,6 +87,13 @@ public class QuestionSetManager {
 
     private synchronized void init() {
         this.questionSets = persistance.getAllQuestionSets();
-        this.questions = persistance.getAllQuestions();
+    }
+
+    // In progress!!! Should return a Question Set!!! not boolean
+    public synchronized boolean getQuestionSetByName(String name) {
+        
+        
+        
+        return true;
     }
 }
