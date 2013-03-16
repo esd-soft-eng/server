@@ -1,11 +1,9 @@
 package servlets;
 
 import QuestionsAndAnswers.DisplayQuestion;
-import QuestionsAndAnswers.Question;
 import QuestionsAndAnswers.QuestionSet;
 import QuestionsAndAnswers.QuestionSetManager;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
