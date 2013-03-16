@@ -75,7 +75,7 @@ public class QuestionSetManager {
         return 0;
     }
 
-    private QuestionSet getQuestionSetById(int id) {
+    public QuestionSet getQuestionSetById(int id) {
 
         for (QuestionSet qs : this.questionSets) {
             if (id == qs.getId()) {                

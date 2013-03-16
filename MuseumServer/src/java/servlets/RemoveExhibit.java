@@ -1,5 +1,6 @@
 package servlets;
 
+import businessDomainObjects.Exhibit;
 import businessDomainObjects.ExhibitManager;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logging.Logger;
 import utility.Redirector;
 
 /**
@@ -44,13 +46,14 @@ public class RemoveExhibit extends HttpServlet {
             return;
         }
         ExhibitManager manager = (ExhibitManager) getServletContext().getAttribute("exhibitManager");
-
+        Exhibit exhibitToRemove = manager.getExhibitByID(exhibitIDInt);
         if (!manager.removeExhibit(exhibitIDInt)) {
             request.setAttribute("message", "<h2 style='color:red;'>Failed to remove exhibit.</h2>");
             Redirector.redirect(request, response, "/admin/removeExhibit.jsp");
             return;
         }
-
+        
+        Logger.Log(Logger.LogType.EXHIBITREMOVE, new String[]{String.valueOf(exhibitIDInt), exhibitToRemove.getName(), (String) request.getSession().getAttribute("username")});
         request.setAttribute("message", "<h2>Successfully removed exhibit.</h2>");
         Redirector.redirect(request, response, "/admin/removeExhibit.jsp");
     }

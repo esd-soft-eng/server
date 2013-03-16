@@ -1,7 +1,12 @@
 package servlets;
 
+import QuestionsAndAnswers.DisplayQuestion;
+import QuestionsAndAnswers.QuestionSet;
+import QuestionsAndAnswers.QuestionSetManager;
+import businessDomainObjects.Tour;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,8 +32,11 @@ public class ValidateUserDetails extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ServletContext ctx = request.getServletContext();
+        QuestionSetManager qsm = (QuestionSetManager) ctx.getAttribute("questionSetManger");
+        
         // Get title selected and validate it
-        String title = request.getParameter("title");
+        String title = (String) request.getParameter("title");
         if (title != null) {
             title = InputValidator.clean(title);
         }
@@ -39,7 +47,7 @@ public class ValidateUserDetails extends HttpServlet {
         }
         
         // Get first name entered and validate it
-        String firstName = request.getParameter("firstName");
+        String firstName = (String) request.getParameter("firstName");
         if (firstName != null) {
             firstName = InputValidator.clean(firstName);
         }
@@ -50,7 +58,7 @@ public class ValidateUserDetails extends HttpServlet {
         }
         
         // Get last name entered and validate it
-        String lastName = request.getParameter("lastName");
+        String lastName = (String) request.getParameter("lastName");
         if (lastName != null) {
             lastName = InputValidator.clean(lastName);
         }
@@ -61,7 +69,7 @@ public class ValidateUserDetails extends HttpServlet {
         }
         
         // Get age selected and validate it
-        String age = request.getParameter("age");
+        String age = (String) request.getParameter("age");
         if (age != null) {
             age = InputValidator.clean(age);
         }
@@ -71,8 +79,20 @@ public class ValidateUserDetails extends HttpServlet {
             return;
         }
         
-        // Redirect to next JSP
-        // Instantiate a request dispatcher for the JSP
+        // Get the questions we're going to ask the user and store them to be sent
+        // to the next JSP to be displayed
+        
+        // TODO work out the id using Simon's stuff to find corresponding question
+        // set id to the tour we're passed in
+        QuestionSet qs = qsm.getQuestionSetById(1);
+//        Tour tour = new Tour(); // ADD FOR NICE
+        
+        DisplayQuestion[] questions = qs.getQuestionsForDisplay();
+        
+        request.setAttribute("questions", questions);
+        
+        // Redirect so user who has just entered their details can answer questions
+        // to determine their level
         RequestDispatcher view =
                 request.getRequestDispatcher("answerQuestions.jsp");
 

@@ -21,6 +21,7 @@
 
         <% if (request.getAttribute("message") != null) {
                 out.println("<h2 style='color:red;'>"+request.getAttribute("message")+"</h2>");
-            }%>
+            }
+        %>
     </body>
 </html>

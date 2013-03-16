@@ -21,6 +21,10 @@ public class RouterLog implements Log {
 
     @Override
     public void log(String[] params) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String loginCode = params[0];
+        String MAC = params[1];
+        
+        String SQL = "INSERT INTO RouterLog (action, loginCode ,MAC, logDate,logTime) VALUES ('" + action.name() + "','" + loginCode + "','" +MAC+"','"+ Logger.getDate() + "','" + Logger.getTime() + "');";
+        db.executeUpdate(SQL);
     }
 }

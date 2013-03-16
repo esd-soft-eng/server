@@ -4,6 +4,7 @@
  */
 package servlets;
 
+import businessDomainObjects.Exhibit;
 import businessDomainObjects.ExhibitManager;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logging.Logger;
+import logging.Logger;
 import utility.Redirector;
 
 /**
@@ -85,6 +88,8 @@ public class AddExhibit extends HttpServlet {
             return;
         }
 
+        Exhibit exhibitJustAdded = manager.getListOfExhibits().get(manager.getListOfExhibits().size()-1);
+        Logger.Log(Logger.LogType.EXHIBITADD, new String[]{String.valueOf(exhibitJustAdded.getExhibitID()),exhibitJustAdded.getName(), (String)request.getSession().getAttribute("username")});
         request.setAttribute("message", "<h2>Successfully added a new exhibit.</h2>");
         Redirector.redirect(request, response, "/admin/addNewExhibit.jsp");
     }

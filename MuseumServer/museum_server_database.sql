@@ -191,7 +191,7 @@ CREATE TABLE `TourLog` (
   `logDate` varchar(20) NOT NULL,
   `logTime` varchar(20) NOT NULL,
   PRIMARY KEY (`LogID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,6 +200,7 @@ CREATE TABLE `TourLog` (
 
 LOCK TABLES `TourLog` WRITE;
 /*!40000 ALTER TABLE `TourLog` DISABLE KEYS */;
+INSERT INTO `TourLog` VALUES (1,'ADD',23,'Testin','Bob','16/03/2013','15:58:19');
 /*!40000 ALTER TABLE `TourLog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,7 +295,7 @@ CREATE TABLE `answer` (
   PRIMARY KEY (`id`),
   KEY `questionId` (`questionId`),
   CONSTRAINT `answer_ibfk_1` FOREIGN KEY (`questionId`) REFERENCES `question` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -303,6 +304,7 @@ CREATE TABLE `answer` (
 
 LOCK TABLES `answer` WRITE;
 /*!40000 ALTER TABLE `answer` DISABLE KEYS */;
+INSERT INTO `answer` VALUES (2,'123',2,12);
 /*!40000 ALTER TABLE `answer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -374,7 +376,7 @@ CREATE TABLE `question` (
   PRIMARY KEY (`id`),
   KEY `questionSetId` (`questionSetId`),
   CONSTRAINT `question_ibfk_1` FOREIGN KEY (`questionSetId`) REFERENCES `questionset` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -383,6 +385,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
+INSERT INTO `question` VALUES (2,'Testing',3),(3,'hello',-1);
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -397,7 +400,7 @@ CREATE TABLE `questionset` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -406,6 +409,7 @@ CREATE TABLE `questionset` (
 
 LOCK TABLES `questionset` WRITE;
 /*!40000 ALTER TABLE `questionset` DISABLE KEYS */;
+INSERT INTO `questionset` VALUES (-1,''),(3,'Test');
 /*!40000 ALTER TABLE `questionset` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -475,10 +479,8 @@ CREATE TABLE `tours` (
   `TourName` varchar(50) NOT NULL,
   `TourDescription` varchar(200) NOT NULL,
   `QuestionSetID` int(11) NOT NULL,
-  PRIMARY KEY (`TourID`),
-  UNIQUE KEY `QuestionSetID` (`QuestionSetID`),
-  CONSTRAINT `tours_ibfk_1` FOREIGN KEY (`QuestionSetID`) REFERENCES `question` (`questionSetId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`TourID`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -487,6 +489,7 @@ CREATE TABLE `tours` (
 
 LOCK TABLES `tours` WRITE;
 /*!40000 ALTER TABLE `tours` DISABLE KEYS */;
+INSERT INTO `tours` VALUES (7,'Tooster','Tooster',-1),(14,'Testin','test',3),(18,'Testin','test',-1),(19,'Testin','test',-1),(20,'Testin','test',3),(21,'Testin','test',3),(22,'Testin','test',3),(23,'Testin','test',3);
 /*!40000 ALTER TABLE `tours` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -509,6 +512,7 @@ CREATE TABLE `toursexhibitslink` (
 
 LOCK TABLES `toursexhibitslink` WRITE;
 /*!40000 ALTER TABLE `toursexhibitslink` DISABLE KEYS */;
+INSERT INTO `toursexhibitslink` VALUES (7,1),(14,1),(14,2),(14,3),(18,1),(18,2),(18,3),(19,1),(19,2),(19,3),(20,1),(20,2),(20,3),(21,1),(21,2),(21,3),(22,1),(22,2),(22,3),(23,1),(23,2),(23,3);
 /*!40000 ALTER TABLE `toursexhibitslink` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -631,4 +635,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-03-16 14:03:52
+-- Dump completed on 2013-03-16 16:00:31

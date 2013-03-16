@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import utility.InputValidator;
 
 /**
@@ -21,10 +20,24 @@ public class PersistanceRepositoryTour {
         this.db = db;
     }
 
-    public synchronized boolean addTour(String name, String description, ArrayList<String> exhibitIDs) throws SQLException {
+    public synchronized boolean addTour(String name, String description, ArrayList<String> exhibitIDs, String questionSetID) throws SQLException {
         name = InputValidator.clean(name);
         description = InputValidator.clean(description);
-        String insertSQL = "INSERT INTO `tours` (TourName, TourDescription) VALUES ('" + name + "','" + description + "');";
+        String insertSQL = "INSERT INTO `tours` (TourName, "
+                + "TourDescription";
+        
+        if(questionSetID.equals("")){ // if not null, add in the questionSet too
+            insertSQL += ", QuestionSetID) VALUES ('" + name + "','" 
+                + description + "', '-1'";
+        }
+        else{
+            insertSQL += ", QuestionSetID) VALUES ('" + name + "','" 
+                + description + "', '" + questionSetID + "'";
+        }
+
+            insertSQL += ");";
+ 
+
         boolean ret = db.executeUpdate(insertSQL);
         if (ret == false) {
             return false;
@@ -98,6 +111,7 @@ public class PersistanceRepositoryTour {
     private ArrayList<Tour> mapResultSetToArrayList(ResultSet rs) {
         ArrayList<Tour> listOfTours = new ArrayList<Tour>();
         String tourName = "", tourDescription = "", tourID = "", exhibitID = "";
+        int questionSetID;
         Tour tempTour = null;
         try {
             while (rs.next()) {
@@ -108,7 +122,8 @@ public class PersistanceRepositoryTour {
                     tourDescription = rs.getString("TourDescription");
                     tourID = rs.getString("TourID");
                     exhibitID = rs.getString("ExhibitID");
-                    tempTour = new Tour(Integer.parseInt(tourID), tourName, tourDescription);
+                    questionSetID = Integer.parseInt(rs.getString("QuestionSetID"));
+                    tempTour = new Tour(Integer.parseInt(tourID), tourName, tourDescription, questionSetID);
                     tempTour.addExhibit(Integer.parseInt(exhibitID));
                     listOfTours.add(tempTour);
                 }

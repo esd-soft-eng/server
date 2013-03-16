@@ -19,16 +19,16 @@ public class TourManager {
         this.listOfTours = persistance.getAllTours();
     }
 
-    public synchronized boolean addTour(String name, String description, ArrayList<String> exhibitIDs) {
+    public synchronized boolean addTour(String name, String description, ArrayList<String> exhibitIDs, String questionSetID) {
         try {
-            boolean ret = persistance.addTour(name, description, exhibitIDs);
+            boolean ret = persistance.addTour(name, description, exhibitIDs, questionSetID);
             if (ret == false) {
                 return false;
             }
         } catch (SQLException e) {
             return false;
         }
-
+        
         this.listOfTours = persistance.getAllTours();
         return true;
     }
@@ -72,4 +72,5 @@ public class TourManager {
         }
         return null;
     }
+
 }
