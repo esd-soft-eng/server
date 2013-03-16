@@ -5,6 +5,7 @@
 package servlets;
 
 import QuestionsAndAnswers.QuestionSetManager;
+import businessDomainObjects.Tour;
 import businessDomainObjects.TourManager;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logging.Logger;
 import utility.Redirector;
 
 /**
@@ -62,6 +64,8 @@ public class AddTour extends HttpServlet {
             Redirector.redirect(request, response, "/admin/addNewTour.jsp");
             return;
         } else {
+            Tour lastAdded = tm.getListOfTours().get(tm.getListOfTours().size()-1);
+            Logger.Log(Logger.LogType.TOURADD, new String[]{String.valueOf(lastAdded.getTourID()),lastAdded.getName(),(String)request.getSession().getAttribute("username")});
             request.setAttribute("message", "<h2> Successfully created tour. </h2>");
             Redirector.redirect(request, response, "/admin/addNewTour.jsp");
             return;

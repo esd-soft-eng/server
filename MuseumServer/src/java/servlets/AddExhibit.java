@@ -85,6 +85,7 @@ public class AddExhibit extends HttpServlet {
             return;
         }
 
+        Exhibit exhibitJustAdded = manager.getListOfExhibits().get(manager.getListOfExhibits().size()-1);
         request.setAttribute("message", "<h2>Successfully added a new exhibit.</h2>");
         Redirector.redirect(request, response, "/admin/addNewExhibit.jsp");
     }

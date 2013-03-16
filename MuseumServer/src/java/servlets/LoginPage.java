@@ -38,9 +38,10 @@ public class LoginPage extends HttpServlet {
             Redirector.redirect(request, response, "index.jsp");
             return;
         }
-
+        
         // Adds our order to the session
         session.setAttribute("currentUser", user);
+        session.setAttribute("username",username);
         request.setAttribute("user", user);
 
         Redirector.redirect(request, response, "displayPortal.do");

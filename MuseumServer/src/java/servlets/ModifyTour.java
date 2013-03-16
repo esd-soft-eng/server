@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logging.Logger;
 import utility.Redirector;
 
 /**
@@ -185,10 +186,10 @@ public class ModifyTour extends HttpServlet {
             request.setAttribute("message", "<h2 style='color:red;'> Failed to modify exhibit. </h2>");
             Redirector.redirect(request, response, "modifyTour.do?tourID=" + tourID + "&stage=1");
             return;
-        }
-        else
-        {
-            request.setAttribute("message", "<h2> Successfully modified exhibit. </h2>");
+        } else {
+            Logger.Log(Logger.LogType.TOURADD, new String[]{tourID, tourName, (String) request.getSession().getAttribute("username")});
+
+            request.setAttribute("message", "<h2> Successfully modified tour. </h2>");
             Redirector.redirect(request, response, "/admin/modifyTour.jsp");
             return;
         }
