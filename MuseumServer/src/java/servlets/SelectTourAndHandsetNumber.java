@@ -1,21 +1,14 @@
 package servlets;
 
 import java.io.IOException;
-<<<<<<< HEAD
-import java.io.PrintWriter;
-=======
 import javax.servlet.RequestDispatcher;
->>>>>>> 6c1ff4542381e327ef4f511b88336761526e6a14
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-<<<<<<< HEAD
-=======
 import javax.servlet.http.HttpSession;
 import utility.InputValidator;
 import utility.Redirector;
->>>>>>> 6c1ff4542381e327ef4f511b88336761526e6a14
 
 /**
  *
@@ -35,9 +28,6 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD
-        String tour = request.getParameter("userID");
-=======
         HttpSession session = request.getSession();
         
         // Get tour selected and validate it
@@ -74,7 +64,6 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
         // Use the request dispatcher to ask the Container to crank up the JSP,
         // sending it the request and response
         view.forward(request, response);
->>>>>>> 6c1ff4542381e327ef4f511b88336761526e6a14
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
