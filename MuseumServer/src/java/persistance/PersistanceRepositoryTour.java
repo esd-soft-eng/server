@@ -21,11 +21,10 @@ public class PersistanceRepositoryTour {
         this.db = db;
     }
 
-    public synchronized boolean addTour(String name, String description, ArrayList<String> exhibitIDs, int questionSetId) throws SQLException {
+    public synchronized boolean addTour(String name, String description, ArrayList<String> exhibitIDs) throws SQLException {
         name = InputValidator.clean(name);
         description = InputValidator.clean(description);
-        String insertSQL = "INSERT INTO `tours` (TourName, TourDescription, QuestionSetID) VALUES"
-                + "('" + name + "','" + description + "','" + questionSetId + "');";
+        String insertSQL = "INSERT INTO `tours` (TourName, TourDescription) VALUES ('" + name + "','" + description + "');";
         boolean ret = db.executeUpdate(insertSQL);
         if (ret == false) {
             return false;

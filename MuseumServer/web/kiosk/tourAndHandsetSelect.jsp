@@ -49,5 +49,11 @@
 
             <input type='submit' value='Submit' align='left'/>
         </form>
+
+        <% String messageFromServlet = (String) request.getAttribute("message");
+            if (messageFromServlet != null) {
+                out.println(messageFromServlet);
+            }
+        %>
     </body>
 </html>

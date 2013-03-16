@@ -8,6 +8,7 @@ import QuestionsAndAnswers.Question;
 import QuestionsAndAnswers.QuestionSetManager;
 import businessDomainObjects.TourManager;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,16 +21,16 @@ import utility.Redirector;
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
  * + Darkstar <1337@313373>
- * 
  */
-
 @WebServlet(name = "AddTour", urlPatterns = {"/addTour.do"})
 public class AddTour extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         QuestionSetManager qsm = (QuestionSetManager) getServletContext().getAttribute("tourManager");
-        Question[] allQuestions = qsm.getAllQuestions();
+//        Question[] allQuestions = qsm.getAllQuestions();
+        Question[] allQuestions = null;
         
         // Adds new question set first or identifies an existing question set to use for questionSetID
         String questionSetSelection = request.getParameter("questionSetSelection");
@@ -37,11 +38,11 @@ public class AddTour extends HttpServlet {
         if(questionSetSelection.equals("new")){
             // Create a new question set (consisting of questions).
             qsm.addQuestionSet(request.getParameter("questionSetTitle")); // *** NEEDS TO RETURN AN ID, SO WE CAN USE IT in the below fields!!!
-            qsm.getQuestionSetByName(); // IN PROGRESS
+//            qsm.getQuestionSetByName(); // IN PROGRESS
             for(Question currentQuestion : allQuestions){
                 int currentQuestionID = currentQuestion.getQuestionId(); 
                 if(request.getParameter("check" + currentQuestionID).equals("ON")){
-                    currentQuestion.setQuestionSetId(Integer.parseInt(questionSetSelection));
+//                    currentQuestion.setQuestionSetId(Integer.parseInt(questionSetSelection));
                     qsm.addQuestion(currentQuestion, Integer.parseInt(questionSetSelection));
                 }
             }
@@ -73,11 +74,11 @@ public class AddTour extends HttpServlet {
         }
         TourManager tm = (TourManager) getServletContext().getAttribute("tourManager");
         ArrayList exhibits = new ArrayList<String>();
-        for(String exhibit : exhibitIDs) {
+        for (String exhibit : exhibitIDs) {
             exhibits.add(exhibit);
         }
 
-        if (!tm.addTour(tourName, tourDescription, exhibits, 0)) { // FIXME: need to change final parameter!!! to newly created OR selected set id!!
+        if (!tm.addTour(tourName, tourDescription, exhibits)) {
             request.setAttribute("message", "<h2 style='color:red;'> Failed to create tour. </h2>");
             Redirector.redirect(request, response, "/admin/addNewTour.jsp");
             return;
