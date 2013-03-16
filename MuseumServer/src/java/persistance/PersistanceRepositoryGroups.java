@@ -57,7 +57,7 @@ public class PersistanceRepositoryGroups {
     public synchronized boolean addNewVisitorToDatabase(Visitor visitor, int groupId) {
         
         String sql = "INSERT INTO `visitor`"
-                   + " (foreName, surName, title, age, level, pin, tourGroup)"
+                   + " (forename, surname, title, age, level, pin, tourGroup)"
                    + " VALUES ( '" + visitor.forename + "','" + visitor.surname + "',"
                    + "'" + visitor.title + "'," + visitor.age + ",'" + visitor.level.toString() + "',"
                    + "" + visitor.pin + "," + groupId + ")";        
@@ -125,8 +125,8 @@ public class PersistanceRepositoryGroups {
     private Visitor getVisitorFromResultSet(ResultSet rs) throws SQLException {
         
         String title = rs.getString("title"); 
-        String forename = rs.getString("foreName");
-        String surname = rs.getString("surName");
+        String forename = rs.getString("forename");
+        String surname = rs.getString("surname");
         int age = rs.getInt("age");
         Levels level = Levels.valueOf(rs.getString("level"));             
         return new Visitor(title, forename, surname, age, level);

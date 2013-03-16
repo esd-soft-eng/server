@@ -1,19 +1,24 @@
 package servlets;
 
+import businessDomainObjects.Tour;
+import businessDomainObjects.TourManager;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utility.InputValidator;
 import utility.Redirector;
+import visitorsAndGroups.Visitor;
 
 /**
  *
  * @author Alex
  */
+@WebServlet(name = "SelectTourAndHandsetNumber", urlPatterns = {"/SelectTourAndHandsetNumber.do"})
 public class SelectTourAndHandsetNumber extends HttpServlet {
 
     /**
@@ -28,8 +33,33 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
         
+        HttpSession session = request.getSession();
+        String questionSetId = (String) request.getParameter("questionSetId");
+        String visitorSignupStatus = (String) request.getParameter("visitorSignupStatus");
+
+        RequestDispatcher view = request.getRequestDispatcher("kiosk/tourAndHandsetSelect.jsp");
+        
+        if (visitorSignupStatus == null) {
+            visitorSignupStatus = "0";
+        }
+
+        switch (Integer.parseInt(visitorSignupStatus)) {
+            case 0:
+                this.getTourAndNumberOfHandsets(request);
+                this.clearSessionData(session);
+                break;
+            case 1:
+                this.getTourAndNumberOfHandsets(request);
+                this.getUserDetails(request, session);
+                break;
+            default:
+                view = request.getRequestDispatcher("kiosk/tourAndHandsetSelect.jsp");
+                break;
+        }
+
+
+/*
         // Get tour selected and validate it
         String tourString = (String) request.getParameter("tour");
         int tourID = 0;
@@ -56,13 +86,13 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
 
         session.setAttribute("tourID", tourID);
         session.setAttribute("handsetNo", handsetNumber);
-        
+
         // Redirect so each user can enter their own details
         RequestDispatcher view =
                 request.getRequestDispatcher("addUserDetails.jsp");
 
         // Use the request dispatcher to ask the Container to crank up the JSP,
-        // sending it the request and response
+        // sending it the request and response */
         view.forward(request, response);
     }
 
@@ -106,4 +136,37 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void getTourAndNumberOfHandsets(HttpServletRequest request) {
+        
+        TourManager tm = (TourManager) getServletContext().getAttribute("tourManager");
+        Tour[] tours = tm.getListOfTours().toArray(new Tour[0]);
+        request.setAttribute("tours", tours);   
+        request.setAttribute("visitorSignupStatus", "0");
+    }
+
+    private void getUserDetails(HttpServletRequest request, HttpSession session) {
+        
+        String tourIdS = (String) request.getParameter("tourId");
+        String numberOfPeopleS = (String) request.getParameter("numberOfPeople");
+        
+        int tourId = Integer.parseInt(tourIdS);
+        int numberOfPeople = Integer.parseInt(numberOfPeopleS);
+        int currentVisitor = 1;
+        Visitor[] visitors = new Visitor[numberOfPeople];
+        
+        session.setAttribute("tourId", tourId);
+        session.setAttribute("currentVisitor", currentVisitor);
+        session.setAttribute("visitors", visitors);
+        request.setAttribute("visitorSignupStatus", "1");
+    }
+    
+    private void clearSessionData(HttpSession session){
+        
+        session.removeAttribute("tourId");
+        session.removeAttribute("currentVisitor");
+        session.removeAttribute("visitors");
+    }
+
+ 
 }
