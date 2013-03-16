@@ -57,7 +57,7 @@ CREATE TABLE `ExhibitLog` (
   `logDate` varchar(20) NOT NULL,
   `logTime` varchar(20) NOT NULL,
   PRIMARY KEY (`LogID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +66,7 @@ CREATE TABLE `ExhibitLog` (
 
 LOCK TABLES `ExhibitLog` WRITE;
 /*!40000 ALTER TABLE `ExhibitLog` DISABLE KEYS */;
+INSERT INTO `ExhibitLog` VALUES (1,'ADD',8,'Testing','Bob','16/03/2013','16:17:38'),(2,'REMOVE',5,'Test','null','16/03/2013','16:22:24'),(3,'MODIFY',4,'Test','null','16/03/2013','16:22:49');
 /*!40000 ALTER TABLE `ExhibitLog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,8 +159,8 @@ DROP TABLE IF EXISTS `RouterLog`;
 CREATE TABLE `RouterLog` (
   `LogID` int(11) NOT NULL AUTO_INCREMENT,
   `action` varchar(20) NOT NULL,
-  `loginCode` int(11) NOT NULL,
   `MAC` varchar(20) NOT NULL,
+  `maintainerUsername` varchar(50) DEFAULT NULL,
   `logDate` varchar(20) NOT NULL,
   `logTime` varchar(20) NOT NULL,
   PRIMARY KEY (`LogID`)
@@ -191,7 +192,7 @@ CREATE TABLE `TourLog` (
   `logDate` varchar(20) NOT NULL,
   `logTime` varchar(20) NOT NULL,
   PRIMARY KEY (`LogID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,7 +201,7 @@ CREATE TABLE `TourLog` (
 
 LOCK TABLES `TourLog` WRITE;
 /*!40000 ALTER TABLE `TourLog` DISABLE KEYS */;
-INSERT INTO `TourLog` VALUES (1,'ADD',23,'Testin','Bob','16/03/2013','15:58:19');
+INSERT INTO `TourLog` VALUES (1,'ADD',23,'Testin','Bob','16/03/2013','15:58:19'),(2,'REMOVE',7,'Tooster','Bob','16/03/2013','16:10:40'),(3,'MODIFY',20,'Testin','Bob','16/03/2013','16:16:04');
 /*!40000 ALTER TABLE `TourLog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,7 +220,7 @@ CREATE TABLE `UserLog` (
   `logDate` varchar(20) NOT NULL,
   `logTime` varchar(20) NOT NULL,
   PRIMARY KEY (`LogID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -228,6 +229,7 @@ CREATE TABLE `UserLog` (
 
 LOCK TABLES `UserLog` WRITE;
 /*!40000 ALTER TABLE `UserLog` DISABLE KEYS */;
+INSERT INTO `UserLog` VALUES (1,'ADD','Test','null','16/03/2013','16:31:40'),(2,'REMOVE','Test','null','16/03/2013','16:32:26'),(3,'ADD','Test','null','16/03/2013','16:32:36'),(4,'MODIFY','Test','null','16/03/2013','16:32:58');
 /*!40000 ALTER TABLE `UserLog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -349,7 +351,7 @@ CREATE TABLE `exhibits` (
   `AudioLevel3ID` int(11) NOT NULL,
   `AudioLevel4ID` int(11) NOT NULL,
   PRIMARY KEY (`ExhibitID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -358,7 +360,7 @@ CREATE TABLE `exhibits` (
 
 LOCK TABLES `exhibits` WRITE;
 /*!40000 ALTER TABLE `exhibits` DISABLE KEYS */;
-INSERT INTO `exhibits` VALUES (1,'Test','Test!',5,6,7,6),(2,'Test','Test!',5,6,7,6),(3,'Test','Test!',5,6,7,6),(4,'Test','Test!',5,6,7,6),(5,'Test','Test!',5,6,7,6),(6,'test','55',5,5,5,5),(7,'This exhibit is an introduction to ','This exhibit is an introduction to the bippidy slip slappa whappa bip bop, happa bappa whippa whappa',5,5,5,5);
+INSERT INTO `exhibits` VALUES (1,'Test','Test!',5,6,7,6),(2,'Test','Test!',5,6,7,6),(3,'Test','Test!',5,6,7,6),(4,'Test','Test',5,6,7,6),(7,'This exhibit is an introduction to ','This exhibit is an introduction to the bippidy slip slappa whappa bip bop, happa bappa whippa whappa',5,5,5,5);
 /*!40000 ALTER TABLE `exhibits` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -489,7 +491,7 @@ CREATE TABLE `tours` (
 
 LOCK TABLES `tours` WRITE;
 /*!40000 ALTER TABLE `tours` DISABLE KEYS */;
-INSERT INTO `tours` VALUES (7,'Tooster','Tooster',-1),(14,'Testin','test',3),(18,'Testin','test',-1),(19,'Testin','test',-1),(20,'Testin','test',3),(21,'Testin','test',3),(22,'Testin','test',3),(23,'Testin','test',3);
+INSERT INTO `tours` VALUES (14,'Testin','test',3),(18,'Testin','test',-1),(19,'Testin','test',-1),(20,'Testin','test',3),(21,'Testin','test',3),(22,'Testin','test',3),(23,'Testin','test',3);
 /*!40000 ALTER TABLE `tours` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -512,7 +514,7 @@ CREATE TABLE `toursexhibitslink` (
 
 LOCK TABLES `toursexhibitslink` WRITE;
 /*!40000 ALTER TABLE `toursexhibitslink` DISABLE KEYS */;
-INSERT INTO `toursexhibitslink` VALUES (7,1),(14,1),(14,2),(14,3),(18,1),(18,2),(18,3),(19,1),(19,2),(19,3),(20,1),(20,2),(20,3),(21,1),(21,2),(21,3),(22,1),(22,2),(22,3),(23,1),(23,2),(23,3);
+INSERT INTO `toursexhibitslink` VALUES (14,1),(14,2),(14,3),(18,1),(18,2),(18,3),(19,1),(19,2),(19,3),(21,1),(21,2),(21,3),(22,1),(22,2),(22,3),(23,1),(23,2),(23,3),(20,1),(20,2),(20,3);
 /*!40000 ALTER TABLE `toursexhibitslink` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -529,7 +531,7 @@ CREATE TABLE `user` (
   `password` varchar(32) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`userID`),
   KEY `userID` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -538,7 +540,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Bob','0cc175b9c0f1b6a831c399e269772661');
+INSERT INTO `user` VALUES (1,'Bob','0cc175b9c0f1b6a831c399e269772661'),(3,'Test','098f6bcd4621d373cade4e832627b4f6');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -591,7 +593,7 @@ CREATE TABLE `usertypelink` (
 
 LOCK TABLES `usertypelink` WRITE;
 /*!40000 ALTER TABLE `usertypelink` DISABLE KEYS */;
-INSERT INTO `usertypelink` VALUES (1,1),(1,2),(1,3);
+INSERT INTO `usertypelink` VALUES (1,1),(1,2),(1,3),(3,1),(3,2),(3,3);
 /*!40000 ALTER TABLE `usertypelink` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -604,8 +606,8 @@ DROP TABLE IF EXISTS `visitor`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `visitor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `foreName` varchar(50) NOT NULL,
-  `surName` varchar(50) NOT NULL,
+  `forename` varchar(50) NOT NULL,
+  `surname` varchar(50) NOT NULL,
   `title` varchar(5) NOT NULL,
   `age` tinyint(4) NOT NULL,
   `level` varchar(50) NOT NULL,
@@ -635,4 +637,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-03-16 16:00:31
+-- Dump completed on 2013-03-16 16:56:53

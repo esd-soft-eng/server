@@ -21,10 +21,9 @@ public class RouterLog implements Log {
 
     @Override
     public void log(String[] params) {
-        String loginCode = params[0];
-        String MAC = params[1];
-        
-        String SQL = "INSERT INTO RouterLog (action, loginCode ,MAC, logDate,logTime) VALUES ('" + action.name() + "','" + loginCode + "','" +MAC+"','"+ Logger.getDate() + "','" + Logger.getTime() + "');";
-        db.executeUpdate(SQL);
+        String MAC = params[0];
+        String maintainerUsername = params[1];
+        String SQL = "INSERT INTO RouterLog (MAC, maintainerUsername, logDate,logTime) VALUES ('" + MAC + "','" + maintainerUsername + "','" + Logger.getDate() + "','" + Logger.getTime() + "');";
+        db.executeUpdate(SQL);;
     }
 }

@@ -86,7 +86,7 @@ public class UserManager {
         return false;
     }
 
-    private User getUserByID(int userID) {
+    public User getUserByID(int userID) {
         
         for(User user : listOfUsers){
             if (user.getUserID() == userID){

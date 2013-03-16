@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logging.Logger;
 import utility.InputValidator;
 import utility.Redirector;
 
@@ -52,6 +53,7 @@ public class RemoveMAC extends HttpServlet {
         HandsetAccessManager ham = (HandsetAccessManager) getServletContext().getAttribute("handsetAccessManager");
 
         if (ham.removeDevice(MAC)) {
+            Logger.Log(Logger.LogType.HANDSETREMOVE, new String[]{MAC, (String) request.getSession().getAttribute("username")});
             request.setAttribute("message", "<h2>Successfully removed MAC address <i>\"" + MAC + "\"</i> from the database.</h2>");
             Redirector.redirect(request, response, "/admin/removeMacAddress.jsp");
             return;

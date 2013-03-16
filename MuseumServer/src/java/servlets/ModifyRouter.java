@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import logging.Logger;
 import utility.Redirector;
 
 /**
@@ -65,7 +66,7 @@ public class ModifyRouter extends HttpServlet {
         
         // Execute sql for update
         rm.modifyRouter(thisRouter);
-        
+        Logger.Log(Logger.LogType.ROUTERADD, new String[]{macAddress,(String)request.getSession().getAttribute("username")});
         request.setAttribute("message", "<h2 style='color:green;'>Success!</h2>");
         Redirector.redirect(request, response, "/admin/manageRouters.jsp");
     }

@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logging.Logger;
 import utility.InputValidator;
 import utility.Redirector;
 
@@ -48,8 +49,9 @@ public class RemoveUser extends HttpServlet {
 
             ServletContext ctx = request.getServletContext();
             UserManager um = (UserManager) ctx.getAttribute("userManager");
-
+            String username = um.getUserByID(userID).getUserName();
             if (um.removeUser(userID)) {
+                Logger.Log(Logger.LogType.USERREMOVE, new String[]{username, (String)request.getSession().getAttribute("username")});
                 request.setAttribute("message", "<h2>Successfully removed user <i>\"" + userID + "\"</i> from the database.</h2>");
                 Redirector.redirect(request, response, "/admin/removeUserForm.jsp");
                 return;

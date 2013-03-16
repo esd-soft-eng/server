@@ -11,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logging.Logger;
+import logging.Logger;
 import utility.Redirector;
 
 /**
@@ -54,6 +56,7 @@ public class AddMAC extends HttpServlet {
         //attempt to add the device and redirect with a success message,
         //if it fails then redirect back to the 'add' page.
         if (ham.addDevice(MAC)) {
+            Logger.Log(Logger.LogType.HANDSETADD, new String[] {MAC, (String)request.getSession().getAttribute("username")});
             request.setAttribute("message", "<h2>Successfully added MAC address <i>\"" + MAC + "\"</i> to the database.</h2>"
                     + "<p> Click <a href=\"/MuseumServer/admin/viewRegisteredHandsets.jsp\">here</a> to view registered devices.");
             Redirector.redirect(request, response, "/admin/addMacAddress.jsp");
