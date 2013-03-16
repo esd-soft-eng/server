@@ -35,7 +35,7 @@ public class PersistanceRepositoryTour {
         rs.next();
         String latestTourID = rs.getString("TourID");
         for (String exhibitID : exhibitIDs) {
-            String exhibitInsertSQL = "INSERT INTO `toursExhibitsLink` (TourID, ExhibitID) VALUES ('" + latestTourID + "','" + exhibitID + "');";
+            String exhibitInsertSQL = "INSERT INTO `toursexhibitslink` (TourID, ExhibitID) VALUES ('" + latestTourID + "','" + exhibitID + "');";
             ret = db.executeUpdate(exhibitInsertSQL);
             if (ret == false) {
                 return false;
@@ -52,7 +52,7 @@ public class PersistanceRepositoryTour {
         if (!ret) {
             return false;
         }
-        SQL = "DELETE FROM toursExhibitsLink WHERE TourID = '" + tourIDString + "';";
+        SQL = "DELETE FROM toursexhibitslink WHERE TourID = '" + tourIDString + "';";
         ret = db.executeUpdate(SQL);
         if (!ret) {
             return false;
@@ -68,14 +68,14 @@ public class PersistanceRepositoryTour {
             return false;
         }
 
-        String linkRemovalSQL = "DELETE FROM toursExhibitsLink WHERE TourID = " + ID + ";";
+        String linkRemovalSQL = "DELETE FROM toursexhibitslink WHERE TourID = " + ID + ";";
         ret = db.executeUpdate(linkRemovalSQL);
         if (!ret) {
             return false;
         }
 
         for (String exhibitID : exhibitIDs) {
-            String exhibitInsertSQL = "INSERT INTO `toursExhibitsLink` (TourID, ExhibitID) VALUES ('" + ID + "','" + exhibitID + "');";
+            String exhibitInsertSQL = "INSERT INTO `toursexhibitslink` (TourID, ExhibitID) VALUES ('" + ID + "','" + exhibitID + "');";
             ret = db.executeUpdate(exhibitInsertSQL);
             if (ret == false) {
                 return false;
@@ -87,7 +87,7 @@ public class PersistanceRepositoryTour {
 
     public ArrayList<Tour> getAllTours() {
         String sql = "SELECT * FROM "
-                + "`tours` `t` , `exhibits` `e` , `toursExhibitsLink` `tel` "
+                + "`tours` `t` , `exhibits` `e` , `toursexhibitslink` `tel` "
                 + "WHERE `t`.`TourID` = `tel`.`TourID` "
                 + "AND `e`.`ExhibitID` = `tel`.`ExhibitID` ORDER BY `tel`.`TourID`;";
 
