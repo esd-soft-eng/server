@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logging.Logger;
 import utility.Redirector;
 
 /**
@@ -38,6 +39,7 @@ public class RemoveRouter extends HttpServlet {
             Redirector.redirect(request, response, "/admin/removeRouter.jsp");
             return;
         } else {
+            Logger.Log(Logger.LogType.ROUTERADD, new String[]{routerMAC,(String)request.getSession().getAttribute("username")});
             request.setAttribute("message", "<h2>Successfully removed router from the database.</h2>");
             Redirector.redirect(request, response, "/admin/removeRouter.jsp");
             return;

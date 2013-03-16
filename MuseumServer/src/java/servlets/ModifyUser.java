@@ -64,6 +64,7 @@ public class ModifyUser extends HttpServlet{
             Redirector.redirect(request, response, "/admin/modifyUser.jsp");
         }
         else{
+            logging.Logger.Log(logging.Logger.LogType.USERMODIFY, new String[]{userName, (String)request.getSession().getAttribute("username")});
             request.setAttribute("message", "<h2 style='color:green;'>Success!  The user has been modified!</h2>");
             Redirector.redirect(request, response, "/admin/modifyUser.jsp");
         }

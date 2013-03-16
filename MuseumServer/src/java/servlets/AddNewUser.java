@@ -13,6 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logging.Logger;
+import logging.Logger;
 import utility.InputValidator;
 import utility.MD5Hasher;
 import utility.Redirector;
@@ -89,6 +91,7 @@ public class AddNewUser extends HttpServlet {
                         return;
                     }
                 }
+                Logger.Log(Logger.LogType.USERADD, new String[]{userName, (String)request.getSession().getAttribute("username")});
                 request.setAttribute("message", "<h2>Successfully added user <i>\"" + userName + "\"</i> to the database.</h2>");
                 Redirector.redirect(request, response, "/admin/addNewUserForm.jsp");
                 return;
