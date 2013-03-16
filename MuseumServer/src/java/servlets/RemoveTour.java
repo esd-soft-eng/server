@@ -57,7 +57,7 @@ public class RemoveTour extends HttpServlet {
         TourManager tm = (TourManager) getServletContext().getAttribute("tourManager");
 
         Tour tourToRemove = tm.getTourByID(tourID);
-        Logger.Log(Logger.LogType.TOURADD, new String[]{String.valueOf(tourToRemove.getTourID()), tourToRemove.getName(), (String) request.getSession().getAttribute("username")});
+        Logger.Log(Logger.LogType.TOURREMOVE, new String[]{String.valueOf(tourToRemove.getTourID()), tourToRemove.getName(), (String) request.getSession().getAttribute("username")});
 
         tm.removeTour(tourID);
 

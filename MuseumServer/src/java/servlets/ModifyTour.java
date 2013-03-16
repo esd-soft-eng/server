@@ -187,7 +187,7 @@ public class ModifyTour extends HttpServlet {
             Redirector.redirect(request, response, "modifyTour.do?tourID=" + tourID + "&stage=1");
             return;
         } else {
-            Logger.Log(Logger.LogType.TOURADD, new String[]{tourID, tourName, (String) request.getSession().getAttribute("username")});
+            Logger.Log(Logger.LogType.TOURMODIFY, new String[]{tourID, tourName, (String) request.getSession().getAttribute("username")});
 
             request.setAttribute("message", "<h2> Successfully modified tour. </h2>");
             Redirector.redirect(request, response, "/admin/modifyTour.jsp");

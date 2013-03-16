@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logging.Logger;
 import utility.Redirector;
 
 /**
@@ -153,7 +154,8 @@ public class ModifyExhibit extends HttpServlet {
                 Redirector.redirect(request, response, "/admin/modifyExhibit.jsp");
                 return;
             }
-
+            
+            Logger.Log(Logger.LogType.EXHIBITMODIFY, new String[]{String.valueOf(exhibitID),exhibitName, (String)request.getSession().getAttribute("username")});
             request.setAttribute("message", "<h2>Successfully modified exhibit</h2>");
             Redirector.redirect(request, response, "/admin/modifyExhibit.jsp");
 
