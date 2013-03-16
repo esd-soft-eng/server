@@ -94,4 +94,12 @@ public class QuestionSetManager {
         this.questionSets = persistance.getAllQuestionSets();
         this.questions = persistance.getAllQuestions();
     }
+
+    // In progress!!! Should return a Question Set!!! not boolean
+    public synchronized boolean getQuestionSetByName(String name) {
+        
+        
+        
+        return true;
+    }
 }

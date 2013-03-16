@@ -8,7 +8,6 @@ import QuestionsAndAnswers.Question;
 import QuestionsAndAnswers.QuestionSetManager;
 import businessDomainObjects.TourManager;
 import java.io.IOException;
-import java.lang.Integer;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +19,7 @@ import utility.Redirector;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
- * + Darkstar
+ * + Darkstar <1337@313373>
  * 
  */
 
@@ -38,6 +37,7 @@ public class AddTour extends HttpServlet {
         if(questionSetSelection.equals("new")){
             // Create a new question set (consisting of questions).
             qsm.addQuestionSet(request.getParameter("questionSetTitle")); // *** NEEDS TO RETURN AN ID, SO WE CAN USE IT in the below fields!!!
+            qsm.getQuestionSetByName(); // IN PROGRESS
             for(Question currentQuestion : allQuestions){
                 int currentQuestionID = currentQuestion.getQuestionId(); 
                 if(request.getParameter("check" + currentQuestionID).equals("ON")){
