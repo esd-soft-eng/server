@@ -18,7 +18,7 @@
         <h1>Tour and Handset Number Selection</h1>
         <form method="POST" action="./SelectTourAndHandsetNumber.do">
             <b>Please select from the available tours:</b> <br>
-            <select>
+            <select name="tour">
                 <%
                     ServletContext ctx = request.getServletContext();
                     TourManager tm = (TourManager) ctx.getAttribute("tourManager");
@@ -30,7 +30,7 @@
                     ArrayList<Tour> tours = tm.getListOfTours();
 
                     for (Tour tour : tours) {
-                        out.println("<option value=\"tour\">"
+                        out.println("<option value=\"" + tour.getTourID() + "\">"
                                 + tour.getName() + "</option>");
                     }
                 %>                  

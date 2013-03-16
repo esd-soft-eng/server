@@ -4,6 +4,7 @@ import QuestionsAndAnswers.DisplayQuestion;
 import QuestionsAndAnswers.QuestionSet;
 import QuestionsAndAnswers.QuestionSetManager;
 import businessDomainObjects.Tour;
+import businessDomainObjects.TourManager;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -11,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import utility.InputValidator;
 import utility.Redirector;
 
@@ -32,6 +34,7 @@ public class ValidateUserDetails extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         ServletContext ctx = request.getServletContext();
         QuestionSetManager qsm = (QuestionSetManager) ctx.getAttribute("questionSetManger");
         
@@ -81,12 +84,15 @@ public class ValidateUserDetails extends HttpServlet {
         
         // Get the questions we're going to ask the user and store them to be sent
         // to the next JSP to be displayed
+        int tourID = Integer.parseInt((String) session.getAttribute("tourID"));
+        TourManager tourManager = (TourManager) ctx.getAttribute("tourManager");
+        
+        Tour tour = tourManager.getTourByID(tourID);
         
         // TODO work out the id using Simon's stuff to find corresponding question
         // set id to the tour we're passed in
-        QuestionSet qs = qsm.getQuestionSetById(1);
-//        Tour tour = new Tour(); // ADD FOR NICE
-        
+        QuestionSet qs = qsm.getQuestionSetById(tour.getQuestionSetID());
+             
         DisplayQuestion[] questions = qs.getQuestionsForDisplay();
         
         request.setAttribute("questions", questions);

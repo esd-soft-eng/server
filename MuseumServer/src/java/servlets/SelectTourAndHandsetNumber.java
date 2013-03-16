@@ -31,11 +31,12 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
         HttpSession session = request.getSession();
         
         // Get tour selected and validate it
-        String tour = (String) request.getParameter("tour");
-        if (tour != null) {
-            tour = InputValidator.clean(tour);
+        String tourString = (String) request.getParameter("tour");
+        int tourID = 0;
+        if (tourString != null) {
+            tourID = Integer.parseInt(InputValidator.clean(tourString));
         }
-        if (tour == null || tour.isEmpty()) {
+        if (tourString == null || tourString.isEmpty()) {
             request.setAttribute("message", "<h2 style='color:red'>Please select a tour</h2>");
             Redirector.redirect(request, response, "/kiosk/tourAndHandsetSelect.jsp");
             return;
@@ -53,7 +54,7 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
             return;
         }
 
-        session.setAttribute("tour", tour);
+        session.setAttribute("tourID", tourID);
         session.setAttribute("handsetNo", handsetNumber);
         
         // Redirect so each user can enter their own details
