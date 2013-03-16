@@ -13,15 +13,19 @@ import persistance.DatabaseQueryExecutor;
 public class UserLog implements Log {
 
     DatabaseQueryExecutor db;
-    LogFactory.LogAction action;
+    Logger.LogAction action;
 
-    public UserLog(DatabaseQueryExecutor db, LogFactory.LogAction action) {
+    public UserLog(DatabaseQueryExecutor db, Logger.LogAction action) {
         this.db = db;
         this.action = action;
     }
 
     @Override
     public void log(String[] params) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String usernameOfUser = params[0];
+        String usernameOfMaintainer = params[1];
+
+        String SQL = "INSERT INTO UserLog (action, usernameOfUser, maintainerUsername, logDate,logTime) VALUES ('" + action.name() + "','" + usernameOfUser + "','" + usernameOfMaintainer + "','" + Logger.getDate() + "','" + Logger.getTime() + "');";
+        db.executeUpdate(SQL);
     }
 }

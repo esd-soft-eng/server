@@ -26,7 +26,7 @@ public class PersistanceRepositoryHandset {
 
         HashSet<String> allowedDevices = new HashSet<String>();
 
-        String sql = "SELECT * FROM `allowedDevices`";
+        String sql = "SELECT * FROM `alloweddevices`";
 
         createAllowedDevicesList(sql, allowedDevices);
         return allowedDevices;
@@ -48,7 +48,7 @@ public class PersistanceRepositoryHandset {
 
     public void addDevice(String macAddress) {
         String sql = "INSERT INTO "
-                + "`allowedDevices` "
+                + "`alloweddevices` "
                 + "VALUES ('" + macAddress + "')";
 
         executor.executeUpdate(sql);
@@ -56,7 +56,7 @@ public class PersistanceRepositoryHandset {
 
     public void removeDevice(String macAddress) {
         String sql = "DELETE FROM "
-                + "`allowedDevices` "
+                + "`alloweddevices` "
                 + "WHERE `macaddress` = '" + macAddress + "'";
 
         executor.executeUpdate(sql);

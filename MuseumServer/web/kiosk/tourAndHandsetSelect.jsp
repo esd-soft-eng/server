@@ -17,7 +17,7 @@
     <body>
         <h1>Tour and Handset Number Selection</h1>
         <form method="POST" action="./SelectTourAndHandsetNumber.do">
-            Please select from the available tours: <br>
+            <b>Please select from the available tours:</b> <br>
             <select>
                 <%
                     ServletContext ctx = request.getServletContext();
@@ -37,7 +37,7 @@
             </select>
             <br><br>
 
-            Please select the number of handsets you require: <br>
+            <b>Please select the number of handsets you require:</b> <br>
             <select>
                 <%
                     for (int i = 1; i <= 10; i++) {

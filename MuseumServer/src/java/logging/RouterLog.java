@@ -12,15 +12,19 @@ import persistance.DatabaseQueryExecutor;
  */
 public class RouterLog implements Log {
     DatabaseQueryExecutor db;
-    LogFactory.LogAction action;
+    Logger.LogAction action;
 
-    public RouterLog(DatabaseQueryExecutor db, LogFactory.LogAction action) {
+    public RouterLog(DatabaseQueryExecutor db, Logger.LogAction action) {
         this.db = db;
         this.action = action;
     }
 
     @Override
     public void log(String[] params) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String loginCode = params[0];
+        String MAC = params[1];
+        
+        String SQL = "INSERT INTO RouterLog (action, loginCode ,MAC, logDate,logTime) VALUES ('" + action.name() + "','" + loginCode + "','" +MAC+"','"+ Logger.getDate() + "','" + Logger.getTime() + "');";
+        db.executeUpdate(SQL);
     }
 }

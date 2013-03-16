@@ -13,15 +13,19 @@ import persistance.DatabaseQueryExecutor;
 public class HandsetLog implements Log {
 
     DatabaseQueryExecutor db;
-    LogFactory.LogAction action;
+    Logger.LogAction action;
 
-    public HandsetLog(DatabaseQueryExecutor db, LogFactory.LogAction action) {
+    public HandsetLog(DatabaseQueryExecutor db, Logger.LogAction action) {
         this.db = db;
         this.action = action;
     }
 
     @Override
     public void log(String[] params) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String MAC = params[0];
+        String maintainerUsername = params[1];
+        
+        String SQL = "INSERT INTO HandsetLog (action, MAC ,maintainerUsername, logDate,logTime) VALUES ('" + action.name() + "','" + MAC + "','" +maintainerUsername+"','"+ Logger.getDate() + "','" + Logger.getTime() + "');";
+        db.executeUpdate(SQL);
     }
 }

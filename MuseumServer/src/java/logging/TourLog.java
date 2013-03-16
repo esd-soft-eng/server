@@ -13,15 +13,20 @@ import persistance.DatabaseQueryExecutor;
 public class TourLog implements Log {
 
     DatabaseQueryExecutor db;
-    LogFactory.LogAction action;
+    Logger.LogAction action;
 
-    public TourLog(DatabaseQueryExecutor db, LogFactory.LogAction action) {
+    public TourLog(DatabaseQueryExecutor db, Logger.LogAction action) {
         this.db = db;
         this.action = action;
     }
 
     @Override
     public void log(String[] params) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String tourID = params[0];
+        String tourName = params[1];
+        String maintainerUsername = params[2];
+        
+        String SQL = "INSERT INTO TourLog (action, tourID, tourName,maintainerUsername, logDate,logTime) VALUES ('" + action.name() + "','" + tourID + "','" + tourName + "','"+maintainerUsername+"','"+ Logger.getDate() + "','" + Logger.getTime() + "');";
+        db.executeUpdate(SQL);
     }
 }

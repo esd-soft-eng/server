@@ -20,6 +20,9 @@ public class AudioLog implements Log {
 
     @Override
     public void log(String[] params) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String loginCode = params[0];
+        String audioID = params[1];
+        String SQL = "INSERT INTO AudioLog (loginCode, audioID, logDate,logTime) VALUES ('" + loginCode + "','" + audioID + "','" + Logger.getDate() + "','" + Logger.getTime() + "');";
+        db.executeUpdate(SQL);
     }
 }

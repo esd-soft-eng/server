@@ -20,6 +20,8 @@ public class LoginLog implements Log {
     
     @Override
     public void log(String[] params) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String loginCode = params[0];
+        String SQL = "INSERT INTO LoginLog (loginCode, logDate,logTime) VALUES ('"+loginCode + "','" + Logger.getDate() + "','" + Logger.getTime() + "');";
+        db.executeUpdate(SQL); 
     }
 }

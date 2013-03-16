@@ -13,15 +13,20 @@ import persistance.DatabaseQueryExecutor;
 public class ExhibitLog implements Log {
 
     DatabaseQueryExecutor db;
-    LogFactory.LogAction action;
+    Logger.LogAction action;
 
-    public ExhibitLog(DatabaseQueryExecutor db, LogFactory.LogAction action) {
+    public ExhibitLog(DatabaseQueryExecutor db, Logger.LogAction action) {
         this.db = db;
         this.action = action;
     }
 
     @Override
     public void log(String[] params) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String exhibitID = params[0];
+        String exhibitName = params[1];
+        String maintainerUsername = params[2];
+        
+        String SQL = "INSERT INTO ExhibitLog (action, exhibitID, exhibitName,maintainerUsername, logDate,logTime) VALUES ('" + action.name() + "','" + exhibitID + "','" + exhibitName + "','"+maintainerUsername+"','"+ Logger.getDate() + "','" + Logger.getTime() + "');";
+        db.executeUpdate(SQL);
     }
 }

@@ -10,6 +10,8 @@ import businessDomainObjects.UserManager;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import logging.LogFactory;
+import logging.Logger;
 import persistance.DatabaseQueryExecutor;
 import persistance.PersistanceRepositoryAudio;
 import persistance.PersistanceRepositoryExhibit;
@@ -40,6 +42,7 @@ public class DatabaseInit implements ServletContextListener {
         ctx.setAttribute("audioManager", initAudioManager(db));
         ctx.setAttribute("questionSetManager", initQuestionSetManager(db));        
         ctx.setAttribute("routerManager", initRouterManager(db));        
+        Logger.setLogFact(new LogFactory(db));
     }
 
     @Override
