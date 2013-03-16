@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.30, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.27, for Linux (i686)
 --
 -- Host: localhost    Database: museum_server_database
 -- ------------------------------------------------------
--- Server version	5.5.30-log
+-- Server version	5.5.27
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,247 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `AudioLog`
+--
+
+DROP TABLE IF EXISTS `AudioLog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `AudioLog` (
+  `LogID` int(11) NOT NULL AUTO_INCREMENT,
+  `loginCode` int(11) NOT NULL,
+  `audioID` int(11) NOT NULL,
+  `logDate` varchar(20) NOT NULL,
+  `logTime` varchar(20) NOT NULL,
+  PRIMARY KEY (`LogID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AudioLog`
+--
+
+LOCK TABLES `AudioLog` WRITE;
+/*!40000 ALTER TABLE `AudioLog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `AudioLog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ExhibitLog`
+--
+
+DROP TABLE IF EXISTS `ExhibitLog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ExhibitLog` (
+  `LogID` int(11) NOT NULL AUTO_INCREMENT,
+  `action` varchar(20) NOT NULL,
+  `exhibitID` int(11) NOT NULL,
+  `exhibitName` varchar(200) NOT NULL,
+  `maintainerUsername` varchar(50) NOT NULL,
+  `logDate` varchar(20) NOT NULL,
+  `logTime` varchar(20) NOT NULL,
+  PRIMARY KEY (`LogID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ExhibitLog`
+--
+
+LOCK TABLES `ExhibitLog` WRITE;
+/*!40000 ALTER TABLE `ExhibitLog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ExhibitLog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `HandsetLog`
+--
+
+DROP TABLE IF EXISTS `HandsetLog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `HandsetLog` (
+  `LogID` int(11) NOT NULL AUTO_INCREMENT,
+  `action` varchar(20) NOT NULL,
+  `MAC` varchar(20) NOT NULL,
+  `maintainerUsername` varchar(50) NOT NULL,
+  `logDate` varchar(20) NOT NULL,
+  `logTime` varchar(20) NOT NULL,
+  PRIMARY KEY (`LogID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `HandsetLog`
+--
+
+LOCK TABLES `HandsetLog` WRITE;
+/*!40000 ALTER TABLE `HandsetLog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `HandsetLog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `LoginLog`
+--
+
+DROP TABLE IF EXISTS `LoginLog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `LoginLog` (
+  `LogID` int(11) NOT NULL AUTO_INCREMENT,
+  `loginCode` int(11) NOT NULL,
+  `logDate` varchar(20) NOT NULL,
+  `logTime` varchar(20) NOT NULL,
+  PRIMARY KEY (`LogID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `LoginLog`
+--
+
+LOCK TABLES `LoginLog` WRITE;
+/*!40000 ALTER TABLE `LoginLog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `LoginLog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `RegisterLog`
+--
+
+DROP TABLE IF EXISTS `RegisterLog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `RegisterLog` (
+  `LogID` int(11) NOT NULL AUTO_INCREMENT,
+  `usernameOfUser` varchar(50) NOT NULL,
+  `levelOfUser` varchar(50) NOT NULL,
+  `loginCode` int(11) NOT NULL,
+  `logDate` varchar(20) NOT NULL,
+  `logTime` varchar(20) NOT NULL,
+  PRIMARY KEY (`LogID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `RegisterLog`
+--
+
+LOCK TABLES `RegisterLog` WRITE;
+/*!40000 ALTER TABLE `RegisterLog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `RegisterLog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `RouterLog`
+--
+
+DROP TABLE IF EXISTS `RouterLog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `RouterLog` (
+  `LogID` int(11) NOT NULL AUTO_INCREMENT,
+  `action` varchar(20) NOT NULL,
+  `loginCode` int(11) NOT NULL,
+  `MAC` varchar(20) NOT NULL,
+  `logDate` varchar(20) NOT NULL,
+  `logTime` varchar(20) NOT NULL,
+  PRIMARY KEY (`LogID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `RouterLog`
+--
+
+LOCK TABLES `RouterLog` WRITE;
+/*!40000 ALTER TABLE `RouterLog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `RouterLog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `TourLog`
+--
+
+DROP TABLE IF EXISTS `TourLog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `TourLog` (
+  `LogID` int(11) NOT NULL AUTO_INCREMENT,
+  `action` varchar(20) NOT NULL,
+  `tourID` int(11) NOT NULL,
+  `tourName` varchar(200) NOT NULL,
+  `maintainerUsername` varchar(50) NOT NULL,
+  `logDate` varchar(20) NOT NULL,
+  `logTime` varchar(20) NOT NULL,
+  PRIMARY KEY (`LogID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `TourLog`
+--
+
+LOCK TABLES `TourLog` WRITE;
+/*!40000 ALTER TABLE `TourLog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `TourLog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `UserLog`
+--
+
+DROP TABLE IF EXISTS `UserLog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `UserLog` (
+  `LogID` int(11) NOT NULL AUTO_INCREMENT,
+  `action` varchar(20) NOT NULL,
+  `usernameOfUser` varchar(50) NOT NULL,
+  `maintainerUsername` varchar(50) NOT NULL,
+  `logDate` varchar(20) NOT NULL,
+  `logTime` varchar(20) NOT NULL,
+  PRIMARY KEY (`LogID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `UserLog`
+--
+
+LOCK TABLES `UserLog` WRITE;
+/*!40000 ALTER TABLE `UserLog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `UserLog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `WifiLog`
+--
+
+DROP TABLE IF EXISTS `WifiLog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `WifiLog` (
+  `LogID` int(11) NOT NULL AUTO_INCREMENT,
+  `loginCode` int(11) NOT NULL,
+  `MAC` varchar(20) NOT NULL,
+  `logDate` varchar(20) NOT NULL,
+  `logTime` varchar(20) NOT NULL,
+  PRIMARY KEY (`LogID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `WifiLog`
+--
+
+LOCK TABLES `WifiLog` WRITE;
+/*!40000 ALTER TABLE `WifiLog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `WifiLog` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `alloweddevices`
@@ -390,4 +631,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-03-16 13:51:12
+-- Dump completed on 2013-03-16 14:03:52

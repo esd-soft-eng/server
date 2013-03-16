@@ -11,14 +11,19 @@ import persistance.DatabaseQueryExecutor;
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
  */
 public class RegisterLog implements Log {
+
     DatabaseQueryExecutor db;
-    
+
     public RegisterLog(DatabaseQueryExecutor db) {
         this.db = db;
     }
 
     @Override
     public void log(String[] params) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String username = params[0];
+        String level = params[1];
+        String loginCode = params[2];
+        String SQL = "INSERT INTO RegisterLog (usernameOfUser, levelOfUser, loginCode, logDate,logTime) VALUES ('" + username + "','" + level + "', '" + loginCode + "','" + Logger.getDate() + "','" + Logger.getTime() + "');";
+        db.executeUpdate(SQL);
     }
 }

@@ -12,9 +12,9 @@ import persistance.DatabaseQueryExecutor;
  */
 public class RouterLog implements Log {
     DatabaseQueryExecutor db;
-    LogFactory.LogAction action;
+    Logger.LogAction action;
 
-    public RouterLog(DatabaseQueryExecutor db, LogFactory.LogAction action) {
+    public RouterLog(DatabaseQueryExecutor db, Logger.LogAction action) {
         this.db = db;
         this.action = action;
     }
