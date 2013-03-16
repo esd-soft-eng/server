@@ -31,7 +31,7 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
         HttpSession session = request.getSession();
         
         // Get tour selected and validate it
-        String tour = request.getParameter("tour");
+        String tour = (String) request.getParameter("tour");
         if (tour != null) {
             tour = InputValidator.clean(tour);
         }
@@ -42,7 +42,7 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
         }
 
         // Get number of handsets required and validate
-        String handsetString = request.getParameter("handset");
+        String handsetString = (String) request.getParameter("handset");
         int handsetNumber = 0;
         if (handsetString != null) {
             handsetNumber = Integer.parseInt(InputValidator.clean(handsetString));
@@ -56,8 +56,7 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
         session.setAttribute("tour", tour);
         session.setAttribute("handsetNo", handsetNumber);
         
-        // Redirect to next JSP
-        // Instantiate a request dispatcher for the JSP
+        // Redirect so each user can enter their own details
         RequestDispatcher view =
                 request.getRequestDispatcher("addUserDetails.jsp");
 
