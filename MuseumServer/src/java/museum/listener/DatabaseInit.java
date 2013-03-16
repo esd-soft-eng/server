@@ -43,7 +43,6 @@ public class DatabaseInit implements ServletContextListener {
         ctx.setAttribute("questionSetManager", initQuestionSetManager(db));        
         ctx.setAttribute("routerManager", initRouterManager(db));        
         Logger.setLogFact(new LogFactory(db));
-        Logger.Log(Logger.LogType.LOGIN, new String[]{"1234",});
     }
 
     @Override

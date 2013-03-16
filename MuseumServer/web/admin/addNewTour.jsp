@@ -4,6 +4,8 @@
     Author     : Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
 --%>
 
+<%@page import="QuestionsAndAnswers.QuestionSet"%>
+<%@page import="QuestionsAndAnswers.QuestionSetManager"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="businessDomainObjects.Exhibit"%>
 <%@page import="businessDomainObjects.ExhibitManager"%>
@@ -34,6 +36,25 @@
                         int ID = e.getExhibitID();
                         out.println("<input type=\"checkbox\" name=\"exhibitID\" value=\"" + ID + "\">" + name + "(<i>" + description + "</i>)<br>");
                     }
+            %>
+            
+            Select a Question Set:<br />
+            <select name="questionSetSelection">
+                <%
+                    QuestionSetManager qsm = (QuestionSetManager) request.getServletContext().getAttribute("questionSetManager");
+
+                    QuestionSet[] qs = qsm.getAllQuestionSets();
+
+                    out.println("<option value=\"new\">None</option>");
+                    for(QuestionSet currentQuestionSet : qs){
+                        out.println("<option value=\"" + currentQuestionSet.getId() + "\">"
+                                + currentQuestionSet.getName() + "</option>");
+                    }
+
+                %>
+            </select><br /><br />
+            
+            <%
                     out.println("<input type=\"submit\" value=\"submit\"/>");
                 }
             %>

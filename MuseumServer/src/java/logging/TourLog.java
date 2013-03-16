@@ -22,6 +22,11 @@ public class TourLog implements Log {
 
     @Override
     public void log(String[] params) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String tourID = params[0];
+        String tourName = params[1];
+        String maintainerUsername = params[2];
+        
+        String SQL = "INSERT INTO TourLog (action, tourID, tourName,maintainerUsername, logDate,logTime) VALUES ('" + action.name() + "','" + tourID + "','" + tourName + "','"+maintainerUsername+"','"+ Logger.getDate() + "','" + Logger.getTime() + "');";
+        db.executeUpdate(SQL);
     }
 }
