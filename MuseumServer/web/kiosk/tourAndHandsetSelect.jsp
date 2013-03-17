@@ -4,6 +4,7 @@
     Author     : Alex
 --%>
 
+<%@page import="QuestionsAndAnswers.Levels"%>
 <%@page import="QuestionsAndAnswers.Answer"%>
 <%@page import="QuestionsAndAnswers.DisplayQuestion"%>
 <%@page import="businessDomainObjects.Tour"%>
@@ -20,7 +21,8 @@
 
         
         
-        <%
+        <%    
+        
         // *****
         // This is the initial part of the page, shows when there's no current sign up in progress
         // It just kicks off the process with a button click and sets the signup status to 0
@@ -32,8 +34,7 @@
                     %><input type="hidden" name="visitorSignupStatus" value="0"/><%
                     %><input type="submit" name="submit" value="Sign me up!"/><%
             %><form><%
-        }
-        
+        }        
         // *****
         // Else we start the process of signing people up
         // *****
@@ -82,8 +83,9 @@
               // If we have a tour and number of people then we can proceed to get their information.
               // *****
               if(status == 1){
-              
-                %><h1>Let's get your details eh?</h1><%
+                Integer visitorNumber = (Integer) request.getAttribute("displayCurrentVisitor");
+                %><h2>Visitor number <%out.print(visitorNumber);%></h2><%
+                %><h2>Let's get your details eh?</h2><%
                 %><form method="POST" action="/MuseumServer/SelectTourAndHandsetNumber.do"><%
                 %><input type="hidden" name="visitorSignupStatus" value="2"/><%
                   
@@ -125,18 +127,39 @@
                       %><br/><%
                       for(int j = 0; j < question.answers.length; j++){
                           String answer = question.answers[j];
-                        %><input type="radio" name="question<%out.print(i);%>" value="<%out.print(j);%>"><% out.print(answer); %><br><%
+                        %><input type="radio" name="question<%out.print(i);%>" value="<%out.print(j);%>" checked><% out.print(answer); %><br><%
                       }
                      %></div><%
                 }
                 %><input type="submit" name="submit" value="Suggest my level!"/><%
                 %></form<%
                 
+              }
+              
+            // *****
+            // 
+            // *****
+            if (status == 3){
+                String visitorName = (String) request.getAttribute("visitorName");
+                String score = (String) request.getAttribute("score");
+                String level = (String) request.getAttribute("level");
+                Levels[] levels = (Levels[]) request.getAttribute("levels");
                 
-                if (status == 3){
-                    
-                }
-            }
+                %><h2>Well <%out.print(visitorName);%>, you scored <%out.print(score);%>!</h2><%
+                %><p>We think you'd enjoy the <%out.print(level);%> audio commentary best, but you're free to choose whichever you like!</p><%
+                
+                    %><form method="POST" action="/MuseumServer/SelectTourAndHandsetNumber.do"><%
+                    %><input type="hidden" name="visitorSignupStatus" value="1"/><%
+                   
+                    %><b>Select Level of Commentary:</b><select  name="level"><%
+                        for(Levels l : levels){
+                            %><option value="<%out.print(l);%>"><%out.print(l);%></option><%
+                        }
+                    %></select><br/><br/><%
+                    %><input type="submit" name="submit" value="Confirm my audio!"/><%
+                %></form><%
+             }
+            
                               
         }%>
         

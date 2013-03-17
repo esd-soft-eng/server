@@ -43,6 +43,9 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
 
         RequestDispatcher view = request.getRequestDispatcher("kiosk/tourAndHandsetSelect.jsp");
         
+        System.out.println("KJKJ");
+        System.out.println(visitorSignupStatus);
+        
         if (visitorSignupStatus == null) {
             visitorSignupStatus = "0";
         }
@@ -59,6 +62,11 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
             case 2:
                 this.getTourAndNumberOfHandsets(request);
                 this.getQuestionsForVisitorToAnswer(request, session);
+                break;
+            case 3:
+                this.getTourAndNumberOfHandsets(request);
+                this.getVisitorsPreferredAudioLevel(request, session);
+                break;
             default:
                 view = request.getRequestDispatcher("kiosk/tourAndHandsetSelect.jsp");
                 break;
@@ -121,7 +129,7 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
         
         String tourIdS = (String) request.getParameter("tourId");
         String numberOfPeopleS = (String) request.getParameter("numberOfPeople");
-        
+        // need to figure out if it's coming in from the request or the session then return the correct one.
         int tourId = Integer.parseInt(tourIdS);
         int numberOfPeople = Integer.parseInt(numberOfPeopleS);
         int currentVisitor = 0;
@@ -130,6 +138,7 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
         session.setAttribute("tourId", tourId);
         session.setAttribute("currentVisitor", currentVisitor);
         session.setAttribute("visitors", visitors);
+        request.setAttribute("displayCurrentVisitor", currentVisitor + 1);
         request.setAttribute("visitorSignupStatus", "1");        
     }
     
@@ -141,9 +150,7 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
     }
 
     private void getQuestionsForVisitorToAnswer(HttpServletRequest request, HttpSession session) {
-        
-        
-        
+              
         int tourId = (Integer) session.getAttribute("tourId");       
         int currentVisitor = (Integer) session.getAttribute("currentVisitor");
         Visitor[] visitors = (Visitor[]) session.getAttribute("visitors");
@@ -157,8 +164,7 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
             
             visitors[currentVisitor] = new Visitor(title, forename, surname, age, null);
             
-            request.setAttribute("visitorName", title + ". " + surname);
-            
+            request.setAttribute("visitorName", title + ". " + surname);            
             
             TourManager tm = (TourManager) getServletContext().getAttribute("tourManager");
             Tour tour = tm.getTourByID(tourId);
@@ -166,14 +172,52 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
             QuestionSetManager qsm = (QuestionSetManager) getServletContext().getAttribute("questionSetManager");
             QuestionSet qs = qsm.getQuestionSetById(tour.getQuestionSetID());
         
+            session.setAttribute("questionSet", qs);
             request.setAttribute("questions", qs.getQuestionsForDisplay());
             request.setAttribute("visitorSignupStatus", "2");
-            
-            currentVisitor++;
             return;
         }
         
         request.setAttribute("visitorSignupStatus", "4");
+    }
+
+    private void getVisitorsPreferredAudioLevel(HttpServletRequest request, HttpSession session) {
+        
+                System.out.println("I GET HERE!");  
+        int tourId = (Integer) session.getAttribute("tourId");       
+        int currentVisitor = (Integer) session.getAttribute("currentVisitor");
+        Visitor[] visitors = (Visitor[]) session.getAttribute("visitors");
+        
+        QuestionSet qs = (QuestionSet) session.getAttribute("questionSet");
+        
+        System.out.println("XDXDXDXDXD");        
+        System.out.println(qs.getName() + " : " + qs.getQuestions().size());
+        
+        int[] answers = this.extractAnswersFromRequest(request, qs.getQuestionsForDisplay().length);
+        int score = qs.getScoreForAnswers(answers);
+        
+        if (currentVisitor < visitors.length){       
+            
+            Visitor visitor = visitors[currentVisitor];
+            request.setAttribute("visitorName", visitor.title + ". " + visitor.surname);
+            request.setAttribute("score", "score: " + score);
+            request.setAttribute("level", "arseburgers");                        
+            request.setAttribute("levels", Levels.values());
+            
+            
+            request.setAttribute("questions", qs.getQuestionsForDisplay());
+            request.setAttribute("visitorSignupStatus", "3");
+            currentVisitor++;
+        }
+    }
+
+    private int[] extractAnswersFromRequest(HttpServletRequest request, int numberOfQuestions) {
+        
+        int[] answers = new int[numberOfQuestions];
+        for(int i = 0; i < numberOfQuestions; i++){
+            answers[i] = Integer.parseInt((String) request.getParameter("question"+i));
+        }
+        return answers;        
     }
 
  
