@@ -84,7 +84,8 @@
               // *****
               if(status == 1){
                 Integer visitorNumber = (Integer) request.getAttribute("displayCurrentVisitor");
-                %><h2>Visitor number <%out.print(visitorNumber);%></h2><%
+                Integer numberOfVisitors = (Integer) request.getAttribute("numberOfVisitors");
+                %><h2>Visitor number <%out.print(visitorNumber);%> of <%out.print(numberOfVisitors);%></h2><%
                 %><h2>Let's get your details eh?</h2><%
                 %><form method="POST" action="/MuseumServer/SelectTourAndHandsetNumber.do"><%
                 %><input type="hidden" name="visitorSignupStatus" value="2"/><%
