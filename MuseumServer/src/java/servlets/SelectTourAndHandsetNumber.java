@@ -1,8 +1,12 @@
 package servlets;
 
+import QuestionsAndAnswers.Levels;
+import QuestionsAndAnswers.QuestionSet;
+import QuestionsAndAnswers.QuestionSetManager;
 import businessDomainObjects.Tour;
 import businessDomainObjects.TourManager;
 import java.io.IOException;
+import java.util.logging.Level;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +39,6 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        String questionSetId = (String) request.getParameter("questionSetId");
         String visitorSignupStatus = (String) request.getParameter("visitorSignupStatus");
 
         RequestDispatcher view = request.getRequestDispatcher("kiosk/tourAndHandsetSelect.jsp");
@@ -53,46 +56,15 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
                 this.getTourAndNumberOfHandsets(request);
                 this.getUserDetails(request, session);
                 break;
+            case 2:
+                this.getTourAndNumberOfHandsets(request);
+                this.getQuestionsForVisitorToAnswer(request, session);
             default:
                 view = request.getRequestDispatcher("kiosk/tourAndHandsetSelect.jsp");
                 break;
         }
 
-
-/*
-        // Get tour selected and validate it
-        String tourString = (String) request.getParameter("tour");
-        int tourID = 0;
-        if (tourString != null) {
-            tourID = Integer.parseInt(InputValidator.clean(tourString));
-        }
-        if (tourString == null || tourString.isEmpty()) {
-            request.setAttribute("message", "<h2 style='color:red'>Please select a tour</h2>");
-            Redirector.redirect(request, response, "/kiosk/tourAndHandsetSelect.jsp");
-            return;
-        }
-
-        // Get number of handsets required and validate
-        String handsetString = (String) request.getParameter("handset");
-        int handsetNumber = 0;
-        if (handsetString != null) {
-            handsetNumber = Integer.parseInt(InputValidator.clean(handsetString));
-        }
-        if (handsetString == null || handsetString.isEmpty()) {
-            request.setAttribute("message", "<h2 style='color:red'>Please select the number of handsets you require</h2>");
-            Redirector.redirect(request, response, "/kiosk/tourAndHandsetSelect.jsp");
-            return;
-        }
-
-        session.setAttribute("tourID", tourID);
-        session.setAttribute("handsetNo", handsetNumber);
-
-        // Redirect so each user can enter their own details
-        RequestDispatcher view =
-                request.getRequestDispatcher("addUserDetails.jsp");
-
-        // Use the request dispatcher to ask the Container to crank up the JSP,
-        // sending it the request and response */
+        
         view.forward(request, response);
     }
 
@@ -152,13 +124,13 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
         
         int tourId = Integer.parseInt(tourIdS);
         int numberOfPeople = Integer.parseInt(numberOfPeopleS);
-        int currentVisitor = 1;
+        int currentVisitor = 0;
         Visitor[] visitors = new Visitor[numberOfPeople];
         
         session.setAttribute("tourId", tourId);
         session.setAttribute("currentVisitor", currentVisitor);
         session.setAttribute("visitors", visitors);
-        request.setAttribute("visitorSignupStatus", "1");
+        request.setAttribute("visitorSignupStatus", "1");        
     }
     
     private void clearSessionData(HttpSession session){
@@ -166,6 +138,42 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
         session.removeAttribute("tourId");
         session.removeAttribute("currentVisitor");
         session.removeAttribute("visitors");
+    }
+
+    private void getQuestionsForVisitorToAnswer(HttpServletRequest request, HttpSession session) {
+        
+        
+        
+        int tourId = (Integer) session.getAttribute("tourId");       
+        int currentVisitor = (Integer) session.getAttribute("currentVisitor");
+        Visitor[] visitors = (Visitor[]) session.getAttribute("visitors");
+                               
+        if (currentVisitor < visitors.length){
+            
+            String title = (String) request.getParameter("title");            
+            String forename = (String) request.getParameter("forename");            
+            String surname = (String) request.getParameter("surname");
+            int age = Integer.parseInt((String) request.getParameter("age"));
+            
+            visitors[currentVisitor] = new Visitor(title, forename, surname, age, null);
+            
+            request.setAttribute("visitorName", title + ". " + surname);
+            
+            
+            TourManager tm = (TourManager) getServletContext().getAttribute("tourManager");
+            Tour tour = tm.getTourByID(tourId);
+        
+            QuestionSetManager qsm = (QuestionSetManager) getServletContext().getAttribute("questionSetManager");
+            QuestionSet qs = qsm.getQuestionSetById(tour.getQuestionSetID());
+        
+            request.setAttribute("questions", qs.getQuestionsForDisplay());
+            request.setAttribute("visitorSignupStatus", "2");
+            
+            currentVisitor++;
+            return;
+        }
+        
+        request.setAttribute("visitorSignupStatus", "4");
     }
 
  

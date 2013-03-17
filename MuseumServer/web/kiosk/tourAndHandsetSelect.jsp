@@ -43,7 +43,7 @@
             // Depending on the status of the signup we'll see different parts of the signup process
             // *****
             int status = Integer.parseInt(visitorSignupStatus);
-            out.print("<b>"+status+ "</b>");
+            out.print("<b>"+ status + "</b>");
             // *****
             // The select tour/number of people form if we actually have a status set 
             // *****
@@ -66,7 +66,7 @@
                         %><label for="numberOfPeople"><b>Number of Persons: </b></label><%
                         %><select id="numberOfPeople" name="numberOfPeople"><%
                         for (int i = 1; i <= 10; i++) {
-                            %><option value="<%out.print(i);%>">" + i + "</option><%
+                            %><option value="<% out.print(i); %>"><% out.println(i); %></option><%
                         }
                         %></select><%
                         
@@ -93,9 +93,9 @@
                     %><option value="Miss">Miss</option><%
                     %><option value="Dr">Dr</option><%
                 %></select><br/><%
-                %><b>First name :</b><input type="text" name="firstName"><br/><%
-                %><b>Last name :</b><input type="text" name="lastName"><br/><%
-                %><b>Age: </b><input type="text" name="lastName" size="3" maxlength="3"><br/><%
+                %><b>First name :</b><input type="text" name="forename"><br/><%
+                %><b>Last name :</b><input type="text" name="surname"><br/><%
+                %><b>Age: </b><input type="text" name="age" size="3" maxlength="3"><br/><%
                 %><input type="submit" name="submit" value="Decide my audio!"/><%
               %></form><%
               }
@@ -108,7 +108,7 @@
                 String visitorName = (String) request.getAttribute("visitorName");
                 DisplayQuestion[] questions = (DisplayQuestion[]) request.getAttribute("questions");
                 
-                %><h1>Ok <%out.print(visitorName);%> let's try to figure out which audio is best for you!</h1><%
+                %><h2>Ok <%out.print(visitorName);%>, let's try to figure out which audio is best for you!</h2><%
                 %><h2>Answer the questions below:</h2><%
                 %><form method="POST" action="/MuseumServer/SelectTourAndHandsetNumber.do"><%
                 %><input type="hidden" name="visitorSignupStatus" value="3"/><%
@@ -117,15 +117,17 @@
                 // We print out each question and then eash of it's answers in two loops
                 // *****
                 for (int i = 0; i < questions.length; i++){
+                    %><div style="border: solid; border-width: 1px;"><%
                     %><h3>Question: <%out.print(i + 1);%></h3><%
                     
                       DisplayQuestion question = questions[i];
                       out.print(question.questionText);
-                      
+                      %><br/><%
                       for(int j = 0; j < question.answers.length; j++){
                           String answer = question.answers[j];
                         %><input type="radio" name="question<%out.print(i);%>" value="<%out.print(j);%>"><% out.print(answer); %><br><%
                       }
+                     %></div><%
                 }
                 %><input type="submit" name="submit" value="Suggest my level!"/><%
                 %></form<%
