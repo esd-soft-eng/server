@@ -109,9 +109,6 @@ public class PersistanceRepositoryQuestions {
         } catch (SQLException ex) {
             Logger.getLogger(PersistanceRepositoryQuestions.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        
-        System.out.println("yarrr!!!");
         
         return answerList;
     }
