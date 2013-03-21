@@ -5,6 +5,7 @@
 package logging;
 
 import persistance.DatabaseQueryExecutor;
+import utility.DateUtil;
 
 /**
  *
@@ -23,7 +24,7 @@ public class RouterLog implements Log {
     public void log(String[] params) {
         String MAC = params[0];
         String maintainerUsername = params[1];
-        String SQL = "INSERT INTO RouterLog (MAC, maintainerUsername, logDate,logTime) VALUES ('" + MAC + "','" + maintainerUsername + "','" + Logger.getDate() + "','" + Logger.getTime() + "');";
+        String SQL = "INSERT INTO RouterLog (MAC, maintainerUsername, logDate,logTime) VALUES ('" + MAC + "','" + maintainerUsername + "','" + DateUtil.getCurrentDate() + "','" + DateUtil.getCurrentTime() + "');";
         db.executeUpdate(SQL);;
     }
 }

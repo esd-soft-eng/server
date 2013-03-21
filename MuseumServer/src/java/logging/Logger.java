@@ -21,18 +21,7 @@ public class Logger {
 
         ADD, REMOVE, MODIFY
     };
-
-    public static String getTime() {
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-        Date date = new Date();
-        return dateFormat.format(date);
-    }
-
-    public static String getDate() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        return dateFormat.format(date);
-    }
+    
     private static LogFactory logFactory;
 
     public static void setLogFact(LogFactory logFact) {

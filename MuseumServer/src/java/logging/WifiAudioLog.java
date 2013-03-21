@@ -5,6 +5,7 @@
 package logging;
 
 import persistance.DatabaseQueryExecutor;
+import utility.DateUtil;
 
 /**
  *
@@ -22,7 +23,7 @@ public class WifiAudioLog implements Log {
     public void log(String[] params) {
         String loginCode = params[0];
         String MAC = params[1];
-        String SQL = "INSERT INTO WifiLog (loginCode, MAC, logDate,logTime) VALUES ('" + loginCode + "','" + MAC + "','" + Logger.getDate() + "','" + Logger.getTime() + "');";
+        String SQL = "INSERT INTO WifiLog (loginCode, MAC, logDate,logTime) VALUES ('" + loginCode + "','" + MAC + "','" + DateUtil.getCurrentDate() + "','" + DateUtil.getCurrentTime() + "');";
         db.executeUpdate(SQL);
     }
 }

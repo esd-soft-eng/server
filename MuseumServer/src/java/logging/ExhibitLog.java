@@ -5,6 +5,7 @@
 package logging;
 
 import persistance.DatabaseQueryExecutor;
+import utility.DateUtil;
 
 /**
  *
@@ -26,7 +27,7 @@ public class ExhibitLog implements Log {
         String exhibitName = params[1];
         String maintainerUsername = params[2];
         
-        String SQL = "INSERT INTO ExhibitLog (action, exhibitID, exhibitName,maintainerUsername, logDate,logTime) VALUES ('" + action.name() + "','" + exhibitID + "','" + exhibitName + "','"+maintainerUsername+"','"+ Logger.getDate() + "','" + Logger.getTime() + "');";
+        String SQL = "INSERT INTO ExhibitLog (action, exhibitID, exhibitName,maintainerUsername, logDate,logTime) VALUES ('" + action.name() + "','" + exhibitID + "','" + exhibitName + "','"+maintainerUsername+"','"+ DateUtil.getCurrentDate()+ "','" + DateUtil.getCurrentTime() + "');";
         db.executeUpdate(SQL);
     }
 }
