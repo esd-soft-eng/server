@@ -4,6 +4,7 @@
     Author     : Alex
 --%>
 
+<%@page import="visitorsAndGroups.Visitor"%>
 <%@page import="QuestionsAndAnswers.Levels"%>
 <%@page import="QuestionsAndAnswers.Answer"%>
 <%@page import="QuestionsAndAnswers.DisplayQuestion"%>
@@ -34,7 +35,7 @@
                     %><input type="hidden" name="visitorSignupStatus" value="0"/><%
                     %><input type="submit" name="submit" value="Sign me up!"/><%
             %><form><%
-        }        
+        }
         // *****
         // Else we start the process of signing people up
         // *****
@@ -48,7 +49,7 @@
             // *****
             // The select tour/number of people form if we actually have a status set 
             // *****
-            if (status > -1){
+            if (status == 0){
                 
                 Tour[] tours = (Tour[]) request.getAttribute("tours");                
                     if (tours.length > 0) {
@@ -79,6 +80,14 @@
                         out.println("<h2> No tours are currently available, we're very sorry!</h2>");
                     }
               }
+            
+              if (status > 0){
+                  %><form method="POST" action="/MuseumServer/SelectTourAndHandsetNumber.do"><%
+                    %><input type="hidden" name="visitorSignupStatus" value="0"/><%
+                    %><input type="submit" name="submit" value="Start again!"/><%
+                  %></form><%
+              }
+            
               // *****
               // If we have a tour and number of people then we can proceed to get their information.
               // *****
@@ -138,7 +147,7 @@
               }
               
             // *****
-            // 
+            // Let the visitor confirm the level of audio which they want to hear. default selection is based on their question score
             // *****
             if (status == 3){
                 String visitorName = (String) request.getAttribute("visitorName");
@@ -150,18 +159,56 @@
                 %><p>We think you'd enjoy the <%out.print(level);%> audio commentary best, but you're free to choose whichever you like!</p><%
                 
                     %><form method="POST" action="/MuseumServer/SelectTourAndHandsetNumber.do"><%
-                    %><input type="hidden" name="visitorSignupStatus" value="1"/><%
+                    %><input type="hidden" name="visitorSignupStatus" value="4"/><%
                    
                     %><b>Select Level of Commentary:</b><select  name="level"><%
                         for(Levels l : levels){
-                            %><option value="<%out.print(l);%>"><%out.print(l);%></option><%
+                            %><option value="<%out.print(l);%>" 
+                                <%if(l.name().equalsIgnoreCase(level)){
+                                  %>selected<%
+                                }%>> 
+                            <%out.print(l);%></option><%
                         }
                     %></select><br/><br/><%
                     %><input type="submit" name="submit" value="Confirm my audio!"/><%
                 %></form><%
              }
+
+            // *****
+            // Show confirmation of the number of handsets, details and price (almost like a booking confirmation)
+            // *****
             
-                              
+             if (status == 4){
+                                
+                Double pricePerHandset = (Double) request.getAttribute("pricePerHandset");
+                Visitor[] visitors = (Visitor[]) request.getAttribute("visitors");               
+                String tourName = (String) request.getAttribute("tourName");
+                
+                %><h2>Please check the details below.</h2><%
+                %><p>If you are satisfied, click Continue, else you can start over with the button at the top.</p><%
+                
+                %><h2>Tour: <%out.println(tourName);%></h2><%
+                
+                for (int i = 0; i < visitors.length; i++){
+                    Visitor visitor = visitors[i];
+                    %><div style="border: solid; border-width: 1px;"><%
+                    %><h3><%out.println("Visitor: " + i);%></h3><%
+                    out.print("Name: " + visitor.title + ". " + visitor.forename + " " + visitor.surname);
+                    %><br/><%
+                    out.print("Age: " + visitor.age);
+                    %><br/><%
+                    out.print("Commentary: " + visitor.level.name());
+                    %></div><%
+                }
+                %><h2>Pricing:</h2><%
+                %>Number of handsets: <% out.print(visitors.length);
+                %><br/><%
+                %>Cost per handset: <% out.print("£" + pricePerHandset);
+                %><br/><%
+                %>Total cost of visit: <% out.print("£" + (double)visitors.length * pricePerHandset);
+                %><form method="POST" action="/MuseumServer/SelectTourAndHandsetNumber.do"><%
+                %><input type="submit" name="submit" value="Continue to payment!"/><%
+             }
         }%>
         
     </body>

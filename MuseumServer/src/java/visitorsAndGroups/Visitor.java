@@ -31,6 +31,7 @@ public class Visitor {
     
     public void registerHandset(String hostname, int pin){
         this.hostname = hostname;
+        this.pin = pin;
     }
     
     public String getHostName(){
