@@ -5,6 +5,7 @@
 package logging;
 
 import persistance.DatabaseQueryExecutor;
+import utility.DateUtil;
 
 /**
  *
@@ -26,7 +27,7 @@ public class TourLog implements Log {
         String tourName = params[1];
         String maintainerUsername = params[2];
         
-        String SQL = "INSERT INTO TourLog (action, tourID, tourName,maintainerUsername, logDate,logTime) VALUES ('" + action.name() + "','" + tourID + "','" + tourName + "','"+maintainerUsername+"','"+ Logger.getDate() + "','" + Logger.getTime() + "');";
+        String SQL = "INSERT INTO TourLog (action, tourID, tourName,maintainerUsername, logDate,logTime) VALUES ('" + action.name() + "','" + tourID + "','" + tourName + "','"+maintainerUsername+"','"+ DateUtil.getCurrentDate() + "','" + DateUtil.getCurrentTime() + "');";
         db.executeUpdate(SQL);
     }
 }

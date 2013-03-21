@@ -5,6 +5,7 @@
 package logging;
 
 import persistance.DatabaseQueryExecutor;
+import utility.DateUtil;
 
 /**
  *
@@ -23,7 +24,7 @@ public class RegisterLog implements Log {
         String username = params[0];
         String level = params[1];
         String loginCode = params[2];
-        String SQL = "INSERT INTO RegisterLog (usernameOfUser, levelOfUser, loginCode, logDate,logTime) VALUES ('" + username + "','" + level + "', '" + loginCode + "','" + Logger.getDate() + "','" + Logger.getTime() + "');";
+        String SQL = "INSERT INTO RegisterLog (usernameOfUser, levelOfUser, loginCode, logDate,logTime) VALUES ('" + username + "','" + level + "', '" + loginCode + "','" + DateUtil.getCurrentDate() + "','" + DateUtil.getCurrentTime() + "');";
         db.executeUpdate(SQL);
     }
 }

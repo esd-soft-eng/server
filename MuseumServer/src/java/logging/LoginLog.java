@@ -5,6 +5,7 @@
 package logging;
 
 import persistance.DatabaseQueryExecutor;
+import utility.DateUtil;
 
 /**
  *
@@ -21,7 +22,7 @@ public class LoginLog implements Log {
     @Override
     public void log(String[] params) {
         String loginCode = params[0];
-        String SQL = "INSERT INTO LoginLog (loginCode, logDate,logTime) VALUES ('"+loginCode + "','" + Logger.getDate() + "','" + Logger.getTime() + "');";
+        String SQL = "INSERT INTO LoginLog (loginCode, logDate,logTime) VALUES ('"+loginCode + "','" + DateUtil.getCurrentDate() + "','" + DateUtil.getCurrentTime() + "');";
         db.executeUpdate(SQL); 
     }
 }

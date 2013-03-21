@@ -50,6 +50,8 @@
 
             String reportHtml = (String) request.getAttribute("report");
             if (reportHtml != null) {
+                out.println("<hr/>");
+                out.println("<h1>Report Results:</h1>");
                 out.println(reportHtml);
             }
         %>

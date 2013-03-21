@@ -5,6 +5,7 @@
 package logging;
 
 import persistance.DatabaseQueryExecutor;
+import utility.DateUtil;
 
 /**
  *
@@ -22,7 +23,7 @@ public class AudioLog implements Log {
     public void log(String[] params) {
         String loginCode = params[0];
         String audioID = params[1];
-        String SQL = "INSERT INTO AudioLog (loginCode, audioID, logDate,logTime) VALUES ('" + loginCode + "','" + audioID + "','" + Logger.getDate() + "','" + Logger.getTime() + "');";
+        String SQL = "INSERT INTO AudioLog (loginCode, audioID, logDate,logTime) VALUES ('" + loginCode + "','" + audioID + "','" + DateUtil.getCurrentDate() + "','" + DateUtil.getCurrentTime() + "');";
         db.executeUpdate(SQL);
     }
 }

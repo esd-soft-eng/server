@@ -5,6 +5,7 @@
 package logging;
 
 import persistance.DatabaseQueryExecutor;
+import utility.DateUtil;
 
 /**
  *
@@ -25,7 +26,7 @@ public class HandsetLog implements Log {
         String MAC = params[0];
         String maintainerUsername = params[1];
         
-        String SQL = "INSERT INTO HandsetLog (action, MAC ,maintainerUsername, logDate,logTime) VALUES ('" + action.name() + "','" + MAC + "','" +maintainerUsername+"','"+ Logger.getDate() + "','" + Logger.getTime() + "');";
+        String SQL = "INSERT INTO HandsetLog (action, MAC ,maintainerUsername, logDate,logTime) VALUES ('" + action.name() + "','" + MAC + "','" +maintainerUsername+"','"+ DateUtil.getCurrentDate() + "','" + DateUtil.getCurrentTime() + "');";
         db.executeUpdate(SQL);
     }
 }
