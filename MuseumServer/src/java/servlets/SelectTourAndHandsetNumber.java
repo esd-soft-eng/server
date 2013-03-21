@@ -140,12 +140,14 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
 
         int tourId = Integer.parseInt((String) request.getParameter("tourId"));
         int numberOfPeople = Integer.parseInt((String) request.getParameter("numberOfPeople"));
+        int multicastGroup = Integer.parseInt((String) request.getParameter("multicastGroup"));
         int currentVisitor = 0;
-        
+                
         Visitor[] visitors = new Visitor[numberOfPeople];
 
         session.setAttribute("tourId", tourId);
         session.setAttribute("currentVisitor", currentVisitor);
+        session.setAttribute("multicastGroup", multicastGroup);
         request.setAttribute("numberOfVisitors", visitors.length);
         session.setAttribute("visitors", visitors);
         request.setAttribute("displayCurrentVisitor", currentVisitor + 1);
@@ -158,6 +160,7 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
         session.removeAttribute("tourId");
         session.removeAttribute("currentVisitor");
         session.removeAttribute("visitors");
+        session.removeAttribute("multicastGroup");
     }
 
     private void getQuestionsForVisitorToAnswer(HttpServletRequest request, HttpSession session) {
