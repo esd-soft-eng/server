@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utility.DummyPaymentTransactor;
 import utility.InputValidator;
 import utility.Redirector;
 
@@ -86,6 +87,16 @@ public class PaymentProcessor extends HttpServlet {
         }
         if (securityNumber == null || securityNumber.isEmpty()) {
             request.setAttribute("message", "<h2 style='color:red'>Please enter a security number</h2>");
+            Redirector.redirect(request, response, "/kiosk/enterPaymentDetails.jsp");
+            return;
+        }
+        
+        if (DummyPaymentTransactor.transactPayment(cardType, cardNumber, expiryDate, securityNumber)) {
+            request.setAttribute("message", "<h2 style='color:green'>Payment Successful</h2>");
+            Redirector.redirect(request, response, "/kiosk/enterPaymentDetails.jsp");
+            return;
+        } else {
+            request.setAttribute("message", "<h2 style='color:red'>Payment failed</h2>");
             Redirector.redirect(request, response, "/kiosk/enterPaymentDetails.jsp");
             return;
         }
