@@ -56,6 +56,10 @@
         <servlet-name>ValidateUserDetails</servlet-name>
         <servlet-class>servlets.ValidateUserDetails</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PaymentProcessor</servlet-name>
+        <servlet-class>servlets.PaymentProcessor</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginPage</servlet-name>
         <url-pattern>/displayuser.do</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>ValidateUserDetails</servlet-name>
         <url-pattern>/ValidateUserDetails.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentProcessor</servlet-name>
+        <url-pattern>/PaymentProcessor.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
