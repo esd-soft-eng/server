@@ -40,8 +40,9 @@ public class DatabaseInit implements ServletContextListener {
         ctx.setAttribute("tourManager", initTourManager(db));
         ctx.setAttribute("exhibitManager", initExhibitManager(db));
         ctx.setAttribute("audioManager", initAudioManager(db));
-        ctx.setAttribute("questionSetManager", initQuestionSetManager(db));        
-        ctx.setAttribute("routerManager", initRouterManager(db));        
+        ctx.setAttribute("questionSetManager", initQuestionSetManager(db));
+        ctx.setAttribute("routerManager", initRouterManager(db));
+        ctx.setAttribute("databaseExecutor", db);
         Logger.setLogFact(new LogFactory(db));
     }
 
