@@ -24,7 +24,8 @@ public class RouterLog implements Log {
     public void log(String[] params) {
         String MAC = params[0];
         String maintainerUsername = params[1];
-        String SQL = "INSERT INTO RouterLog (MAC, maintainerUsername, logDate,logTime) VALUES ('" + MAC + "','" + maintainerUsername + "','" + DateUtil.getCurrentDate() + "','" + DateUtil.getCurrentTime() + "');";
+        String actionName = action.name();
+        String SQL = "INSERT INTO RouterLog (action, MAC, maintainerUsername, logDate,logTime) VALUES ('" + actionName + "','" + MAC + "','" + maintainerUsername + "','" + DateUtil.getCurrentDate() + "','" + DateUtil.getCurrentTime() + "');";
         db.executeUpdate(SQL);;
     }
 }
