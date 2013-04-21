@@ -26,7 +26,7 @@ public class PersistanceRepositoryUser {
         String sql = "SELECT * FROM "
                 + "`user` `u` , `usertype` `ut` , `usertypelink` `utl` "
                 + "WHERE `u`.`userID` = `utl`.`userID` "
-                + "AND `ut`.`typeID` = `utl`.`typeID`";
+                + "AND `ut`.`typeID` = `utl`.`typeID` ORDER BY u.userID";
 
         ResultSet rs = db.executeStatement(sql);
         return mapResultSetToArrayList(rs);

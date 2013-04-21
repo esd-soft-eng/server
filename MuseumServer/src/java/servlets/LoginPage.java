@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import persistance.DatabaseQueryExecutor;
+import persistance.PersistanceRepositoryUser;
 import utility.Redirector;
 
 /**
@@ -25,7 +27,8 @@ public class LoginPage extends HttpServlet {
         HttpSession session = request.getSession();
 
         UserManager um = (UserManager) request.getServletContext().getAttribute("userManager");
-
+        DatabaseQueryExecutor db = (DatabaseQueryExecutor)request.getServletContext().getAttribute("databaseExecutor");
+        um = new UserManager(new PersistanceRepositoryUser(db));
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
