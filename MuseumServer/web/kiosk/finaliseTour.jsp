@@ -20,7 +20,7 @@
         %>
         
         <h1>Your Handset Information</h1>
-        <form method="POST" action="/MuseumServer/LeadDecider.do">
+        <form method="POST" action="/MuseumServer/TourLeaderSelect.do">
             <h3>Enter your pin number into the handset. Pins are valid for up to 8 hours</h3>
             <table>
                 <tr><th><center>Visitor</center></th><th><center>Pin number</center></th></tr>
@@ -29,7 +29,7 @@
                     
                     for(Visitor v : visitors){
                         %><tr><td><center><% out.print(v.title + ". " + v.forename + " " + v.surname); %></center></td>
-                              <td><center><% out.print(v.pin); %></td></center></tr><%
+                              <td><center><% out.print(v.pin); %></center></td></tr><%
                     }
                          
                 %>

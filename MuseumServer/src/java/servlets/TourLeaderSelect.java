@@ -10,13 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utility.Redirector;
 import visitorsAndGroups.GroupManager;
+import visitorsAndGroups.Visitor;
 
 /**
  *
  * @author Neil
  */
-@WebServlet(name = "LeadDecider", urlPatterns = {"/LeadDecider.do"})
-public class LeadDecider extends HttpServlet {
+@WebServlet(name = "TourLeaderSelect", urlPatterns = {"/TourLeaderSelect.do"})
+public class TourLeaderSelect extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -33,19 +34,20 @@ public class LeadDecider extends HttpServlet {
 
         HttpSession session = request.getSession();
         ServletContext ctx = request.getServletContext();
-
-        int groupLeader = Integer.parseInt(request.getParameter("groupLeader"));
+       
         int multicastGroup = (Integer) session.getAttribute("multicastGroup");
-        int tourId = (Integer) session.getAttribute("tourId");
         GroupManager gm = (GroupManager) ctx.getAttribute("groupManager");
 
         if (multicastGroup == 1) {
-            if (!gm.setGroupLeader(tourId, groupLeader)) {
-                request.setAttribute("message", "<h2 style='color:red'>Something went wrong. Please contact"
-                                        + "<br/>Please contact a staff member.</h2>");
-                Redirector.redirect(request, response, "/kiosk/finaliseTour.jsp");
+            int groupLeader = Integer.parseInt(request.getParameter("groupLeader"));
+            int multicastGroupId = (Integer) session.getAttribute("multicastGroupId");
+                        
+            if (!gm.setGroupLeader(multicastGroupId, groupLeader)) {
+                handleSetFailure(request, session, multicastGroup, response);
             }
         }
+        this.unsetSessionData(session);
+        
         Redirector.redirect(request, response, "/kiosk/tourAndHandsetSelect.jsp");
     }
 
@@ -89,4 +91,21 @@ public class LeadDecider extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void unsetSessionData(HttpSession session) {
+        session.removeAttribute("multicastGroup");
+        session.removeAttribute("multicastGroupId");
+        session.removeAttribute("visitors");
+        session.removeAttribute("tourId");
+        session.removeAttribute("questionSet");
+        session.removeAttribute("currentVisitor");
+    }
+
+    private void handleSetFailure(HttpServletRequest request, HttpSession session, int multicastGroup, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("message", "<h2 style='color:red'>Something went wrong. Please contact"
+                                + "<br/>Please contact a staff member.</h2>");
+        request.setAttribute("visitors", (Visitor[]) session.getAttribute("visitors"));
+        request.setAttribute("multicastGroup", multicastGroup);
+        Redirector.redirect(request, response, "/kiosk/finaliseTour.jsp");
+    }
 }

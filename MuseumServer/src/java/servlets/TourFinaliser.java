@@ -168,8 +168,8 @@ public class TourFinaliser extends HttpServlet {
     private void createMulticastGroup(int tourId, Visitor[] visitors, GroupManager gm, HttpSession session) {
 
         int groupId = gm.createNewGroup(tourId);
-        session.setAttribute("multiCastGroupId", groupId);
-
+        session.setAttribute("multicastGroupId", groupId);
+        
         for (Visitor v : visitors) {
             gm.addNewVisitorToGroup(groupId, v);
         }
