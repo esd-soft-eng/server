@@ -30,6 +30,7 @@
                     out.println("<h2>Select a tour to modify.</h2>");
                     for (Tour t : tours) {
                         String tourName = t.getName();
+                        //Display just a small subset of the description for brevity
                         String tourDescription = t.getDescription().length() > 100 ? t.getDescription().substring(0, 100) + "...." : t.getDescription();
                         int tourID = t.getTourID();
                         String questionSetID = Integer.toString(t.getQuestionSetID());

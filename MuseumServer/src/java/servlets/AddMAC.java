@@ -68,6 +68,7 @@ public class AddMAC extends HttpServlet {
         }
     }
 
+    //Simple function which checks if a MAC address is actually valid
     private boolean validMAC(String MAC1, String MAC2, String MAC3, String MAC4, String MAC5, String MAC6) {
         String[] macArray = {MAC1, MAC2, MAC3, MAC4, MAC5, MAC6};
 

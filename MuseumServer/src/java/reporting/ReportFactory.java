@@ -6,6 +6,7 @@ package reporting;
  */
 public class ReportFactory {
 
+    //Simple method which returns a report object based on the report type
     public Report getFactory(ReportGeneratorServlet.ReportType reportType) {
         switch (reportType) {
             case AUDIO:

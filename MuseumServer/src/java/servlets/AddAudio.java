@@ -55,16 +55,18 @@ public class AddAudio extends HttpServlet {
         String audioLocation = "";
         InputStream content = null;
         String audioName = "";
+        String filename = "";
         try {
             List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
-
+            
             for (FileItem item : items) {
+                //because form is multipart we deal with the file object itself here
                 if (!item.isFormField()) {
-                    String filename = item.getName();
+                    filename = item.getName();
 
                     audioLocation = FileUtil.getFileSystemPath(getServletContext(), "audio") + "/" + filename;
                     content = item.getInputStream();
-                } else {
+                } else { //And grab the other parameter in this block
 
                     if (item.getFieldName().contains("audioName")) {
                         audioName = item.getString();
@@ -75,6 +77,7 @@ public class AddAudio extends HttpServlet {
             ex.printStackTrace();
         }
 
+        //various checks to ensure that the uploaded file is correct/the name is valid
         if (!audioLocation.toUpperCase().endsWith(".MP3")) {
             request.setAttribute("message", "<h2 style='color:red;'>Only MP3s may be uploaded through this form.</h2>");
             Redirector.redirect(request, response, "/admin/addAudio.jsp");
@@ -87,7 +90,7 @@ public class AddAudio extends HttpServlet {
             request.setAttribute("message", "<h2 style='color:red;'>Error uploading file.</h2>");
             Redirector.redirect(request, response, "/admin/addAudio.jsp");
             return;
-        } else if (!manager.addAudio(audioName, audioLocation)) {
+        } else if (!manager.addAudio(audioName, filename)) {
             request.setAttribute("message", "<h2 style='color:red;'>Error uploading file.</h2>");
             Redirector.redirect(request, response, "/admin/addAudio.jsp");
             return;
@@ -101,6 +104,7 @@ public class AddAudio extends HttpServlet {
         return;
     }
 
+    //Simple function to store the file on the server
     public void uploadAudio(InputStream content, String audioLocation) throws FileNotFoundException, IOException {
         // write the inputStream to a FileOutputStream
         OutputStream out = new FileOutputStream(new File(audioLocation));

@@ -2,9 +2,6 @@
     Document   : enterPaymentDetails
     Created on : 21-Mar-2013, 17:16:56
     Author     : Alex
-    Desc.      : Creates a web page that lets the visitor pay for their handsets
-                 with a credit card. Lets the visitor provide their card type, 
-                 card number, expiry date and security number.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,8 +11,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
-        <h1>Enter Payment Details</h1>
+    <body>        
+        <% String messageFromServlet = (String) request.getAttribute("message");
+            if (messageFromServlet != null) {
+                out.println(messageFromServlet);
+            }
+        %>
+        
+        <h1>MWAH!</h1>
         <form method="POST" action="/MuseumServer/PaymentProcessor.do">
             <b>Card type</b><select name="cardType">
                 <option value="Visa">Visa</option>
@@ -56,10 +59,6 @@
             <input type="submit" name="submit" value="Cancel"/>
         </form>
         
-        <% String messageFromServlet = (String) request.getAttribute("message");
-            if (messageFromServlet != null) {
-                out.println(messageFromServlet);
-            }
-        %>
+        
     </body>
 </html>

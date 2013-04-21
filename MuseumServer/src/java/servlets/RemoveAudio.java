@@ -40,6 +40,7 @@ public class RemoveAudio extends HttpServlet {
 
         AudioManager manager = (AudioManager) getServletContext().getAttribute("audioManager");
         Audio audioToDelete = null;
+        //Loop over all audio until we find the correct audio to remove
         for (Audio a : manager.getListOfAudio()) {
             if (a.getAudioID() == Integer.parseInt(ID)) {
                 audioToDelete = a;
@@ -47,6 +48,7 @@ public class RemoveAudio extends HttpServlet {
             }
         }
 
+        //if no audio was found then error out
         if (audioToDelete == null) {
             request.setAttribute("message", "<h2 style='color:red;'>Invalid audio ID was selected</h2>");
             Redirector.redirect(request, response, "/admin/removeAudio.jsp");
@@ -56,6 +58,7 @@ public class RemoveAudio extends HttpServlet {
         File audioFile = new File(audioToDelete.getAudioLocation());
         audioFile.delete();
 
+        //if the deletion fails then error out
         if (!manager.removeAudio(Integer.parseInt(ID))) {
             request.setAttribute("message", "<h2 style='color:red;'>Failed to delete audio file.</h2>");
             Redirector.redirect(request, response, "/admin/removeAudio.jsp");

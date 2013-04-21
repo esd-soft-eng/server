@@ -35,6 +35,7 @@ public class DateUtil {
     
     public static Date subtractWeeksFromCurrentDate(int numWeeks)
     {
+        //Standard Java approach to subtracting weeks from date
         Date now = new Date();
         GregorianCalendar gc = new GregorianCalendar();
         gc.setTime(now);

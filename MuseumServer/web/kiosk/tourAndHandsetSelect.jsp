@@ -1,7 +1,7 @@
 <%-- 
     Document   : tourAndHandsetSelect
     Created on : 14-Mar-2013, 15:03:59
-    Author     : Alex
+    Author     : Neil
 --%>
 
 <%@page import="visitorsAndGroups.Visitor"%>
@@ -212,6 +212,7 @@
                 %><br/><%
                 %>Total cost of visit: <% out.print("£" + (double)visitors.length * pricePerHandset);
                 %><form method="POST" action="/MuseumServer/SelectTourAndHandsetNumber.do"><%
+                %><input type="hidden" name="visitorSignupStatus" value="5"/><%
                 %><input type="submit" name="submit" value="Continue to payment!"/><%
              }
         }%>

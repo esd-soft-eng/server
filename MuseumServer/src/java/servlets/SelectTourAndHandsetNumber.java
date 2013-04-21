@@ -13,12 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utility.InputValidator;
 import utility.LevelCalculator;
 import visitorsAndGroups.Visitor;
 
 /**
  *
- * @author Alex
+ * @author Neil
  */
 @WebServlet(name = "SelectTourAndHandsetNumber", urlPatterns = {"/SelectTourAndHandsetNumber.do"})
 public class SelectTourAndHandsetNumber extends HttpServlet {
@@ -65,12 +66,14 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
             case 4:
                 this.collectLevelAndVisitorDetails(request, session);
                 break;
+            case 5:
+                view = request.getRequestDispatcher("kiosk/enterPaymentDetails.jsp");
+                break;
             default:
                 this.clearSignUpSessionData(session);
                 view = request.getRequestDispatcher("kiosk/tourAndHandsetSelect.jsp");
                 break;
         }
-
 
         view.forward(request, response);
     }
@@ -171,9 +174,9 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
 
         if (currentVisitor < visitors.length) {
 
-            String title = (String) request.getParameter("title");
-            String forename = (String) request.getParameter("forename");
-            String surname = (String) request.getParameter("surname");
+            String title = InputValidator.clean((String) request.getParameter("title"));
+            String forename = InputValidator.clean((String) request.getParameter("forename"));
+            String surname = InputValidator.clean((String) request.getParameter("surname"));
             int age = Integer.parseInt((String) request.getParameter("age"));
 
             visitors[currentVisitor] = new Visitor(title, forename, surname, age, null);
@@ -236,7 +239,7 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
             return;
         }
         
-        this.confirmVisitorDetails(request, session, visitors);        
+        this.confirmVisitorDetails(request, session, visitors); 
     }
 
     private void confirmVisitorDetails(HttpServletRequest request, HttpSession session, Visitor[] visitors) {
