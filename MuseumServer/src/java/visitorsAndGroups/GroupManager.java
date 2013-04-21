@@ -45,7 +45,7 @@ public class GroupManager {
 
         Group group = this.getGroupById(groupId);
         if (group != null) {
-            return this.groups.add(group);
+            return group.addVisitorToGroup(visitor);
         }
         return false;
     }
@@ -59,6 +59,15 @@ public class GroupManager {
         } while (this.pinIsAlreadyTaken(newPin));
 
         return newPin;
+    }
+
+    public boolean setGroupLeader(int groupId, int pin) {
+        
+        Group group = this.getGroupById(groupId);
+        if (group != null){
+            return (group.setGroupLeader(pin) && persistance.updateGroupLeader(group)) ? true : false;
+        }
+        return false;
     }
 
     private synchronized Group getGroupById(int groupId) {
@@ -75,7 +84,7 @@ public class GroupManager {
         return (int) (1000 + (Math.random() * 8999));
     }
 
-    private boolean pinIsAlreadyTaken(int newPin) {
+    private synchronized boolean pinIsAlreadyTaken(int newPin) {
 
         for (Group g : this.groups) {
             if (g.containsPin(newPin)) {

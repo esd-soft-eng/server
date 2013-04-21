@@ -31,20 +31,20 @@ public class PersistanceRepositoryGroups {
         return executor.executeUpdate(sql);
     }
     
-    public boolean updateGroup(int id, int leader, Date start, Date expires, boolean active){
+    public boolean updateGroupLeader(Group group){
+        
+        Visitor leader = group.getGroupLeader();
         
         String sql = "UPDATE `tourGroup` `tg` "
-                   + "SET `tg`.`leader`=" + leader
-                   + " , `tg`.`start`=" + start
-                   + " , `tg`.`expires`=" + expires
-                   + " , `tg`.`active`=" + active
-                   + " WHERE `tg`.`id`=" + id;
+                   + "SET `tg`.`leader`=" + leader.pin
+                   + " WHERE `tg`.`id`=" + group.getId();
         return executor.executeUpdate(sql);
     }
 
     public synchronized Group getLastCreatedGroup() {
         
-        String sql = "SELECT MAX(`id`) FROM `tourGroup`";
+        String sql = "SELECT * FROM `tourGroup`"
+                   + "ORDER BY `id` DESC LIMIT 1";
         
         ResultSet rs = executor.executeStatement(sql);
         return this.getTourGroupsFromResultSet(rs).get(0);        

@@ -42,9 +42,6 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
 
         RequestDispatcher view = request.getRequestDispatcher("kiosk/tourAndHandsetSelect.jsp");
 
-        System.out.println("KJKJ");
-        System.out.println(visitorSignupStatus);
-
         if (visitorSignupStatus == null) {
             visitorSignupStatus = "0";
         }

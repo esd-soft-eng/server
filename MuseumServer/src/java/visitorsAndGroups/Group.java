@@ -42,6 +42,7 @@ public class Group {
         return true;
     }
     
+    
     public boolean pinIsGroupLeader(int pin){
         return (this.groupLeader.getPin() == pin) ? true : false;
     }
@@ -82,5 +83,9 @@ public class Group {
             }
         }
         return false;
+    }
+
+    public Visitor getGroupLeader() {
+        return this.groupLeader;
     }
 }

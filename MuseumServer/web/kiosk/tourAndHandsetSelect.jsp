@@ -72,7 +72,7 @@
                         }
                         %></select><%
                         %><br/><br/><%                        
-                        %><label for="multicastGroup"><b>Do you want a group tour?: </b></label><br/><%
+                        %><label for="multicastGroup"><b>Do you want a group tour? (One person controls the audio): </b></label><br/><%
                         %><input type="radio" name="multicastGroup" value="1" checked>Yes<br/><%
                         %><input type="radio" name="multicastGroup" value="0">No<br/><%
                         

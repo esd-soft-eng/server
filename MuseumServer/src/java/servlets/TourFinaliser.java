@@ -33,7 +33,7 @@ public class TourFinaliser extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         ServletContext ctx = request.getServletContext();
-        
+
         // Get card type and validate it
         String cardType = (String) request.getParameter("cardType");
         if (cardType != null) {
@@ -44,7 +44,7 @@ public class TourFinaliser extends HttpServlet {
             Redirector.redirect(request, response, "/kiosk/enterPaymentDetails.jsp");
             return;
         }
-        
+
         // Get card number and validate it
         String cardNumber = (String) request.getParameter("cardNumber");
         if (cardNumber != null) {
@@ -55,7 +55,7 @@ public class TourFinaliser extends HttpServlet {
             Redirector.redirect(request, response, "/kiosk/enterPaymentDetails.jsp");
             return;
         }
-        
+
         // Get expiry month and validate it
         String expiryMonth = (String) request.getParameter("expiryMonth");
         if (expiryMonth != null) {
@@ -66,7 +66,7 @@ public class TourFinaliser extends HttpServlet {
             Redirector.redirect(request, response, "/kiosk/enterPaymentDetails.jsp");
             return;
         }
-        
+
         // Get card type and validate it
         String expiryYear = (String) request.getParameter("expiryYear");
         if (expiryYear != null) {
@@ -77,30 +77,30 @@ public class TourFinaliser extends HttpServlet {
             Redirector.redirect(request, response, "/kiosk/enterPaymentDetails.jsp");
             return;
         }
-        
+
         String expiryDate = expiryMonth + "/" + expiryYear;
-        
+
         // Get card type and validate it
         String securityNumber = (String) request.getParameter("securityNumber");
         if (securityNumber != null) {
             securityNumber = InputValidator.clean(securityNumber);
         }
-        
+
         if (securityNumber == null || securityNumber.isEmpty()) {
             request.setAttribute("message", "<h2 style='color:red'>Please enter a security number</h2>");
             Redirector.redirect(request, response, "/kiosk/enterPaymentDetails.jsp");
             return;
         }
-        
+
         if (DummyPaymentTransactor.transactPayment(cardType, cardNumber, expiryDate, securityNumber)) {
             request.setAttribute("message", "<h2 style='color:green'>Payment Successful</h2>");
-            this.processTour(ctx, session);
+            this.processTour(ctx, session, request);
             Redirector.redirect(request, response, "/kiosk/finaliseTour.jsp");
         } else {
             request.setAttribute("message", "<h2 style='color:red'>Payment failed.<br/>Please re-enter details or cancel.</h2>");
             Redirector.redirect(request, response, "/kiosk/enterPaymentDetails.jsp");
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -144,37 +144,44 @@ public class TourFinaliser extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void processTour(ServletContext ctx, HttpSession session) {
-        
+    private void processTour(ServletContext ctx, HttpSession session, HttpServletRequest request) {
+
         GroupManager gm = (GroupManager) ctx.getAttribute("groupManager");
-        
+
         // get the parameters which we've acquired through the sign up process
         int tourId = (Integer) session.getAttribute("tourId");
         Visitor[] visitors = (Visitor[]) session.getAttribute("visitors");
         int multicastGroup = (Integer) session.getAttribute("multicastGroup");
-        
-        if (multicastGroup == 1){
-            this.createMulticastGroup(tourId, visitors, gm);
+
+        request.setAttribute("visitors", visitors);
+        request.setAttribute("multicastGroup", multicastGroup);
+
+        if (multicastGroup == 1) {
+            this.createMulticastGroup(tourId, visitors, gm, session);
             return;
         }
-        
-        this.createVisitorTourGroups(tourId, visitors, gm);                
-        
+
+        this.createVisitorTourGroups(tourId, visitors, gm);
+
     }
 
-    private void createMulticastGroup(int tourId, Visitor[] visitors, GroupManager gm) {
-        
+    private void createMulticastGroup(int tourId, Visitor[] visitors, GroupManager gm, HttpSession session) {
+
         int groupId = gm.createNewGroup(tourId);
-        for(Visitor v : visitors){
+        session.setAttribute("multiCastGroupId", groupId);
+
+        for (Visitor v : visitors) {
             gm.addNewVisitorToGroup(groupId, v);
         }
     }
 
     private void createVisitorTourGroups(int tourId, Visitor[] visitors, GroupManager gm) {
-                
-        for(Visitor v : visitors){
+
+        for (Visitor v : visitors) {
             int groupId = gm.createNewGroup(tourId);
-            gm.addNewVisitorToGroup(groupId, v);
+            if (gm.addNewVisitorToGroup(groupId, v)) {
+                gm.setGroupLeader(groupId, v.pin);
+            }
         }
     }
 }
