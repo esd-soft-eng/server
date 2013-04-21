@@ -4,12 +4,14 @@ import java.security.*;
 
 /**
  *
- * @author Simon
+ * @author Simon Edwins
  */
 public class MD5Hasher {
 
+    // Creates a MD5 hash for passwords.
+    // Contains code which allows for correct leading zero(s) when a hash
+    // is generated!
     public static String hashMD5(String hash) {
-
         
         byte[] inputBytes = hash.getBytes();
         String output = null;

@@ -4,7 +4,6 @@ import businessDomainObjects.TourManager;
 import businessDomainObjects.User;
 import businessDomainObjects.UserManager;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Darkstar
+ * @author Simon Edwins
  */
 public class RemoveTourAction extends HttpServlet {
 

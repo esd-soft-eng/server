@@ -3,7 +3,6 @@ package businessDomainObjects;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import persistance.PersistanceRepositoryExhibit;
-import utility.InputValidator;
 
 /**
  *

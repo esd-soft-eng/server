@@ -1,4 +1,3 @@
-// The Ham (Simon Edwins, 21st February 2013)
 package businessDomainObjects;
 
 import java.util.HashSet;

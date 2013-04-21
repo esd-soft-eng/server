@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package persistance;
 
 import QuestionsAndAnswers.Answer;
@@ -15,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author neil + darkstar
+ * @author neil + simon
  */
 public class PersistanceRepositoryQuestions {
 

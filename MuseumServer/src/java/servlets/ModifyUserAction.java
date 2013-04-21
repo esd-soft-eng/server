@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Simon
+ * @author Simon Edwins
  */
 public class ModifyUserAction extends HttpServlet{
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

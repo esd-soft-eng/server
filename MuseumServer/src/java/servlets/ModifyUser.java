@@ -1,5 +1,3 @@
-// FIXME: Validation (string validation, using utility -> add).
-
 package servlets;
 
 import businessDomainObjects.User;
@@ -8,7 +6,6 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +15,7 @@ import utility.Redirector;
 
 /**
  *
- * @author Simon
+ * @author Simon Edwins
  */
 public class ModifyUser extends HttpServlet{
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

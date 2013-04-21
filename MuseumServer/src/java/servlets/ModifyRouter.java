@@ -16,7 +16,7 @@ import utility.Redirector;
 
 /**
  *
- * @author Darkstar
+ * @author Simon Edwins
  */
 public class ModifyRouter extends HttpServlet {
 

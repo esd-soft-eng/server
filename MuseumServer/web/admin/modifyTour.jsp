@@ -3,6 +3,7 @@
     Created on : 07-Mar-2013, 16:43:54
     Author     : Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
                : Simon Edwins <Darkstar>
+    Description: Form to allow modifying of a Tour.
 --%>
 
 <%@page import="QuestionsAndAnswers.QuestionSet"%>
@@ -37,6 +38,7 @@
                         if(questionSetID.equals("-1")){
                             questionSetID = "None";
                         }
+                        // Display tours, including description and question set ID.
                         out.println("<input type='radio' name='tourID' value='" + tourID + "'/>" + tourName + "(<i>Description:" + tourDescription + "|QuestionSetID:" + questionSetID + "</i>)<br/>");
                     }
                     out.println("<input type='submit' value='modify'/>");

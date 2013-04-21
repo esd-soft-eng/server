@@ -1,8 +1,8 @@
 <%-- 
-    FIXME!!! REFERSH ISSUE (if data is changed, then unless servlet is restarted, won't display changes, may need AJAX!
     Document   : modifyUser
     Created on : 16-Feb-2013, 16:28:00
-    Author     : Ske
+    Author     : Simon Edwins
+    Description: Form for modifying a User (all attributes).
 --%>
 
 <%@page import="java.util.ArrayList"%>
@@ -14,6 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%
+                // Logic for success/error message
                 String message = (String) request.getAttribute("message");
                 if(message == null){
                     message = "";
@@ -34,11 +35,11 @@
             
             <form method="POST" action="ModifyUser.do">
                 
-                <%                    
+                <%                  
+                    // Displays selectable user.
                     for(User userString : um.getAllUsers()){
                         String thisString = userString.getUserName();
-                        int userID = userString.getUserID();
-                        
+                        int userID = userString.getUserID();                        
                         out.println(userID + ": " + thisString + "   <input type=\"radio\" name=\"userToModify\" value=" + userID + "><br />");
                     }
                 %>

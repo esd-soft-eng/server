@@ -5,7 +5,6 @@ import businessDomainObjects.TourManager;
 import businessDomainObjects.User;
 import businessDomainObjects.UserManager;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +15,7 @@ import utility.Redirector;
 
 /**
  *
- * @author Darkstar
+ * @author Simon Edwins
  */
 public class RemoveTour extends HttpServlet {
 

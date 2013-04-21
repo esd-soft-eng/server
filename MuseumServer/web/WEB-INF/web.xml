@@ -41,10 +41,6 @@
         <servlet-class>servlets.RemoveTour</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ModifyAudio</servlet-name>
-        <servlet-class>servlets.ModifyAudio</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ModifyRouter</servlet-name>
         <servlet-class>servlets.ModifyRouter</servlet-class>
     </servlet>
@@ -83,10 +79,6 @@
     <servlet-mapping>
         <servlet-name>RemoveTour</servlet-name>
         <url-pattern>/RemoveTour.do</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ModifyAudio</servlet-name>
-        <url-pattern>/ModifyAudio.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ModifyRouter</servlet-name>
