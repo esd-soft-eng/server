@@ -9,14 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utility.DummyPaymentTransactor;
 import utility.InputValidator;
 import utility.Redirector;
+import visitorsAndGroups.GroupManager;
+import visitorsAndGroups.Visitor;
 
 /**
  *
  * @author Alex
  */
-public class PaymentProcessor extends HttpServlet {
+public class TourFinaliser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -84,10 +87,20 @@ public class PaymentProcessor extends HttpServlet {
         if (securityNumber != null) {
             securityNumber = InputValidator.clean(securityNumber);
         }
+        
         if (securityNumber == null || securityNumber.isEmpty()) {
             request.setAttribute("message", "<h2 style='color:red'>Please enter a security number</h2>");
             Redirector.redirect(request, response, "/kiosk/enterPaymentDetails.jsp");
             return;
+        }
+        
+        if (DummyPaymentTransactor.transactPayment(cardType, cardNumber, expiryDate, securityNumber)) {
+            request.setAttribute("message", "<h2 style='color:green'>Payment Successful</h2>");
+            this.processTour(ctx, session);
+            Redirector.redirect(request, response, "/kiosk/finaliseTour.jsp");
+        } else {
+            request.setAttribute("message", "<h2 style='color:red'>Payment failed.<br/>Please re-enter details or cancel.</h2>");
+            Redirector.redirect(request, response, "/kiosk/enterPaymentDetails.jsp");
         }
         
     }
@@ -132,4 +145,38 @@ public class PaymentProcessor extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void processTour(ServletContext ctx, HttpSession session) {
+        
+        GroupManager gm = (GroupManager) ctx.getAttribute("groupManager");
+        
+        // get the parameters which we've acquired through the sign up process
+        int tourId = (Integer) session.getAttribute("tourId");
+        Visitor[] visitors = (Visitor[]) session.getAttribute("visitors");
+        int multicastGroup = (Integer) session.getAttribute("multicastGroup");
+        
+        if (multicastGroup == 1){
+            this.createMulticastGroup(tourId, visitors, gm);
+            return;
+        }
+        
+        this.createVisitorTourGroups(tourId, visitors, gm);                
+        
+    }
+
+    private void createMulticastGroup(int tourId, Visitor[] visitors, GroupManager gm) {
+        
+        int groupId = gm.createNewGroup(tourId);
+        for(Visitor v : visitors){
+            gm.addNewVisitorToGroup(groupId, v);
+        }
+    }
+
+    private void createVisitorTourGroups(int tourId, Visitor[] visitors, GroupManager gm) {
+                
+        for(Visitor v : visitors){
+            int groupId = gm.createNewGroup(tourId);
+            gm.addNewVisitorToGroup(groupId, v);
+        }
+    }
 }

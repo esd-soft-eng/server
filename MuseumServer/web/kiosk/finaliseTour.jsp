@@ -11,8 +11,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
-        <h1>Enter Payment Details</h1>
+    <body>        
+        <% String messageFromServlet = (String) request.getAttribute("message");
+            if (messageFromServlet != null) {
+                out.println(messageFromServlet);
+            }
+        %>
+        
+        <h1>MWAH!</h1>
         <form method="POST" action="/MuseumServer/PaymentProcessor.do">
             <b>Card type</b><select name="cardType">
                 <option value="Visa">Visa</option>
@@ -53,10 +59,6 @@
             <input type="submit" name="submit" value="Cancel"/>
         </form>
         
-        <% String messageFromServlet = (String) request.getAttribute("message");
-            if (messageFromServlet != null) {
-                out.println(messageFromServlet);
-            }
-        %>
+        
     </body>
 </html>

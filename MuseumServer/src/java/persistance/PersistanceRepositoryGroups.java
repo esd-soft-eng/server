@@ -21,8 +21,8 @@ import visitorsAndGroups.Visitor;
 public class PersistanceRepositoryGroups {
     
     private DatabaseQueryExecutor executor;
-        
-    public void PeristanceRepositoryGroups(DatabaseQueryExecutor executor){
+      
+    public PersistanceRepositoryGroups(DatabaseQueryExecutor executor){
         this.executor = executor;
     }
 
@@ -71,6 +71,14 @@ public class PersistanceRepositoryGroups {
         return this.getTourGroupsFromResultSet(rs);
     }
     
+    public synchronized ArrayList<Group> getAllActiveGroups() {
+        
+        String sql = "SELECT * FROM `tourGroup` `tg`"
+                   + "WHERE NOW() < `tg`.`expiryDate`";
+        ResultSet rs = executor.executeStatement(sql);
+        return this.getTourGroupsFromResultSet(rs);
+    }
+        
     private synchronized ArrayList<Group> getTourGroupsFromResultSet(ResultSet rs){
         ArrayList<Group> groups = new ArrayList();
         

@@ -55,12 +55,13 @@ public class AddAudio extends HttpServlet {
         String audioLocation = "";
         InputStream content = null;
         String audioName = "";
+        String filename = "";
         try {
             List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 
             for (FileItem item : items) {
                 if (!item.isFormField()) {
-                    String filename = item.getName();
+                    filename = item.getName();
 
                     audioLocation = FileUtil.getFileSystemPath(getServletContext(), "audio") + "/" + filename;
                     content = item.getInputStream();
@@ -87,7 +88,7 @@ public class AddAudio extends HttpServlet {
             request.setAttribute("message", "<h2 style='color:red;'>Error uploading file.</h2>");
             Redirector.redirect(request, response, "/admin/addAudio.jsp");
             return;
-        } else if (!manager.addAudio(audioName, audioLocation)) {
+        } else if (!manager.addAudio(audioName, filename)) {
             request.setAttribute("message", "<h2 style='color:red;'>Error uploading file.</h2>");
             Redirector.redirect(request, response, "/admin/addAudio.jsp");
             return;

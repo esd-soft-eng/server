@@ -6,6 +6,7 @@ package visitorsAndGroups;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -75,5 +76,15 @@ public class Group {
             }
         }
         return null;
+    }
+
+    public boolean containsPin(int pin) {
+        
+        for(Visitor v : this.groupMembers){
+            if(v.pin == pin){
+               return true;
+            }
+        }
+        return false;
     }
 }

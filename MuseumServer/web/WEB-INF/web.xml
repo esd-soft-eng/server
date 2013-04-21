@@ -58,7 +58,7 @@
     </servlet>
     <servlet>
         <servlet-name>PaymentProcessor</servlet-name>
-        <servlet-class>servlets.PaymentProcessor</servlet-class>
+        <servlet-class>servlets.TourFinaliser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginPage</servlet-name>

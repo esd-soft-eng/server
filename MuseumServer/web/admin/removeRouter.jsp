@@ -20,7 +20,7 @@
         <form action="/MuseumServer/removeRouter.do">
             <%
                 RouterManager rm = (RouterManager) getServletContext().getAttribute("routerManager");
-                ArrayList<Router> routers = rm.getRouters();
+                ArrayList<Router> routers = rm.getRouterList();
                 if (routers.isEmpty()) {
                     out.println("<p>No routers are currently held in the database.</p>");
                     out.println("<p>To add a router, please go <a href='/MuseumServer/admin/addRouter.jsp'>here</a></p>");

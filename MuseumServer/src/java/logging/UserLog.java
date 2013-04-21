@@ -5,6 +5,7 @@
 package logging;
 
 import persistance.DatabaseQueryExecutor;
+import utility.DateUtil;
 
 /**
  *
@@ -25,7 +26,7 @@ public class UserLog implements Log {
         String usernameOfUser = params[0];
         String usernameOfMaintainer = params[1];
 
-        String SQL = "INSERT INTO UserLog (action, usernameOfUser, maintainerUsername, logDate,logTime) VALUES ('" + action.name() + "','" + usernameOfUser + "','" + usernameOfMaintainer + "','" + Logger.getDate() + "','" + Logger.getTime() + "');";
+        String SQL = "INSERT INTO UserLog (action, usernameOfUser, maintainerUsername, logDate,logTime) VALUES ('" + action.name() + "','" + usernameOfUser + "','" + usernameOfMaintainer + "','" + DateUtil.getCurrentDate() + "','" + DateUtil.getCurrentTime() + "');";
         db.executeUpdate(SQL);
     }
 }

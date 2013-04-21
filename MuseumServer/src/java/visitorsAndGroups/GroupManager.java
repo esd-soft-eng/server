@@ -34,6 +34,7 @@ public class GroupManager {
 
     public synchronized boolean addNewVisitorToGroup(int groupId, Visitor visitor) {
 
+        visitor.pin = this.generateNewPin();
         if (persistance.addNewVisitorToDatabase(visitor, groupId)) {
             return this.addVisitorToGroup(groupId, visitor);
         }
@@ -49,6 +50,17 @@ public class GroupManager {
         return false;
     }
 
+    public synchronized Integer generateNewPin() {
+
+        int newPin;
+
+        do {
+            newPin = this.getRandomFourDigitInt();
+        } while (this.pinIsAlreadyTaken(newPin));
+
+        return newPin;
+    }
+
     private synchronized Group getGroupById(int groupId) {
 
         for (Group g : this.groups) {
@@ -59,7 +71,21 @@ public class GroupManager {
         return null;
     }
 
+    private int getRandomFourDigitInt() {
+        return (int) (1000 + (Math.random() * 8999));
+    }
+
+    private boolean pinIsAlreadyTaken(int newPin) {
+
+        for (Group g : this.groups) {
+            if (g.containsPin(newPin)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void init() {
-        this.groups = persistance.getAllGroups();
+        this.groups = persistance.getAllActiveGroups();
     }
 }

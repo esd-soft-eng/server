@@ -56,6 +56,28 @@ public class ReportGeneratorServlet extends HttpServlet {
             report = fact.getFactory(ReportType.WIFI);
         }
 
+        //convert report periods to week numbers        
+        if (reportPeriod.equals("week")) {
+            reportPeriod = "1";
+        } else if (reportPeriod.equals("fortnight")) {
+            reportPeriod = "2";
+        } else if (reportPeriod.equals("month")) {
+            reportPeriod = "4";
+        } else if (reportPeriod.equals("twoMonths")) {
+            reportPeriod = "8";
+        } else if (reportPeriod.equals("fourMonths")) {
+            reportPeriod = "16";
+        } else if (reportPeriod.equals("sixMonths")) {
+            reportPeriod = "26";
+        } else if (reportPeriod.equals("year")) {
+            reportPeriod = "52";
+        } else if (reportPeriod.equals("forever")) {
+            reportPeriod = "999";
+        }
+
+
+
+
         String reportHTML = report.generateReport(reportPeriod, db);
         if (report == null || report.equals("")) {
             request.setAttribute("message", "<h2 style='color:red;'>Either the report type or the report period was invalid.</h2>");

@@ -15,11 +15,13 @@ import logging.Logger;
 import persistance.DatabaseQueryExecutor;
 import persistance.PersistanceRepositoryAudio;
 import persistance.PersistanceRepositoryExhibit;
+import persistance.PersistanceRepositoryGroups;
 import persistance.PersistanceRepositoryHandset;
 import persistance.PersistanceRepositoryQuestions;
 import persistance.PersistanceRepositoryRouter;
 import persistance.PersistanceRepositoryTour;
 import persistance.PersistanceRepositoryUser;
+import visitorsAndGroups.GroupManager;
 
 /**
  *
@@ -43,6 +45,7 @@ public class DatabaseInit implements ServletContextListener {
         ctx.setAttribute("questionSetManager", initQuestionSetManager(db));
         ctx.setAttribute("routerManager", initRouterManager(db));
         ctx.setAttribute("databaseExecutor", db);
+        ctx.setAttribute("groupManager", initGroupManager(db));
         Logger.setLogFact(new LogFactory(db));
     }
 
@@ -98,5 +101,10 @@ public class DatabaseInit implements ServletContextListener {
     private RouterManager initRouterManager(DatabaseQueryExecutor db) {
         PersistanceRepositoryRouter pr = new PersistanceRepositoryRouter(db);
         return new RouterManager(pr);
+    }
+    
+    private GroupManager initGroupManager(DatabaseQueryExecutor db) {
+        PersistanceRepositoryGroups pr = new PersistanceRepositoryGroups(db);
+        return new GroupManager(pr);
     }
 }
