@@ -1,22 +1,22 @@
 package servlets;
 
-import businessDomainObjects.Audio;
-import businessDomainObjects.AudioManager;
-import java.io.File;
 import java.io.IOException;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import utility.Redirector;
+import visitorsAndGroups.GroupManager;
 
 /**
  *
- * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * @author Neil
  */
-@WebServlet(name = "RemoveAudio", urlPatterns = {"/removeAudio.do"})
-public class RemoveAudio extends HttpServlet {
+@WebServlet(name = "LeadDecider", urlPatterns = {"/LeadDecider.do"})
+public class LeadDecider extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -30,44 +30,23 @@ public class RemoveAudio extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ID = request.getParameter("audioID");
 
-        if (ID == null || ID.equals("")) {
-            request.setAttribute("message", "<h2 style='color:red;'>No audio was selected</h2>");
-            Redirector.redirect(request, response, "/admin/removeAudio.jsp");
-            return;
-        }
+        HttpSession session = request.getSession();
+        ServletContext ctx = request.getServletContext();
 
-        AudioManager manager = (AudioManager) getServletContext().getAttribute("audioManager");
-        Audio audioToDelete = null;
-        //Loop over all audio until we find the correct audio to remove
-        for (Audio a : manager.getListOfAudio()) {
-            if (a.getAudioID() == Integer.parseInt(ID)) {
-                audioToDelete = a;
-                break;
+        int groupLeader = Integer.parseInt(request.getParameter("groupLeader"));
+        int multicastGroup = (Integer) session.getAttribute("multicastGroup");
+        int tourId = (Integer) session.getAttribute("tourId");
+        GroupManager gm = (GroupManager) ctx.getAttribute("groupManager");
+
+        if (multicastGroup == 1) {
+            if (!gm.setGroupLeader(tourId, groupLeader)) {
+                request.setAttribute("message", "<h2 style='color:red'>Something went wrong. Please contact"
+                                        + "<br/>Please contact a staff member.</h2>");
+                Redirector.redirect(request, response, "/kiosk/finaliseTour.jsp");
             }
         }
-
-        //if no audio was found then error out
-        if (audioToDelete == null) {
-            request.setAttribute("message", "<h2 style='color:red;'>Invalid audio ID was selected</h2>");
-            Redirector.redirect(request, response, "/admin/removeAudio.jsp");
-            return;
-        }
-
-        File audioFile = new File(audioToDelete.getAudioLocation());
-        audioFile.delete();
-
-        //if the deletion fails then error out
-        if (!manager.removeAudio(Integer.parseInt(ID))) {
-            request.setAttribute("message", "<h2 style='color:red;'>Failed to delete audio file.</h2>");
-            Redirector.redirect(request, response, "/admin/removeAudio.jsp");
-            return;
-        }
-
-        request.setAttribute("message", "<h2>Successfully deleted audio file.</h2>");
-        Redirector.redirect(request, response, "/admin/removeAudio.jsp");
-        return;
+        Redirector.redirect(request, response, "/kiosk/tourAndHandsetSelect.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,19 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import businessDomainObjects.UserManager;
-import businessDomainObjects.UserTypes;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logging.Logger;
 import logging.Logger;
 import utility.InputValidator;
 import utility.MD5Hasher;
@@ -82,8 +75,13 @@ public class AddNewUser extends HttpServlet {
             ServletContext ctx = request.getServletContext();
             UserManager um = (UserManager) ctx.getAttribute("userManager");
 
+            /*
+             * Call addUser in UserManager and pass the userName and
+             * hashedPassword as provided by the JSP that triggers this
+             * servlet. For loop is used to add multiple user types if the user
+             * is associated with more than 1 user type
+             */
             if (um.addUser(userName, hashedPassword)) {
-                // TODO implement array for many types to one user
                 for (int i = 0; i < userType.length; i++) {
                     if (um.addUserType(type[i]) == false) {
                         request.setAttribute("message", "<h2 style='color:red'>Failed to add user <i>\"" + userName + "\"</i> to the database.</h2>");

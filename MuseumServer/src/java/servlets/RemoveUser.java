@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import businessDomainObjects.UserManager;
@@ -34,13 +30,12 @@ public class RemoveUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            // get userID and validate it
             int userID = 0;
             String userIDString = request.getParameter("userID");
-
             if (userIDString != null) {
                 userID = Integer.parseInt(InputValidator.clean(userIDString));
             }
-
             if (userIDString == null || userIDString.isEmpty()) {
                 request.setAttribute("message", "<h2 style='color:red'>Please select a user</h2>");
                 Redirector.redirect(request, response, "/admin/removeUserForm.jsp");
@@ -49,6 +44,12 @@ public class RemoveUser extends HttpServlet {
 
             ServletContext ctx = request.getServletContext();
             UserManager um = (UserManager) ctx.getAttribute("userManager");
+            
+            /*
+             * Gets username from the UserManager by passing the userID that
+             * was provided by the JSP. The user is then removed from the system
+             * and this activity is logged.
+             */
             String username = um.getUserByID(userID).getUserName();
             if (um.removeUser(userID)) {
                 Logger.Log(Logger.LogType.USERREMOVE, new String[]{username, (String)request.getSession().getAttribute("username")});

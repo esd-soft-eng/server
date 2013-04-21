@@ -2,6 +2,9 @@
     Document   : addNewUserForm
     Created on : 16-Feb-2013, 15:26:27
     Author     : Alex
+    Desc.      : Creates a web page that lets an administrator add a new user
+                 to the system, providing them with a username, password and
+                 user type.
 -->
 <!DOCTYPE html>
 <html>
@@ -25,7 +28,9 @@
                 <input type="SUBMIT" value="Add New User" align="left">
         </form>
 
-        <% String messageFromServlet = (String) request.getAttribute("message");
+        <% 
+            // Gets the error message from the servlet
+            String messageFromServlet = (String) request.getAttribute("message");
             if (messageFromServlet != null) {
                 out.println(messageFromServlet);
             }

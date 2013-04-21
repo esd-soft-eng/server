@@ -43,6 +43,7 @@ public class Portal extends HttpServlet {
 
         ArrayList<String> accessibleFiles = new ArrayList<String>();
 
+        //Establish which JSPs the current user has access to 
         for (String dir : user.getAccessibleDirectories()) {
             for (String file : FileUtil.listFilesInDir(getServletContext(), dir)) {
                 if (file.toLowerCase().endsWith(".jsp") || file.toLowerCase().endsWith(".html")) {
@@ -50,8 +51,10 @@ public class Portal extends HttpServlet {
                 }
             }
         }
+        //put the accessible files in alphabetical order
         Collections.sort(accessibleFiles);
 
+        
         request.setAttribute("accessibleFiles", accessibleFiles);
         Redirector.redirect(request, response, "displayPortal.jsp");
 

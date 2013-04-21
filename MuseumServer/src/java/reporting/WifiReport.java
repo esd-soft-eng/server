@@ -4,6 +4,7 @@
  */
 package reporting;
 
+import utility.ReportSQLUtility;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import persistance.DatabaseQueryExecutor;

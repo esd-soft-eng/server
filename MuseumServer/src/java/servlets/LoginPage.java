@@ -29,16 +29,17 @@ public class LoginPage extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-
+        // Validates the username and password combination to see if the login
+        // was successful
         User user = um.validateUser(username, password);
-
         if (user == null) {
             request.setAttribute("message", "Incorrect login.");
             Redirector.redirect(request, response, "index.jsp");
             return;
         }
         
-        // Adds our order to the session
+        // Sets session attributes for the current user so that the system
+        // remembers who they are
         session.setAttribute("currentUser", user);
         session.setAttribute("username",username);
         request.setAttribute("user", user);

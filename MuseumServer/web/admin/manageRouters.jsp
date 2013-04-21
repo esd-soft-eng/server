@@ -1,7 +1,8 @@
 <%-- 
     Document   : manageRouters
     Created on : 07-Mar-2013, 19:15:47
-    Author     : Darkstar
+    Author     : Simon Edwins
+    Description: Allows for existing router attributes to be modified.
 --%>
 
 <%@page import="businessDomainObjects.Router"%>
@@ -15,6 +16,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%
+            // Provides success/error message logic.
             String message = (String) request.getAttribute("message");
             if(message == null){
                 message = "";
@@ -30,9 +32,11 @@
                 <select name="selectedRouter">
                     
                 <%
+                    // Obtain list of routers (full objects)
                     RouterManager rm = (RouterManager) request.getServletContext().getAttribute("routerManager");
                     ArrayList<Router> routerArrayList = rm.getRouterList();
 
+                    // Create select box with all routers
                     for(Router thisRouter : routerArrayList){
                         String mac = thisRouter.getMACAddress();
                         out.println("<option value=\"" + mac + "\">" + mac + "</option>");

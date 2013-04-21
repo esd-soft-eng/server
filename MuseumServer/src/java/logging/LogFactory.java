@@ -14,6 +14,7 @@ public class LogFactory {
         this.db = db;
     }
 
+    //simple method which determines which log object to use for the log type
     Log getFactory(Logger.LogType logType) {
         switch (logType) {
             case REGISTER:

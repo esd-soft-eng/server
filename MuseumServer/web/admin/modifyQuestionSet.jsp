@@ -1,7 +1,7 @@
 <%-- 
     Document   : modifyQuestionSet
     Created on : 28-Feb-2013, 17:59:36
-    Author     : neil + darkstar
+    Author     : Neil and Simon
 --%>
 
 <%@page import="QuestionsAndAnswers.Answer"%>
@@ -25,8 +25,6 @@
         <%
             QuestionSet[] qs = (QuestionSet[]) request.getAttribute("questionSets");
 
-            
-            
             //show question sets
             if (qs == null) {
         %>

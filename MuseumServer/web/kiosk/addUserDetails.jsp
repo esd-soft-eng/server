@@ -2,6 +2,9 @@
     Document   : addUserDetails
     Created on : 16-Mar-2013, 13:15:57
     Author     : Alex
+    Desc.      : Creates a web page that lets a visitor register with the system.
+                 Allows the visitor to specify their title, first name, last
+                 name and age range.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
