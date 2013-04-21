@@ -2,6 +2,9 @@
     Document   : enterPaymentDetails
     Created on : 21-Mar-2013, 17:16:56
     Author     : Alex
+    Desc.      : Creates a web page that lets the visitor pay for their handsets
+                 with a credit card. Lets the visitor provide their card type, 
+                 card number, expiry date and security number.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
