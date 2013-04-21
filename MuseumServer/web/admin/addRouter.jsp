@@ -1,7 +1,8 @@
 <%-- 
     Document   : addRouter
     Created on : 09-Mar-2013, 14:49:26
-    Author     : Darkstar
+    Author     : Simon Edwins
+    Description: Form which faciliates for adding of a router.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

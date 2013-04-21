@@ -22,13 +22,6 @@
         <form action="/MuseumServer/modifyTour.do">
             <input type="hidden" name="stage" value="1"/>
             <%
-                QuestionSetManager manager = (QuestionSetManager) getServletContext().getAttribute("questionSetManager");
-                QuestionSet[] qs = (QuestionSet[]) manager.getAllQuestionSets();
-
-                for (QuestionSet questionSet : qs) {
-                    out.println("<option value=\"" + questionSet.getId() + "\">" + questionSet.getName() + "</option>");
-                }
-
                 TourManager tm = (TourManager) getServletContext().getAttribute("tourManager");
                 ArrayList<Tour> tours = tm.getListOfTours();
                 if (tours.isEmpty()) {
@@ -39,7 +32,11 @@
                         String tourName = t.getName();
                         String tourDescription = t.getDescription().length() > 100 ? t.getDescription().substring(0, 100) + "...." : t.getDescription();
                         int tourID = t.getTourID();
-                        out.println("<input type='radio' name='tourID' value='" + tourID + "'/>" + tourName + "(<i>" + tourDescription + "</i>)<br/>");
+                        String questionSetID = Integer.toString(t.getQuestionSetID());
+                        if(questionSetID.equals("-1")){
+                            questionSetID = "None";
+                        }
+                        out.println("<input type='radio' name='tourID' value='" + tourID + "'/>" + tourName + "(<i>Description:" + tourDescription + "|QuestionSetID:" + questionSetID + "</i>)<br/>");
                     }
                     out.println("<input type='submit' value='modify'/>");
                 }
