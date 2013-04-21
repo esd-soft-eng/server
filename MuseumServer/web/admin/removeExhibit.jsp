@@ -23,6 +23,7 @@
                 } else {
                     for (Exhibit exhibit : manager.getListOfExhibits()) {
                         String name = exhibit.getName();
+                        //Display just a small subset of the description for brevity
                         String descriptionSubset = exhibit.getDescription().length() > 50 ? exhibit.getDescription().substring(0, 100) + "...." : exhibit.getDescription();
                         int exhibitID = exhibit.getExhibitID();
                         out.println("<input type='radio' name='exhibitID' value='" + exhibitID + "'/><b>" + name + "</b>(<i>\"" + descriptionSubset + "\"</i>)<br/>");

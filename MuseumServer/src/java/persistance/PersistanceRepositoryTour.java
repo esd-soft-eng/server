@@ -25,18 +25,17 @@ public class PersistanceRepositoryTour {
         description = InputValidator.clean(description);
         String insertSQL = "INSERT INTO `tours` (TourName, "
                 + "TourDescription";
-        
-        if(questionSetID.equals("")){ // if not null, add in the questionSet too
-            insertSQL += ", QuestionSetID) VALUES ('" + name + "','" 
-                + description + "', '-1'";
-        }
-        else{
-            insertSQL += ", QuestionSetID) VALUES ('" + name + "','" 
-                + description + "', '" + questionSetID + "'";
+
+        if (questionSetID.equals("")) { // if not null, add in the questionSet too
+            insertSQL += ", QuestionSetID) VALUES ('" + name + "','"
+                    + description + "', '-1'";
+        } else {
+            insertSQL += ", QuestionSetID) VALUES ('" + name + "','"
+                    + description + "', '" + questionSetID + "'";
         }
 
-            insertSQL += ");";
- 
+        insertSQL += ");";
+
 
         boolean ret = db.executeUpdate(insertSQL);
         if (ret == false) {

@@ -60,6 +60,7 @@ public class ModifyExhibit extends HttpServlet {
             return;
         }
 
+        //simple if statements which display different HTML depending on the "stage"
         if (stage.equals("1")) {
             response.setContentType("text/html;charset=UTF-8");
             String exhibitName = exhibitToModify.getName();
@@ -134,6 +135,7 @@ public class ModifyExhibit extends HttpServlet {
                 out.close();
             }
         } else if (stage.equals("2")) {
+            //In stage two we actually store the modified exhibit data
             String exhibitName = request.getParameter("name");
             String exhibitDescription = request.getParameter("description");
             int audioLevel1ID = Integer.parseInt(request.getParameter("audioIDLevel1"));
