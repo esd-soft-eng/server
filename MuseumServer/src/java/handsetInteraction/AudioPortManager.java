@@ -15,6 +15,7 @@ public class AudioPortManager {
     private HashSet<String> portList;
     private int minPort;
     private int maxPort;
+    private String live555port = "8554";
     
     public AudioPortManager(int minPort, int maxPort){
         this.minPort = minPort;
@@ -23,13 +24,15 @@ public class AudioPortManager {
     
     public String getNewPort(){
         
-        String newPort;
+        return live555port;
+        
+        /*String newPort;
         do{
             newPort = this.generateNewPortNumber();
         } while (this.portList.contains(newPort));
         
         portList.add(newPort);
-        return newPort;
+        return newPort;*/
     }
 
     private String generateNewPortNumber() {

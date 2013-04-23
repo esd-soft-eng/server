@@ -9,6 +9,7 @@ import businessDomainObjects.ExhibitManager;
 import businessDomainObjects.HandsetAccessManager;
 import businessDomainObjects.TourManager;
 import handsetInteraction.AudioPortManager;
+import handsetInteraction.HandsetRequestManager;
 import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
