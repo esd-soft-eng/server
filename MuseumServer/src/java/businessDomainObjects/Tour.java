@@ -57,7 +57,5 @@ public class Tour {
     
     public int getQuestionSetID(){
         return questionSetID;
-    }
-    
-    
+    }   
 }

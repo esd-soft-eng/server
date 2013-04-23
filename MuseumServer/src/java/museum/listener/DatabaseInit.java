@@ -7,6 +7,7 @@ import businessDomainObjects.HandsetAccessManager;
 import businessDomainObjects.RouterManager;
 import businessDomainObjects.TourManager;
 import businessDomainObjects.UserManager;
+import handsetInteraction.AudioPortManager;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -35,10 +36,10 @@ public class DatabaseInit implements ServletContextListener {
         // Initialise context and get our context variables from the DD
         ServletContext ctx = sce.getServletContext();
         DatabaseQueryExecutor db = initDatabaseConnection(ctx);
-
-        //init managers and set them in the context    
+       
+        //init managers and set them in the context
         ctx.setAttribute("userManager", initUserManager(db));
-        ctx.setAttribute("handsetAccessManager", initHandsetAccessManager(db));
+        ctx.setAttribute("handsetAccessManager", initHandsetAccessManager(db));        
         ctx.setAttribute("tourManager", initTourManager(db));
         ctx.setAttribute("exhibitManager", initExhibitManager(db));
         ctx.setAttribute("audioManager", initAudioManager(db));
@@ -46,6 +47,7 @@ public class DatabaseInit implements ServletContextListener {
         ctx.setAttribute("routerManager", initRouterManager(db));
         ctx.setAttribute("databaseExecutor", db);
         ctx.setAttribute("groupManager", initGroupManager(db));
+        ctx.setAttribute("audioPortManager", new AudioPortManager(60000, 63000));
         Logger.setLogFact(new LogFactory(db));
     }
 

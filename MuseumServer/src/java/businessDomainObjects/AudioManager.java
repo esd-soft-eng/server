@@ -8,6 +8,7 @@ import utility.InputValidator;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com
  */
 public class AudioManager {
 
@@ -57,5 +58,15 @@ public class AudioManager {
         } catch (SQLException se) {
             return false;
         }
+    }
+    
+    public synchronized String getLocationForAudioId(int id){
+        
+        for(Audio audio : this.listOfAudio){
+            if(audio.getAudioID() == id){
+                return audio.getAudioLocation();
+            }
+        }        
+        return "";
     }
 }

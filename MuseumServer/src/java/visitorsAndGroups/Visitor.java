@@ -29,9 +29,13 @@ public class Visitor {
         this.level = level;
     }
     
-    public void registerHandset(String hostname, int pin){
-        this.hostname = hostname;
-        this.pin = pin;
+    public boolean registerHandsetAddress(int pin, String hostname){
+        
+        if(this.pin == pin){
+            this.hostname = hostname;
+            return true;
+        }
+        return false;
     }
     
     public String getHostName(){

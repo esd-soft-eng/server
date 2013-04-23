@@ -69,6 +69,11 @@ public class GroupManager {
         }
         return false;
     }
+    
+    public boolean pinIsValid(int pin){
+        
+        return this.pinIsAlreadyTaken(pin);
+    }
 
     private synchronized Group getGroupById(int groupId) {
 
@@ -96,5 +101,15 @@ public class GroupManager {
 
     private void init() {
         this.groups = persistance.getAllActiveGroups();
+    }
+
+    public Group getGroupContainingPin(int pin) {
+        
+        for (Group g : this.groups) {
+            if (g.containsPin(pin)) {
+                return g;
+            }
+        }
+        return null;
     }
 }

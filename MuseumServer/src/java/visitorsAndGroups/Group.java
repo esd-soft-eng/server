@@ -88,4 +88,14 @@ public class Group {
     public Visitor getGroupLeader() {
         return this.groupLeader;
     }
+
+    public int getTourId() {
+        return this.tourId;
+    }
+
+    public boolean setPinUrl(int pin, String hostname) {
+        
+        Visitor visitor = findVisitorByPin(pin);
+        return visitor.registerHandsetAddress(pin, hostname);
+    }
 }

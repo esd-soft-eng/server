@@ -6,7 +6,7 @@ package QuestionsAndAnswers;
  */
 public enum Levels {
 
-    PHD(50), UNI(40), ALEVEL(30), GCSE(20), PRIMARY(10);
+    PHD(50), UNI(40), ALEVEL(30), GCSE(20);
 
     private final int score;
 

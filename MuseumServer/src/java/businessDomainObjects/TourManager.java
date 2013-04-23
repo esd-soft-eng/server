@@ -2,13 +2,13 @@ package businessDomainObjects;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import persistance.PersistanceRepositoryTour;
 
 /**
  *
  * @author Oliver Brooks
  */
-
 public class TourManager {
 
     private ArrayList<Tour> listOfTours;
@@ -28,7 +28,7 @@ public class TourManager {
         } catch (SQLException e) {
             return false;
         }
-        
+
         this.listOfTours = persistance.getAllTours();
         return true;
     }
@@ -73,4 +73,30 @@ public class TourManager {
         return null;
     }
 
+    public String getTourExhibitsAsString(int tourId) {
+        Tour t = this.getTourByID(tourId);
+        if (t != null) {
+            return this.buildExhibitString(t);
+        }
+        return "[]";
+    }
+
+    private String buildExhibitString(Tour t) {
+
+        HashSet<String> exhibits = t.getExhibitIDs();
+        StringBuilder sb = new StringBuilder(); 
+        int currentExhibit = 1;
+        
+        sb.append("[");
+        for (String s : exhibits) {
+            sb.append(s);
+            if (currentExhibit < exhibits.size()) {
+                sb.append(",");
+            }
+            currentExhibit++;
+        }
+        sb.append("]");
+
+        return sb.toString();
+    }
 }

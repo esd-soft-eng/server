@@ -16,6 +16,6 @@ public class LevelCalculator {
                 return level;
             }
         }
-        return Levels.PRIMARY;
+        return Levels.GCSE;
     }
 }
