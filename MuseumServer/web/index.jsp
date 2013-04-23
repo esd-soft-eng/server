@@ -1,7 +1,11 @@
 <%-- 
     Document   : index
     Created on : 14-Feb-2013, 14:54:17
-    Author     : Alex
+    Author     : Alex Cooper <alexander2.cooper@live.uwe.ac.uk>
+    Desc.      : Creates a web page that allows a user to login to the server
+                 side of the MADS system, where they have to provide their
+                 username and password login credentials. This is the start page
+                 where all museum staff who have access to the system will login.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

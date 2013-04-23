@@ -1,7 +1,7 @@
 <!--
     Document   : addNewUserForm
     Created on : 16-Feb-2013, 15:26:27
-    Author     : Alex
+    Author     : Alex Cooper <alexander2.cooper@live.uwe.ac.uk>
     Desc.      : Creates a web page that lets an administrator add a new user
                  to the system, providing them with a username, password and
                  user type.

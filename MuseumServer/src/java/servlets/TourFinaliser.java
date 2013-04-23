@@ -15,7 +15,7 @@ import visitorsAndGroups.Visitor;
 
 /**
  *
- * @author Alex
+ * @author Alex Cooper <alexander2.cooper@live.uwe.ac.uk>
  * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 public class TourFinaliser extends HttpServlet {
@@ -68,7 +68,7 @@ public class TourFinaliser extends HttpServlet {
             return;
         }
 
-        // Get card type and validate it
+        // Get expiry year and validate it
         String expiryYear = (String) request.getParameter("expiryYear");
         if (expiryYear != null) {
             expiryYear = InputValidator.clean(expiryYear);
@@ -81,18 +81,18 @@ public class TourFinaliser extends HttpServlet {
 
         String expiryDate = expiryMonth + "/" + expiryYear;
 
-        // Get card type and validate it
+        // Get card security number and validate it
         String securityNumber = (String) request.getParameter("securityNumber");
         if (securityNumber != null) {
             securityNumber = InputValidator.clean(securityNumber);
         }
-
         if (securityNumber == null || securityNumber.isEmpty()) {
             request.setAttribute("message", "<h2 style='color:red'>Please enter a security number</h2>");
             Redirector.redirect(request, response, "/kiosk/enterPaymentDetails.jsp");
             return;
         }
 
+        // Transact card payment
         if (DummyPaymentTransactor.transactPayment(cardType, cardNumber, expiryDate, securityNumber)) {
             request.setAttribute("message", "<h2 style='color:green'>Payment Successful</h2>");
             this.processTour(ctx, session, request);

@@ -1,7 +1,7 @@
 <%-- 
     Document   : listUsers
     Created on : 02-Mar-2013, 14:46:39
-    Author     : Alex
+    Author     : Alex Cooper <alexander2.cooper@live.uwe.ac.uk>
     Desc.      : Creates a web page that displays a list of all users currently
                  recorded in the system.
 --%>

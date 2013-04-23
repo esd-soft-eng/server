@@ -1,8 +1,9 @@
 package utility;
 
 /**
- *
- * @author Alex
+ * Takes card details and transacts the payment
+ * 
+ * @author Alex Cooper <alexander2.cooper@live.uwe.ac.uk>
  */
 public class DummyPaymentTransactor {
     private String cardType;
@@ -48,7 +49,5 @@ public class DummyPaymentTransactor {
 
     public void setSecurityNumber(String securityNumber) {
         this.securityNumber = securityNumber;
-    }
-    
-    
+    }      
 }

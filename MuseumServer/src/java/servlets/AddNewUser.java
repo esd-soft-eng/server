@@ -13,8 +13,11 @@ import utility.MD5Hasher;
 import utility.Redirector;
 
 /**
- *
- * @author Alex
+ * Adds a new user to the system with details provided by the addNewUserForm
+ * JSP. The user is then redirected back to this JSP to tell them whether the
+ * new user was successfully added or not.
+ * 
+ * @author Alex Cooper <alexander2.cooper@live.uwe.ac.uk>
  */
 public class AddNewUser extends HttpServlet {
 

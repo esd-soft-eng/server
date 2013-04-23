@@ -1,7 +1,9 @@
 <%-- 
     Document   : enterPaymentDetails
     Created on : 21-Mar-2013, 17:16:56
-    Author     : Alex
+    Author     : Neil Donnelly
+    Desc.      : Creates a web page that allows a visitor to finalise their
+                 tour details.
 --%>
 
 <%@page import="visitorsAndGroups.Visitor"%>

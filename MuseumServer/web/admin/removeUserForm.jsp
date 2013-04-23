@@ -1,7 +1,7 @@
 <%-- 
     Document   : removeUserForm
     Created on : 16-Feb-2013, 14:52:31
-    Author     : Alex
+    Author     : Alex Cooper <alexander2.cooper@live.uwe.ac.uk>
     Desc.      : Creates a web page that displays a list of all users currently
                  recorded in the system. An administrator can then select one
                  or many users to be deleted from the system so that there
