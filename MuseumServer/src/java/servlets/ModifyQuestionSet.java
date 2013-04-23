@@ -16,7 +16,7 @@ import utility.InputValidator;
 
 /**
  *
- * @author neil
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 @WebServlet(name = "ModifyQuestionSet", urlPatterns = {"/modifyQuestionSet.do"})
 public class ModifyQuestionSet extends HttpServlet {

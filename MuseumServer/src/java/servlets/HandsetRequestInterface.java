@@ -22,7 +22,7 @@ import visitorsAndGroups.GroupManager;
 
 /**
  *
- * @author neil
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 @WebServlet(name = "HandsetRequestInterface", urlPatterns = {"/HandsetRequestInterface"})
 public class HandsetRequestInterface extends HttpServlet {

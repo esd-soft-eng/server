@@ -5,7 +5,8 @@ import persistance.PersistanceRepositoryQuestions;
 
 /**
  *
- * @author Neil + Simon
+ * @author Simon
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 public class QuestionSetManager {
 

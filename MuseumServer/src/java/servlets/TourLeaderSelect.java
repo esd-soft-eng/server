@@ -14,7 +14,7 @@ import visitorsAndGroups.Visitor;
 
 /**
  *
- * @author Neil
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 @WebServlet(name = "TourLeaderSelect", urlPatterns = {"/TourLeaderSelect.do"})
 public class TourLeaderSelect extends HttpServlet {

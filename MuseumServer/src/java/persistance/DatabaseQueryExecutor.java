@@ -4,6 +4,11 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com>
+ */
+
 public class DatabaseQueryExecutor {
 
     Connection con;

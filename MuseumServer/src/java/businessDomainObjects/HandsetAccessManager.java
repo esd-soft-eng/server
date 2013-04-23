@@ -5,7 +5,7 @@ import persistance.PersistanceRepositoryHandset;
 
 /**
  *
- * @author neil
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 public class HandsetAccessManager {
 

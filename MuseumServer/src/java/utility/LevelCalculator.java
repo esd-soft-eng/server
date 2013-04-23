@@ -4,7 +4,7 @@ import QuestionsAndAnswers.Levels;
 
 /**
  *
- * @author neil
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 public class LevelCalculator {
 

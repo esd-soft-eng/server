@@ -2,7 +2,7 @@ package QuestionsAndAnswers;
 
 /**
  *
- * @author neil
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 public enum Levels {
 

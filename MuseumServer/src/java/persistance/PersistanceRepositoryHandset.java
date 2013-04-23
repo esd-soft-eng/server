@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author neil
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 public class PersistanceRepositoryHandset {
 

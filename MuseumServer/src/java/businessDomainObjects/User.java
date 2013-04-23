@@ -8,6 +8,7 @@ import java.util.HashSet;
  * @author Alex
  * @author Oliver  
  * @author Simon
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  * 
  */
 public class User {

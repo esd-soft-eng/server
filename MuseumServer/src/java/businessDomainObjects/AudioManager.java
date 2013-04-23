@@ -8,7 +8,7 @@ import utility.InputValidator;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
- * @author Neil Donnelly <neil.m.donnelly@gmail.com
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 public class AudioManager {
 

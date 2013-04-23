@@ -11,7 +11,8 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author neil + simon
+ * @author simon
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 public class PersistanceRepositoryQuestions {
 

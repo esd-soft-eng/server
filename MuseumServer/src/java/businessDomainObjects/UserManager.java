@@ -8,6 +8,7 @@ import utility.MD5Hasher;
  *
  * @author Alex
  * @author Simon
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 public class UserManager {
 

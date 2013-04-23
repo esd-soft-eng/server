@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author neil
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 public class Question {
 

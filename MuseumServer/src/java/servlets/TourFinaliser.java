@@ -16,6 +16,7 @@ import visitorsAndGroups.Visitor;
 /**
  *
  * @author Alex
+ * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 public class TourFinaliser extends HttpServlet {
 
