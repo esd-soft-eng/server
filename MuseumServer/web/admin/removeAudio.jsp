@@ -2,6 +2,8 @@
     Document   : removeAudio
     Created on : 02-Mar-2013, 12:34:35
     Author     : Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+    Desc       : JSP to allow an administrator to remove an audio file from the
+                 database and from file storage
 --%>
 
 <%@page import="businessDomainObjects.Audio"%>

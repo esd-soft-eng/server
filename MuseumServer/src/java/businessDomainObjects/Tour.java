@@ -5,6 +5,8 @@ import java.util.HashSet;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Model class which contains information about a tour held in the database
+ *       and that tour's corresponding exhibits.
  */
 public class Tour {
 

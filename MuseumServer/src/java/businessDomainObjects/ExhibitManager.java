@@ -7,6 +7,8 @@ import persistance.PersistanceRepositoryExhibit;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Manager class which contains information about all Exhibit models
+ *       and holds a list of all active exhibits in the database
  */
 public class ExhibitManager {
 

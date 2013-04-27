@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Simple class which performs redirection from one servlet to another
  */
 public class Redirector {
 

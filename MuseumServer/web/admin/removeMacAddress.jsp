@@ -2,6 +2,8 @@
     Document   : removeMacAddress
     Created on : 23-Feb-2013, 12:49:41
     Author     : Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+    Desc       : JSP allowing an admin to unregister a client handset MAC from 
+                 the database.
 --%>
 
 <%@page import="businessDomainObjects.HandsetAccessManager"%>

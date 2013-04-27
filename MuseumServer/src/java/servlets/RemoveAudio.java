@@ -14,6 +14,7 @@ import utility.Redirector;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Servlet file which corresponds to the Remove Audio JSP
  */
 @WebServlet(name = "RemoveAudio", urlPatterns = {"/removeAudio.do"})
 public class RemoveAudio extends HttpServlet {

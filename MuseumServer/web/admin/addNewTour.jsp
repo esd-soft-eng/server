@@ -2,6 +2,9 @@
     Document   : addNewTour
     Created on : 28-Feb-2013, 14:16:45
     Author     : Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+    Desc       : This JSP displays a form which allows an administrator to add 
+                 a new tour to the database using the exhibits added with
+                 "addNewExhibit.jsp"
 --%>
 
 <%@page import="QuestionsAndAnswers.QuestionSet"%>

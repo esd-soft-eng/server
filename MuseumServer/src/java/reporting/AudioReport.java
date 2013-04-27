@@ -9,6 +9,8 @@ import utility.DateUtil;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Report implementation which generates a report describing the Audio
+ * addition/removal/modification logs for a certain period
  */
 public class AudioReport implements Report {
 

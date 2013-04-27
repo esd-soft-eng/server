@@ -17,6 +17,7 @@ import utility.Redirector;
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
  * + Darkstar <1337@313373>
+ * Desc: Servlet file which corresponds to the Add Tour JSP
  */
 @WebServlet(name = "AddTour", urlPatterns = {"/addTour.do"})
 public class AddTour extends HttpServlet {

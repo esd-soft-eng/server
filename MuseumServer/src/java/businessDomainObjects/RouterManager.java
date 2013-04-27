@@ -6,6 +6,8 @@ import persistance.PersistanceRepositoryRouter;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Manager class which contains information about all Router models
+ *       and holds a list of all active routers in the database
  */
 public class RouterManager {
 

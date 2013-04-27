@@ -8,6 +8,8 @@ import persistance.PersistanceRepositoryTour;
 /**
  *
  * @author Oliver Brooks
+ * Desc: Manager class which contains information about all Tour models
+ *       and holds a list of all active tours in the database
  */
 public class TourManager {
 

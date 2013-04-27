@@ -11,6 +11,8 @@ import utility.InputValidator;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: The PR class which is responsible for manipulating the database for all
+ * Tour related functionality
  */
 public class PersistanceRepositoryTour {
 

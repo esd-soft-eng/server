@@ -3,6 +3,7 @@ package businessDomainObjects;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Model class which represents an exhibit held in the database.
  */
 public class Exhibit {
 

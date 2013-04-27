@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import businessDomainObjects.User;
@@ -19,6 +15,8 @@ import utility.Redirector;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Servlet which generates a list of links which a logged in user is
+ * authorised to visit
  */
 public class Portal extends HttpServlet {
 
@@ -54,7 +52,7 @@ public class Portal extends HttpServlet {
         //put the accessible files in alphabetical order
         Collections.sort(accessibleFiles);
 
-        
+
         request.setAttribute("accessibleFiles", accessibleFiles);
         Redirector.redirect(request, response, "displayPortal.jsp");
 

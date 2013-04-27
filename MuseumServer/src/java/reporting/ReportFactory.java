@@ -3,6 +3,8 @@ package reporting;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Factory class which returns the correct Report implementation depending
+ * on the ReportType parameter
  */
 public class ReportFactory {
 

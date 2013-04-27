@@ -16,6 +16,7 @@ import utility.Redirector;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Servlet file which corresponds to the Add Exhibit JSP
  */
 @WebServlet(name = "AddExhibit", urlPatterns = {"/addExhibit.do"})
 public class AddExhibit extends HttpServlet {

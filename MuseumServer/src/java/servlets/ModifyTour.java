@@ -18,6 +18,7 @@ import utility.Redirector;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Servlet file which corresponds to the Modify Tour JSP
  */
 @WebServlet(name = "ModifyTour", urlPatterns = {"/modifyTour.do"})
 public class ModifyTour extends HttpServlet {

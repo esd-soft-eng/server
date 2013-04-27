@@ -2,6 +2,8 @@
     Document   : removeRouter
     Created on : 09-Mar-2013, 12:35:15
     Author     : Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+    Desc       : Simple JSP allowing an administrator to remove a router from the
+                 database.
 --%>
 
 <%@page import="businessDomainObjects.Router"%>
@@ -16,7 +18,7 @@
     </head>
     <body>
         <h1>Remove a router held in the database</h1>
-        
+
         <form action="/MuseumServer/removeRouter.do">
             <%
                 RouterManager rm = (RouterManager) getServletContext().getAttribute("routerManager");

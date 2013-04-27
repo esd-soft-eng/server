@@ -5,6 +5,8 @@ import persistance.DatabaseQueryExecutor;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: the factory class which returns the correct implementation of the log
+ * interface upon receiving a request
  */
 public class LogFactory {
 

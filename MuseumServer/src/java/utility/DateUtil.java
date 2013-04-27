@@ -9,8 +9,10 @@ import java.util.GregorianCalendar;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Collection of functions to do various date/time related tasks
  */
 public class DateUtil {
+
     public static String getCurrentTime() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date();
@@ -22,15 +24,13 @@ public class DateUtil {
         Date date = new Date();
         return dateFormat.format(date);
     }
-    
-    public static String getDateString(Date date)
-    {
+
+    public static String getDateString(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(date);
     }
-    
-    public static Date subtractWeeksFromCurrentDate(int numWeeks)
-    {
+
+    public static Date subtractWeeksFromCurrentDate(int numWeeks) {
         //Standard Java approach to subtracting weeks from date
         Date now = new Date();
         GregorianCalendar gc = new GregorianCalendar();

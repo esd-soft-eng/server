@@ -3,6 +3,7 @@ package businessDomainObjects;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Audio model class, containing all information about an audio file.
  */
 public class Audio {
     private int audioID;

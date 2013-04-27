@@ -2,6 +2,8 @@
     Document   : modifyExhibit
     Created on : 02-Mar-2013, 15:57:18
     Author     : Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+    Desc       : JSP to allow an administrator to modify an exhibit held in the
+                 database.
 --%>
 
 <%@page import="businessDomainObjects.Exhibit"%>

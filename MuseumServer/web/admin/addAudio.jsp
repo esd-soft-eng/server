@@ -2,6 +2,8 @@
     Document   : addAudio
     Created on : 28-Feb-2013, 17:01:20
     Author     : Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+    Desc       : This JSP file allows a user to add a new audio file to the 
+                 database, along with providing it with a descriptive name
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
