@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Simple servlet file to mass upload all museum files on production
+ * system
  */
 @WebServlet(name = "MassUploader", urlPatterns = {"/MassUploader"})
 public class MassUploader extends HttpServlet {
@@ -57,7 +59,7 @@ public class MassUploader extends HttpServlet {
         for (String song : songNames) {
             String tracknumber = song.substring(0, 3);
             String level = "";
-            
+
             for (String s : GCSELevels) {
                 if (s.equals(tracknumber)) {
                     level = "GCSE";
@@ -78,7 +80,7 @@ public class MassUploader extends HttpServlet {
                     level = "PHD";
                 }
             }
-            
+
             //strip number from filename
             String correctedName = song.substring(4);
             //strip filetype from filename

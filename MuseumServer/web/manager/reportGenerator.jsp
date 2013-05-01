@@ -2,6 +2,9 @@
     Document   : reportGenerator
     Created on : 21-Mar-2013, 14:31:16
     Author     : Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+    Desc       : This JSP allows a manager to select from various reporting 
+                 criterion and times to display a table containing reports of 
+                 logs created in that time period.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

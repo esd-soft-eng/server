@@ -4,6 +4,7 @@ package utility;
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
  * @author Neil Donnelly <neil.m.donnelly@gmail.com>
+ * Desc: Rudimentary input validator functionality
  */
 public class InputValidator {
 

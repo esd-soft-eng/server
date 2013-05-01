@@ -9,6 +9,8 @@ import utility.InputValidator;
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
  * @author Neil Donnelly <neil.m.donnelly@gmail.com>
+ * Desc: Manager class which contains information about all Audio models
+ *       and holds a list of all active audio files in the database
  */
 public class AudioManager {
 

@@ -1,12 +1,10 @@
 package logging;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: The static singleton class which actually receives all requests to
+ * write a log.
  */
 public class Logger {
 
@@ -23,7 +21,6 @@ public class Logger {
 
         ADD, REMOVE, MODIFY
     };
-    
     //The object which actually determines which log object to use
     private static LogFactory logFactory;
 

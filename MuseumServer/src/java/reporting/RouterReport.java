@@ -9,6 +9,8 @@ import utility.DateUtil;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Report implementation which generates a report describing the router
+ * addition/removal/modification logs for a certain period
  */
 public class RouterReport implements Report {
 
@@ -33,7 +35,7 @@ public class RouterReport implements Report {
                 String action = reportResults.getString("action");
                 String maintainerUsername = reportResults.getString("maintainerUsername");
                 String logDate = reportResults.getString("logDate");
-                overallHtml += "<tr><td>" + logNumber + "</td><td>"+action+"</td><td>" + MAC
+                overallHtml += "<tr><td>" + logNumber + "</td><td>" + action + "</td><td>" + MAC
                         + "</td><td>" + maintainerUsername + "</td><td>" + logDate + "</td></tr>";
             }
             overallHtml += "</table>";

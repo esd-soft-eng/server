@@ -9,6 +9,8 @@ import utility.DateUtil;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Report implementation which generates a report describing the kiosk
+ * registration logs for a certain period
  */
 public class RegisterReport implements Report {
 

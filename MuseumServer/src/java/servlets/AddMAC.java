@@ -14,6 +14,7 @@ import utility.Redirector;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Servlet file which corresponds to the Add New Handset JSP
  */
 @WebServlet(name = "AddMAC", urlPatterns = {"/addNewDevice.do"})
 public class AddMAC extends HttpServlet {

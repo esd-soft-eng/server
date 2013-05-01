@@ -14,6 +14,7 @@ import utility.Redirector;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Servlet file which corresponds to the Remove Exhibit JSP
  */
 @WebServlet(name = "RemoveExhibit", urlPatterns = {"/removeExhibit.do"})
 public class RemoveExhibit extends HttpServlet {

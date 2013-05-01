@@ -10,6 +10,8 @@ import utility.DateUtil;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Log implementation which writes a log entry to the database whenever
+ * directional information is requested
  */
 public class WifiAudioLog implements Log {
 

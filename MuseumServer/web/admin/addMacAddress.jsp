@@ -2,6 +2,8 @@
     Document   : addMacAddress
     Created on : 21-Feb-2013, 18:24:26
     Author     : Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+    Desc       : This JSP file allows an administrator to add a MAC address of a
+                 client handset to the database.                 
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

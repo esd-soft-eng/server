@@ -11,6 +11,8 @@ import utility.InputValidator;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: The PR class which is responsible for manipulating the database for all
+ * Exhibit related functionality
  */
 public class PersistanceRepositoryExhibit {
 
@@ -30,7 +32,7 @@ public class PersistanceRepositoryExhibit {
     private ArrayList<Exhibit> mapResultSetToArrayList(ResultSet rs) {
         ArrayList<Exhibit> listOfExhibits = new ArrayList<Exhibit>();
 
-        try { 
+        try {
             while (rs.next()) {
                 String exhibitName = rs.getString("Name");
                 String exhibitDescription = rs.getString("Description");

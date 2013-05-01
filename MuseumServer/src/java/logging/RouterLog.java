@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package logging;
 
 import persistance.DatabaseQueryExecutor;
@@ -10,8 +6,11 @@ import utility.DateUtil;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Log implementation which writes a log entry to the database whenever a
+ * router is added/removed/modified
  */
 public class RouterLog implements Log {
+
     DatabaseQueryExecutor db;
     Logger.LogAction action;
 

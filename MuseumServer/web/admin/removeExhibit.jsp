@@ -2,6 +2,8 @@
     Document   : removeExhibit
     Created on : 02-Mar-2013, 15:05:47
     Author     : Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+    Desc       : JSP to allow an administrator to delete an exhibit from the 
+                 database
 --%>
 
 <%@page import="businessDomainObjects.Exhibit"%>

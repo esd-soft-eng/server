@@ -5,7 +5,7 @@ import java.util.HashSet;
 
 /**
  *
- * @author Alex
+ * @author Alex Cooper <alexander2.cooper@live.uwe.ac.uk>
  * @author Oliver  
  * @author Simon
  * @author Neil Donnelly <neil.m.donnelly@gmail.com>

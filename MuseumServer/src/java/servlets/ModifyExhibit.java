@@ -17,6 +17,7 @@ import utility.Redirector;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Servlet file which corresponds to the Modify Exhibit JSP
  */
 @WebServlet(name = "ModifyExhibit", urlPatterns = {"/modifyExhibit.do"})
 public class ModifyExhibit extends HttpServlet {

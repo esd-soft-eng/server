@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Alex
+ * @author Alex Cooper <alexander2.cooper@live.uwe.ac.uk>
  * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 public class PersistanceRepositoryUser {

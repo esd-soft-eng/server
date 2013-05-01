@@ -17,8 +17,10 @@ import utility.InputValidator;
 import utility.Redirector;
 
 /**
- *
- * @author Alex
+ * Validates information sent from the addUserDetails JSP, where a visitor
+ * enters their personal details to sign up for an audio tour
+ * 
+ * @author Alex Cooper <alexander2.cooper@live.uwe.ac.uk>
  */
 public class ValidateUserDetails extends HttpServlet {
 

@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Collection of functions to do common file system tasks for servlets
  */
 public class FileUtil {
 

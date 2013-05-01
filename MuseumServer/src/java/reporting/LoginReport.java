@@ -9,8 +9,10 @@ import utility.DateUtil;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Report implementation which generates a report describing the client
+ * handset login logs for a certain period
  */
-public class LoginReport implements Report{
+public class LoginReport implements Report {
 
     @Override
     public String generateReport(String timePeriod, DatabaseQueryExecutor db) {
@@ -40,5 +42,4 @@ public class LoginReport implements Report{
             return "<h2> No logs exist for that period.</h2>";
         }
     }
-    
 }

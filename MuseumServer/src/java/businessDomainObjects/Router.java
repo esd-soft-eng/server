@@ -3,6 +3,7 @@ package businessDomainObjects;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Model file which represents a router held in the database
  */
 public class Router {
 

@@ -13,6 +13,7 @@ import utility.Redirector;
 /**
  *
  * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: Servlet file which corresponds to the Remove Router JSP
  */
 @WebServlet(name = "RemoveRouter", urlPatterns = {"/removeRouter.do"})
 public class RemoveRouter extends HttpServlet {

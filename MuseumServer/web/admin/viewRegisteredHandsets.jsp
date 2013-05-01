@@ -2,6 +2,8 @@
     Document   : viewRegisteredHandsets.jsp
     Created on : 21-Feb-2013, 17:08:35
     Author     : Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+    Desc       : Simple JSP to display the client handset MAC addresses stored
+                 in the database
 --%>
 
 <%@page import="businessDomainObjects.HandsetAccessManager"%>

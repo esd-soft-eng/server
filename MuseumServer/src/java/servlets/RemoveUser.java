@@ -13,7 +13,7 @@ import utility.Redirector;
 
 /**
  *
- * @author Alex
+ * @author Alex Cooper <alexander2.cooper@live.uwe.ac.uk>
  */
 public class RemoveUser extends HttpServlet {
 

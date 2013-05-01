@@ -26,7 +26,7 @@ import visitorsAndGroups.GroupManager;
 
 /**
  *
- * @author Alex
+ * @author Alex Cooper <alexander2.cooper@live.uwe.ac.uk>
  * @author Neil Donnelly <neil.m.donnelly@gmail.com>
  */
 public class DatabaseInit implements ServletContextListener {

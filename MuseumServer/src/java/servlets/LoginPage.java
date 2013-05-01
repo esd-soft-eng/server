@@ -16,8 +16,11 @@ import persistance.PersistanceRepositoryUser;
 import utility.Redirector;
 
 /**
- *
- * @author Alex, Simon
+ * Logs in a user to the system provided that their login details are correct
+ * that were given on the index JSP
+ * 
+ * @author Alex Cooper <alexander2.cooper@live.uwe.ac.uk>
+ * @author Simon Edwins
  */
 public class LoginPage extends HttpServlet {
 

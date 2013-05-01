@@ -2,6 +2,9 @@
     Document   : addNewExhibit.jsp
     Created on : 28-Feb-2013, 15:59:39
     Author     : Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+    Desc       : This JSP displays a form containing various fields to allow
+                 an administrator to create a new exhibit and add it to the
+                 database.
 --%>
 
 <%@page import="businessDomainObjects.Audio"%>

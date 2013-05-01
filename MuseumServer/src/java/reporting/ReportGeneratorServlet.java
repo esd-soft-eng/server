@@ -11,7 +11,9 @@ import utility.Redirector;
 
 /**
  *
- * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk){}
+ * @author Oliver Brooks <oliver2.brooks@live.uwe.ac.uk>
+ * Desc: The servlet file which ensures that the report request is valid and
+ * obtains the report HTML ready for display
  */
 @WebServlet(name = "ReportGeneratorServlet", urlPatterns = {"/generateReport.do"})
 public class ReportGeneratorServlet extends HttpServlet {
