@@ -11,6 +11,7 @@ import businessDomainObjects.TourManager;
 import handsetInteraction.AudioPortManager;
 import handsetInteraction.HandsetRequestManager;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -66,8 +67,18 @@ public class HandsetRequestInterface extends HttpServlet {
             String exhibit = (String) request.getParameter("exhibit");
             if (exhibit == null) {
                 String exhibitsForPin = hrm.signHandsetIn(gm, tm, pin, request.getRemoteAddr());
-                request.setAttribute("pin", pin);
-                request.setAttribute("exhibit", tm);
+                
+                response.setContentType("text/html;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                
+                try{
+                    out.println(pin);
+                    out.println(macAddress);
+                    out.println(exhibitsForPin);
+                }
+                finally{
+                    out.close();
+                }
                 // fire off the response
                 return;
             }

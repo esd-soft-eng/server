@@ -34,7 +34,8 @@ public class HandsetAccessManager {
     }
 
     public boolean deviceHasAccess(String macAddress) {
-        return allowedDevices.contains(macAddress);
+        boolean allowed = allowedDevices.contains(macAddress);
+        return allowed;
     }
 
     public String[] getDeviceList() {

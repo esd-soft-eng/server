@@ -132,7 +132,12 @@ public class PersistanceRepositoryGroups {
         String forename = rs.getString("forename");
         String surname = rs.getString("surname");
         int age = rs.getInt("age");
-        Levels level = Levels.valueOf(rs.getString("level"));             
-        return new Visitor(title, forename, surname, age, level);
+        Levels level = Levels.valueOf(rs.getString("level"));        
+        int pin = rs.getInt("pin");
+        
+        Visitor v = new Visitor(title, forename, surname, age, level);
+        v.pin = pin;
+        
+        return v;
     }
 }
