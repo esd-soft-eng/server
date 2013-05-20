@@ -21,7 +21,8 @@ public class AudioUrlDispatcher {
         try {
             Process proc;
             Runtime rt = Runtime.getRuntime();
-            proc = rt.exec("curl --data \"pid=" + pin + "&url=" + audioUrl + " http://127.0.0.1:8084/");
+            String execCommand = "curl --data \"pid=" + pin + "&url=" + audioUrl + "\" http://"+ hostName +":8085";
+            proc = rt.exec(execCommand);
         } catch (IOException ex) {
             Logger.getLogger(AudioUrlDispatcher.class.getName()).log(Level.SEVERE, null, ex);
         }
