@@ -14,8 +14,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Manage Questions and Question Sets</title>
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
     </head>
     <body>
+        <%@include file="/header.jsp"%>
         <h1>Add new Question Set</h1>
         <form method="post" action="/MuseumServer/modifyQuestionSet.do">
             <input type="hidden" name="questionSetAction" value="1"/>

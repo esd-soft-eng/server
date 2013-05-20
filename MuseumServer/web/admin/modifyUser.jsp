@@ -13,6 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
         <%
                 // Logic for success/error message
                 String message = (String) request.getAttribute("message");
@@ -24,6 +25,7 @@
         <title>Modify User</title>
     </head>
     <body>
+        <%@include file="/header.jsp"%>
         <h1>Modify User</h1>
         You're logged in as:
             <%

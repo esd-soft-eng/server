@@ -17,7 +17,7 @@
     </head>
     <body>
         <h1> System Login: </h1>
-        <form action="displayuser.do" method="post">
+        <form action="/MuseumServer/displayuser.do" method="post">
             Username: <input type="text" name="username"/>
             Password: <input type="text" name="password"/>
             <input type="submit" name ="submit" text="submit"/>

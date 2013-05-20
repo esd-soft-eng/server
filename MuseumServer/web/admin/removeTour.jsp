@@ -16,8 +16,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Remove Tour</title>
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
     </head>
     <body>
+        <%@include file="/header.jsp"%>
         <h1>Remove Tour</h1>
         <%
             TourManager tm = (TourManager) request.getServletContext().getAttribute("tourManager");

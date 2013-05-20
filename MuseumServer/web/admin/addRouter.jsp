@@ -11,8 +11,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add Router</title>
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
     </head>
     <body>
+        <%@include file="/header.jsp"%>
         <h1>Add Router</h1>
             <form method="POST" action="/MuseumServer/AddRouter.do">
                 Enter details for new router:<p />

@@ -14,6 +14,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%
             // Provides success/error message logic.
@@ -26,6 +27,7 @@
         <title>Manage Routers</title>
     </head>
     <body>
+        <%@include file="/header.jsp"%>
         <h1>Manage Routers</h1>
         <form method="POST" action="/MuseumServer/ModifyRouter.do">
             <b>Select Router Mac Address to Modify </b>

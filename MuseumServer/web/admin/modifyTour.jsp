@@ -17,8 +17,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Modify a tour held in the database.</title>
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
     </head>
     <body>
+        <%@include file="/header.jsp"%>
         <h1>Modify a tour held in the database</h1>
         <form action="/MuseumServer/modifyTour.do">
             <input type="hidden" name="stage" value="1"/>
