@@ -19,10 +19,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
+        <%@include file="/header.jsp"%>
         <h1 align="center">Remove User</h1>
         <p>
         <form method="POST" action="./RemoveUser.do" onsubmit="return confirm('This will delete the selected user. Continue?');">

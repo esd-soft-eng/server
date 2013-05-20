@@ -19,8 +19,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add a new tour to the database</title>
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
     </head>
     <body>
+        <%@include file="/header.jsp"%>
         <h1> Add a new tour to the database </h1> 
         <form action="/MuseumServer/addTour.do">
             <h2>Select which exhibits correspond to the tour:</h2>

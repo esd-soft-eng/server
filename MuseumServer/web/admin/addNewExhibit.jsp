@@ -16,8 +16,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add a new exhibit to the database</title>
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
     </head>
     <body>
+        <%@include file="/header.jsp"%>
         <h1>Add a new exhibit to the database</h1>
         <form action="/MuseumServer/addExhibit.do">
             Name of exhibit: <input type="text" name="name" size="50" maxlength="50"/><br/>

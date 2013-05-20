@@ -14,8 +14,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Remove an exhibit from the database</title>
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
     </head>
     <body>
+        <%@include file="/header.jsp"%>
         <h1>Remove an exhibit from the database</h1>
         <form action="/MuseumServer/removeExhibit.do">
             <%

@@ -11,8 +11,10 @@
     <head>
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
     </head>
     <body>
+        <%@include file="/header.jsp"%>
         <h1 align="center">Add New User</h1>
         <form method="POST" action="/MuseumServer/AddNewUser.do">
             Enter the details of the user you wish to add<p>

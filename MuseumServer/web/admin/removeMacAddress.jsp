@@ -13,8 +13,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Remove a handset from the database</title>
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
     </head>
     <body>
+        <%@include file="/header.jsp"%>
         <h1> Remove a handset from the database </h1>
         <form action="/MuseumServer/removeDevice" method="post" onsubmit="return confirm('This will delete the selected MAC address. Continue?');">
             <%

@@ -14,8 +14,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Modify an exhibit stored in the database</title>
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
     </head>
     <body>
+        <%@include file="/header.jsp"%>
         <h1>Modify an exhibit stored in the database</h1>
         <form action="/MuseumServer/modifyExhibit.do">
             <input type="hidden" name="stage" value="1"/>

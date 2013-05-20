@@ -12,8 +12,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register a new handset in the database</title>
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
     </head>
     <body>
+        <%@include file="/header.jsp"%>
         <h1> Register a new handset in the database </h1>
         <form method="post" action="/MuseumServer/addNewDevice.do">
             Handset MAC address: <input maxlength="2" size="2" type="text" name="MAC1"/>:<input maxlength="2" size="2" type="text" name="MAC2"/>:<input maxlength="2" size="2" type="text" name="MAC3"/>:<input maxlength="2" size="2" type="text" name="MAC4"/>:<input maxlength="2" size="2" type="text" name="MAC5"/>:<input maxlength="2" size="2" type="text" name="MAC6"/><br />
