@@ -41,7 +41,7 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
         String visitorSignupStatus = (String) request.getParameter("visitorSignupStatus");
 
         RequestDispatcher view = request.getRequestDispatcher("kiosk/tourAndHandsetSelect.jsp");
-
+        
         if (visitorSignupStatus == null) {
             visitorSignupStatus = "0";
         }
@@ -117,7 +117,7 @@ public class SelectTourAndHandsetNumber extends HttpServlet {
     }// </editor-fold>
 
     private void getTourAndNumberOfHandsets(HttpServletRequest request) {
-
+        
         TourManager tm = (TourManager) getServletContext().getAttribute("tourManager");
         Tour[] tours = tm.getListOfTours().toArray(new Tour[0]);
         request.setAttribute("tours", tours);
