@@ -89,7 +89,7 @@ public class HandsetRequestManager {
 
         // now we compose the url for the audio and add it to the 
         // list of already playing audio files
-        String audioUrl = "rtsp://" + serverAddress + ":" + port + audioFile;
+        String audioUrl = "rtsp://" + serverAddress + ":" + port + "/" + audioFile;
         levelsServed.put(level, audioUrl);
 
         return audioUrl;

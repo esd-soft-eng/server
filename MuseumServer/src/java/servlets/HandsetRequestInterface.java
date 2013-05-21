@@ -12,6 +12,9 @@ import handsetInteraction.AudioPortManager;
 import handsetInteraction.HandsetRequestManager;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,11 +43,19 @@ public class HandsetRequestInterface extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
         ServletContext ctx = request.getServletContext();
-        
+
         String serverAddress = request.getServerName();
+        NetworkInterface ni = NetworkInterface.getByName("wlan0");
+        Enumeration<InetAddress> inetAddresses = ni.getInetAddresses();
+        while (inetAddresses.hasMoreElements()) {
+            InetAddress ia = inetAddresses.nextElement();
+            if (!ia.isLinkLocalAddress()) {
+                serverAddress = ia.getHostAddress();
+            }
+        }
 
         // Get the managers we need and bundle them into the HandsetRequestManager
         HandsetAccessManager ham = (HandsetAccessManager) ctx.getAttribute("handsetAccessManager");
@@ -66,16 +77,15 @@ public class HandsetRequestInterface extends HttpServlet {
             String exhibit = (String) request.getParameter("exhibit");
             if (exhibit == null) {
                 String exhibitsForPin = hrm.signHandsetIn(gm, tm, pin, request.getRemoteAddr());
-                
+
                 response.setContentType("text/html;charset=UTF-8");
                 PrintWriter out = response.getWriter();
-                
-                try{
+
+                try {
                     out.println(pin);
                     out.println(macAddress);
                     out.println(exhibitsForPin);
-                }
-                finally{
+                } finally {
                     out.close();
                 }
                 // fire off the response

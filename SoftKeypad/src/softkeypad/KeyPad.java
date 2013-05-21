@@ -228,7 +228,7 @@ public class KeyPad extends javax.swing.JFrame {
         exList = exList.replace("[", "");
         exList = exList.replace("]", "");
 
-        if (exList.contains(",")) {
+        if (exList.length() > 0) {
             String[] ex = exList.split(",");
             for (String s : ex) {
                 this.pin = input;
