@@ -17,9 +17,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tour and handset number selection</title>
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
     </head>
     <body>
-
+        <%@include file="/header.jsp"%>
         
         
         <%    
@@ -45,7 +46,7 @@
             // Depending on the status of the signup we'll see different parts of the signup process
             // *****
             int status = Integer.parseInt(visitorSignupStatus);
-            out.print("<b>"+ status + "</b>");
+            //out.print("<b>"+ status + "</b>");
             // *****
             // The select tour/number of people form if we actually have a status set 
             // *****

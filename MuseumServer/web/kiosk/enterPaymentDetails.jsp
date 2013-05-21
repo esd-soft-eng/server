@@ -13,8 +13,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="/MuseumServer/styles.css"/>
     </head>
     <body>
+        <%@include file="/header.jsp"%>
         <h1>Enter Payment Details</h1>
         <form method="POST" action="/MuseumServer/PaymentProcessor.do">
             <b>Card type</b><select name="cardType">
