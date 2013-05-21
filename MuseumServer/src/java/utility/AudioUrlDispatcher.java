@@ -5,6 +5,8 @@
 package utility;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,7 +18,11 @@ public class AudioUrlDispatcher {
 
     public static void DispatchUrlToHandset(int pin, String audioUrl, String hostName) {
         
-        
+        try {
+            audioUrl = URLEncoder.encode(audioUrl, "ISO-8859-1");
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(AudioUrlDispatcher.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         try {
             Process proc;

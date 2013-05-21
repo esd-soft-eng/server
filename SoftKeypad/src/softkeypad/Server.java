@@ -5,7 +5,9 @@
 package softkeypad;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.ServerSocket;
+import java.net.URLDecoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.http.HttpEntity;
@@ -81,6 +83,13 @@ public class Server implements Runnable {
     }
 
     private void handleParams(String params) {
+        
+        try {
+            params = URLDecoder.decode(params, "UTF-8");
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        params = params.replace(" ", "\\ ");       
         
         String[] args = params.split("&");
 
